@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BioChemHub: Daily MCQs, Topic-wise Quizzes, and Research Updates for Medical Students.">
-    <title>BioChem Mastery | Study Guides & Topic Quizzes</title>
+    <title>BioChem Mastery | Science News & Research</title>
     
     <!-- KaTeX for rendering Chemical Formulas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -15,85 +15,111 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
+        /* THEME: SCIENCE PORTAL (Academic Blue & Serif) */
         :root {
-            --primary: #0f766e;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text: #334155;
-            --border: #e2e8f0;
-            --accent: #f1f5f9;
-            --success: #22c55e;
-            --error: #ef4444;
+            --primary: #0056b3;       /* Standard Link Blue */
+            --header-bg: #003366;     /* Dark Navy Header */
+            --bg: #ffffff;            /* Pure White Background */
+            --text: #333333;          /* Dark Grey Text */
+            --border: #dddddd;        /* Light borders */
+            --accent: #f0f4f8;        /* Very light blue/grey for panels */
+            --summary-bg: #f9f9f9;    /* Off-white for summary box */
+            --font-main: 'Georgia', 'Times New Roman', Times, serif; /* The "ScienceDaily" look */
+            --font-ui: 'Arial', sans-serif; /* For navigation/buttons */
         }
 
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        a { text-decoration: none; color: inherit; }
+        body { font-family: var(--font-main); background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        a { text-decoration: none; color: var(--primary); }
+        a:hover { text-decoration: underline; }
 
-        /* --- HEADER --- */
-        nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 15px 20px; position: sticky; top: 0; z-index: 100; }
-        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
-        .home-btn { font-weight: 600; color: #64748b; font-size: 0.9rem; cursor: pointer; }
-        .home-btn:hover { color: var(--primary); }
+        /* --- HEADER (Classic Portal Style) --- */
+        nav { background: var(--header-bg); padding: 0; border-bottom: 4px solid #004488; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-ui); font-weight: 700; font-size: 1.8rem; color: white; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: #4dabf7; } /* Light blue accent */
+        
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #e0e0e0; font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
+        .nav-links a:hover { color: white; text-decoration: none; }
 
-        /* --- 3-COLUMN GRID --- */
+        /* --- 3-COLUMN GRID (Dense Layout) --- */
         .layout {
             display: grid;
-            grid-template-columns: 260px 1fr 300px; /* Left Sidebar | Main | Right Sidebar */
-            gap: 30px;
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
+            grid-template-columns: 220px 1fr 300px; /* Left Sidebar | Main | Right Sidebar */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
             align-items: start;
         }
 
         /* --- LEFT SIDEBAR (TOPICS) --- */
-        .topic-nav { position: sticky; top: 90px; }
-        .nav-header { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-bottom: 10px; letter-spacing: 0.05em; }
+        .topic-nav { font-family: var(--font-ui); border-right: 1px solid var(--border); padding-right: 15px; }
+        .nav-header { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #666; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
         .topic-list { list-style: none; padding: 0; margin: 0; }
-        .topic-item { margin-bottom: 5px; }
+        .topic-item { border-bottom: 1px solid #eee; }
         .topic-link {
-            display: block; padding: 10px 15px; border-radius: 8px; font-weight: 500; font-size: 0.95rem; color: #475569; transition: all 0.2s;
+            display: block; padding: 8px 5px; font-size: 0.85rem; color: #444; transition: all 0.1s;
         }
-        .topic-link:hover { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .topic-link.active { background: var(--primary); color: white; font-weight: 600; }
+        .topic-link:hover { background: #f4f4f4; color: var(--primary); text-decoration: none; }
+        .topic-link.active { font-weight: 700; color: var(--primary); border-left: 3px solid var(--primary); padding-left: 8px; }
 
-        /* --- CENTER: MAIN STAGE --- */
-        .main-stage { min-height: 80vh; }
+        /* --- CENTER: MAIN STAGE (Journal Style) --- */
+        .main-stage { padding: 0 10px; }
         
         /* Article Styles */
-        .feed-container { display: flex; flex-direction: column; gap: 30px; }
-        .article-card { background: var(--surface); padding: 30px; border-radius: 12px; border: 1px solid var(--border); }
-        .meta { font-size: 0.8rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-        .article-card h2 { margin: 0 0 15px 0; font-size: 1.75rem; color: #0f172a; line-height: 1.3; }
-        .excerpt { color: #475569; margin-bottom: 20px; }
-        .read-btn { color: var(--primary); font-weight: 600; font-size: 0.95rem; }
-
-        /* Quiz Styles */
-        .quiz-view { background: var(--surface); padding: 40px; border-radius: 12px; border: 1px solid var(--border); display: none; }
-        .quiz-header { border-bottom: 2px solid var(--accent); padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .option-btn {
-            display: block; width: 100%; text-align: left; padding: 15px 20px; margin-bottom: 12px;
-            background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; cursor: pointer; transition: 0.2s;
-        }
-        .option-btn:hover:not(.disabled) { border-color: var(--primary); background: #f0fdfa; }
-        .option-btn.correct { background: #dcfce7; border-color: var(--success); }
-        .option-btn.incorrect { background: #fee2e2; border-color: var(--error); }
+        .article-entry { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 30px; }
+        .date-line { font-family: var(--font-ui); font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        h1.article-title { font-family: var(--font-ui); margin: 5px 0 15px 0; font-size: 1.8rem; color: #222; line-height: 1.2; font-weight: 700; }
         
-        .feedback { margin-top: 20px; padding: 20px; background: #f8fafc; border-left: 4px solid var(--primary); display: none; }
-        .btn-action { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; float: right; margin-top: 20px; }
+        /* The ScienceDaily Summary Box */
+        .summary-box {
+            background: var(--summary-bg);
+            border-left: 5px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #444;
+        }
+        .summary-label { font-weight: bold; font-family: var(--font-ui); font-style: normal; color: #222; text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 5px; }
 
-        /* --- RIGHT SIDEBAR (ADS) --- */
-        .right-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 90px; }
-        .ad-box { background: #e2e8f0; height: 250px; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 0.85rem; border-radius: 8px; text-align: center; }
-        .tool-card { background: var(--surface); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .article-body { font-size: 1.1rem; color: #222; text-align: justify; }
+        .article-body p { margin-bottom: 15px; }
+        .article-body h3 { font-family: var(--font-ui); color: #444; margin-top: 25px; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+
+        /* Quiz Styles (Adapted to look clean) */
+        .quiz-view { border: 1px solid var(--primary); background: #fff; padding: 20px; margin-top: 10px; }
+        .quiz-header { background: var(--primary); color: white; padding: 10px 15px; margin: -20px -20px 20px -20px; font-family: var(--font-ui); display: flex; justify-content: space-between; }
+        .option-btn {
+            display: block; width: 100%; text-align: left; padding: 10px 15px; margin-bottom: 8px;
+            background: #f9f9f9; border: 1px solid #ccc; font-family: var(--font-ui); font-size: 0.95rem; cursor: pointer;
+        }
+        .option-btn:hover:not(.disabled) { background: #eef6ff; border-color: var(--primary); }
+        .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+        .option-btn.incorrect { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+        
+        .feedback { margin-top: 15px; padding: 15px; background: #e2e6ea; font-size: 0.9rem; font-family: var(--font-ui); display: none; }
+        .btn-action { background: var(--primary); color: white; border: none; padding: 8px 20px; font-family: var(--font-ui); font-weight: bold; cursor: pointer; margin-top: 15px; }
+
+        /* --- RIGHT SIDEBAR (DENSE INFO) --- */
+        .right-sidebar { font-family: var(--font-ui); border-left: 1px solid var(--border); padding-left: 15px; }
+        .sidebar-header { font-size: 0.85rem; font-weight: 700; color: #222; border-top: 2px solid #222; border-bottom: 1px solid #ccc; padding: 5px 0; margin-bottom: 10px; text-transform: uppercase; }
+        
+        .ad-box { background: #f0f0f0; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.7rem; margin-bottom: 20px; }
+        
+        .news-list { list-style: none; padding: 0; margin: 0; }
+        .news-item { margin-bottom: 12px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+        .news-item a { font-size: 0.85rem; color: var(--primary); font-weight: 600; display: block; line-height: 1.3; }
+        .news-item span { font-size: 0.7rem; color: #888; display: block; margin-top: 3px; }
 
         /* Mobile */
-        @media (max-width: 1024px) {
+        @media (max-width: 900px) {
             .layout { grid-template-columns: 1fr; }
-            .topic-nav, .right-sidebar { position: static; }
-            .topic-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-            .topic-link { background: var(--surface); border: 1px solid var(--border); text-align: center; }
+            .topic-nav { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 20px; }
+            .right-sidebar { border-left: none; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; }
+            .topic-list { display: flex; flex-wrap: wrap; gap: 10px; }
+            .topic-link { background: #f4f4f4; border-radius: 4px; padding: 5px 10px; border: 1px solid #ddd; }
         }
     </style>
 </head>
@@ -101,19 +127,23 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="?page=home" class="logo">BioChem<span style="font-weight:300">Hub</span></a>
-        <a href="?page=home" class="home-btn">Back to Articles</a>
+        <a href="?page=home" class="logo">BioChem<span>Hub</span></a>
+        <div class="nav-links">
+            <a href="?page=home">Home</a>
+            <a href="#">Research</a>
+            <a href="#">Education</a>
+            <a href="#">About</a>
+        </div>
     </div>
 </nav>
 
 <div class="layout">
     
-    <!-- 1. LEFT COLUMN: TOPIC NAVIGATION -->
+    <!-- 1. LEFT COLUMN: TOPIC NAVIGATION (Academic Style) -->
     <aside class="topic-nav">
-        <div class="nav-header">MCQ Library</div>
+        <div class="nav-header">Biochemistry MCQs</div>
         <ul class="topic-list">
-            <!-- These links use URL Parameters to switch the content -->
-            <li class="topic-item"><a href="?topic=daily" class="topic-link">📅 Daily Challenge</a></li>
+            <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
             <li class="topic-item"><a href="?topic=enzymes" class="topic-link">Enzyme Kinetics</a></li>
             <li class="topic-item"><a href="?topic=lipids" class="topic-link">Lipid Metabolism</a></li>
             <li class="topic-item"><a href="?topic=carbs" class="topic-link">Carbohydrates</a></li>
@@ -121,131 +151,204 @@
             <li class="topic-item"><a href="?topic=clinical" class="topic-link">Clinical Cases</a></li>
         </ul>
 
-        <div class="nav-header" style="margin-top: 30px;">Legal</div>
-        <div style="font-size: 0.85rem; color: #94a3b8;">
-            <a href="#" onclick="alert('Privacy Policy Placeholder')">Privacy Policy</a> • 
-            <a href="#">Terms</a>
+        <div class="nav-header" style="margin-top: 30px;">Tools</div>
+        <ul class="topic-list">
+            <li class="topic-item"><a href="#" class="topic-link">Calculator: Michaelis-Menten</a></li>
+            <li class="topic-item"><a href="#" class="topic-link">Reference: Amino Acids</a></li>
+        </ul>
+        
+        <div style="margin-top:30px; font-size: 0.75rem; color:#888;">
+            <a href="#" onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> <br>
+            &copy; 2025 BioChemHub
         </div>
     </aside>
 
-    <!-- 2. CENTER COLUMN: THE MAIN STAGE -->
+    <!-- 2. CENTER COLUMN: MAIN STAGE -->
     <main class="main-stage">
         
-        <!-- VIEW A: ARTICLE FEED (Shown by default) -->
-        <div id="view-articles" class="feed-container">
-            
-            <!-- Article 1 -->
-            <article class="article-card">
-                <div class="meta">Clinical Correlation • Nov 2024</div>
-                <h2>Why Ketoacidosis is Rare in Type 2 Diabetes</h2>
-                <div class="excerpt">
-                    An in-depth look at the mechanism of lipolysis inhibition and why residual insulin in Type 2 diabetics prevents the massive ketone production seen in DKA.
-                </div>
-                <!-- In-Feed Ad Placeholder -->
-                <div class="ad-box" style="height:90px; margin-bottom:20px;">AdSense Horizontal Banner</div>
-                <div class="article-body">
-                    <p>It takes very little insulin to suppress <b>Hormone Sensitive Lipase (HSL)</b> in adipose tissue. Type 2 diabetics, despite having insulin resistance, usually produce enough endogenous insulin to block HSL.</p>
-                    <p>Without active HSL, free fatty acids are not released in massive quantities, and the liver does not produce ketone bodies at a rate that overwhelms buffering capacity.</p>
-                </div>
-            </article>
-
-            <!-- Article 2 -->
-            <article class="article-card">
-                <div class="meta">Research Update</div>
-                <h2>CRISPR 2.0: Prime Editing</h2>
-                <div class="excerpt">
-                    Traditional CRISPR-Cas9 creates double-strand breaks (DSBs). Prime Editing uses a "nickase" to cut only one strand, allowing search-and-replace editing with fewer errors.
-                </div>
-                <a href="#" class="read-btn">Read Full Analysis &rarr;</a>
-            </article>
-
+        <!-- VIEW A: ARTICLE FEED (Fetched from Google Sheet) -->
+        <div id="view-articles">
+            <div style="text-align:center; padding:40px; color:#64748b;" id="blog-loading">
+                Loading Latest Research...
+            </div>
+            <!-- Dynamic Articles will be injected here -->
         </div>
 
-        <!-- VIEW B: QUIZ INTERFACE (Hidden by default, shown when topic clicked) -->
-        <div id="view-quiz" class="quiz-view">
+        <!-- VIEW B: QUIZ INTERFACE -->
+        <div id="view-quiz" class="quiz-view" style="display:none;">
             <div class="quiz-header">
-                <div>
-                    <h2 id="quiz-title" style="margin:0;">Topic Quiz</h2>
-                    <span id="quiz-status" style="font-size:0.9rem; color:#64748b;">Loading Questions...</span>
-                </div>
-                <div style="font-weight:700; font-size:1.2rem; color:var(--primary);">
-                    Score: <span id="score-display">0</span>
-                </div>
+                <span id="quiz-title">Topic Quiz</span>
+                <span id="score-display">Score: 0</span>
             </div>
 
-            <div id="loading-spinner" style="text-align:center; padding:40px;">
-                Connecting to Google Sheet...
+            <div id="loading-spinner" style="text-align:center; padding:20px; font-family:var(--font-ui); font-size:0.9rem;">
+                Connecting to Database...
             </div>
 
             <div id="question-container" style="display:none;">
-                <div id="q-text" style="font-size:1.25rem; font-weight:600; margin-bottom:25px;"></div>
+                <div id="q-text" style="font-size:1.1rem; font-weight:700; margin-bottom:15px; font-family:var(--font-main);"></div>
                 <div id="options-area"></div>
                 <div id="feedback-area" class="feedback"></div>
-                <button id="next-btn" class="btn-action" onclick="nextQuestion()" style="display:none;">Next Question</button>
+                <button id="next-btn" class="btn-action" onclick="nextQuestion()" style="display:none;">Next Question &rarr;</button>
             </div>
 
-            <div id="results-container" style="display:none; text-align:center; padding:40px;">
-                <h2>Module Complete!</h2>
+            <div id="results-container" style="display:none; text-align:center; padding:20px;">
+                <h3 style="margin-top:0;">Module Complete</h3>
                 <p>Final Score: <span id="final-score">0</span></p>
-                <button class="btn-action" style="float:none;" onclick="location.reload()">Return to Menu</button>
+                <button class="btn-action" onclick="location.reload()">Return to Index</button>
             </div>
         </div>
 
     </main>
 
-    <!-- 3. RIGHT COLUMN: ADS & TOOLS -->
+    <!-- 3. RIGHT COLUMN: ADS & RELATED -->
     <aside class="right-sidebar">
-        <!-- Ad Unit -->
-        <div class="ad-box">AdSense Square (300x250)</div>
+        
+        <div class="sidebar-header">Advertisements</div>
+        <div class="ad-box">Google AdSense (300x250)</div>
 
-        <!-- Affiliate Widget -->
-        <div class="tool-card">
-            <div class="meta" style="margin-bottom:10px;">Recommended</div>
-            <div style="font-weight:600; margin-bottom:5px;">Lehninger Principles</div>
-            <p style="font-size:0.85rem; margin-bottom:15px; color:#64748b;">The gold standard textbook for medical biochemistry.</p>
-            <a href="https://amzn.to/YOUR_LINK" target="_blank" style="display:block; text-align:center; background:#f1f5f9; padding:8px; border-radius:6px; font-size:0.9rem; font-weight:600; color:var(--text);">Check Price on Amazon</a>
-        </div>
+        <div class="sidebar-header">Related Resources</div>
+        <ul class="news-list">
+            <li class="news-item">
+                <a href="https://amzn.to/YOUR_LINK" target="_blank">Lehninger Principles of Biochemistry</a>
+                <span>Recommended Textbook</span>
+            </li>
+            <li class="news-item">
+                <a href="https://gumroad.com/YOUR_LINK" target="_blank">Download: 500+ High-Yield MCQs</a>
+                <span>PDF Question Bank ($5)</span>
+            </li>
+        </ul>
 
-        <!-- Pro Product -->
-        <div class="tool-card" style="background:#1e293b; color:white; border:none;">
-            <div style="color:#4ade80; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:10px;">Pro Question Bank</div>
-            <p style="font-size:0.9rem; margin-bottom:15px;">Get 500+ High-Yield MCQs offline (PDF) with detailed explanations.</p>
-            <a href="https://gumroad.com/YOUR_LINK" target="_blank" style="display:block; text-align:center; background:#22c55e; color:white; padding:10px; border-radius:6px; font-weight:700;">Download PDF ($5)</a>
-        </div>
+        <div class="sidebar-header">Recent Headlines</div>
+        <ul class="news-list">
+            <li class="news-item"><a href="#">New findings in protein folding stability</a><span>Nov 24, 2025</span></li>
+            <li class="news-item"><a href="#">CRISPR updates from the annual conference</a><span>Nov 22, 2025</span></li>
+        </ul>
+
     </aside>
 
 </div>
 
+<!-- PRIVACY MODAL (Required for AdSense) -->
+<div id="privacyModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
+  <div style="background:#fff; margin:10% auto; padding:30px; width:80%; max-width:600px; border:1px solid #000;">
+    <span onclick="document.getElementById('privacyModal').style.display='none'" style="float:right; cursor:pointer; font-weight:bold;">&times; CLOSE</span>
+    <h2>Privacy Policy</h2>
+    <p>Standard AdSense Disclaimer: We use cookies to personalize content and ads.</p>
+  </div>
+</div>
+
 <script>
     // ==========================================
-    // CONFIGURATION: MAP TOPICS TO GOOGLE SHEETS
+    // CONFIGURATION
     // ==========================================
     const SHEET_MAP = {
-        // Example: 'topic_id': 'GOOGLE_SHEET_CSV_LINK'
-        'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',  // Paste your Daily Quiz CSV link here
-        'enzymes': '', // Paste your Enzymes CSV link here
-        'lipids': '', // Paste your Lipids CSV link here
-        'carbs': '',  // Paste your Carbs CSV link here
+        'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv', 
+        'enzymes': '',
+        'lipids': '',
+        'carbs': '',
         'genetics': '',
         'clinical': ''
     };
 
+    // BLOG SHEET (Columns: Date, Category, Title, Excerpt, Content)
+    const BLOG_SHEET_URL = ""; 
+
+
     // --- APP LOGIC ---
-    let quizData = [];
-    let currentQ = 0;
-    let score = 0;
     const urlParams = new URLSearchParams(window.location.search);
     const activeTopic = urlParams.get('topic');
 
-    // DOM Elements
-    const views = {
-        articles: document.getElementById('view-articles'),
-        quiz: document.getElementById('view-quiz')
-    };
+    document.addEventListener("DOMContentLoaded", () => {
+        if (activeTopic && SHEET_MAP[activeTopic] !== undefined) {
+            document.getElementById('view-articles').style.display = 'none';
+            document.getElementById('view-quiz').style.display = 'block';
+            loadQuiz(activeTopic);
+            // Active Link
+            const links = document.querySelectorAll(`.topic-link[href="?topic=${activeTopic}"]`);
+            if(links.length > 0) links[0].classList.add('active');
+        } else {
+            document.getElementById('view-articles').style.display = 'block';
+            document.getElementById('view-quiz').style.display = 'none';
+            loadBlog();
+        }
+    });
+
+    // --- BLOG ENGINE (ScienceDaily Style) ---
+    function loadBlog() {
+        const container = document.getElementById('view-articles');
+        const loader = document.getElementById('blog-loading');
+
+        if (!BLOG_SHEET_URL) {
+            // FALLBACK CONTENT (So it looks good immediately)
+            loader.style.display = 'none';
+            container.innerHTML = `
+                <div class="article-entry">
+                    <div class="date-line">November 25, 2025 &mdash; BioChemHub</div>
+                    <h1 class="article-title">Why Ketoacidosis is Rare in Type 2 Diabetes</h1>
+                    <div class="summary-box">
+                        <span class="summary-label">Summary:</span>
+                        While Type 1 diabetics are prone to DKA, Type 2 patients rarely develop it. The key lies in the differential sensitivity of Hormone Sensitive Lipase (HSL) to insulin inhibition.
+                    </div>
+                    <div class="article-body">
+                        <p>One of the most common board questions involves distinguishing DKA (Diabetic Ketoacidosis) from HHS (Hyperosmolar Hyperglycemic State). While Type 1 diabetics are prone to DKA, Type 2 patients rarely develop it. Why?</p>
+                        <h3>The Role of Residual Insulin</h3>
+                        <p>It takes very little insulin to suppress <b>Hormone Sensitive Lipase (HSL)</b> in adipose tissue. Type 2 diabetics, despite having insulin resistance, usually produce enough endogenous insulin to block HSL.</p>
+                        <p>Without active HSL, free fatty acids are not released in massive quantities, and the liver does not produce ketone bodies (acetoacetate and beta-hydroxybutyrate) at a rate that overwhelms the buffering capacity of the blood.</p>
+                    </div>
+                </div>
+                
+                <div class="article-entry">
+                    <div class="date-line">November 22, 2025 &mdash; Genetics</div>
+                    <h1 class="article-title">CRISPR 2.0: The Rise of Prime Editing</h1>
+                    <div class="summary-box">
+                        <span class="summary-label">Summary:</span>
+                        New techniques allow for "search-and-replace" gene editing without the double-strand breaks associated with traditional Cas9.
+                    </div>
+                    <div class="article-body">
+                        <p>Traditional CRISPR-Cas9 creates double-strand breaks (DSBs), which can lead to unintended indels. Prime Editing, a newer technique, uses a "nickase" to cut only one strand.</p>
+                        <p>This allows for "search-and-replace" gene editing without the risks associated with DSBs. Recent studies suggest this could correct up to 89% of known pathogenic human genetic variants.</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        const freshUrl = BLOG_SHEET_URL + (BLOG_SHEET_URL.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+        Papa.parse(freshUrl, {
+            download: true, header: true,
+            complete: function(results) {
+                const posts = results.data.filter(r => r.Title);
+                if (posts.length === 0) return;
+                loader.style.display = 'none';
+                
+                posts.forEach(post => {
+                    const article = document.createElement('div');
+                    article.className = 'article-entry';
+                    const formattedContent = post.Content ? post.Content.replace(/\n/g, '<p>') : '';
+
+                    article.innerHTML = `
+                        <div class="date-line">${post.Date || 'Recent'} &mdash; ${post.Category || 'Research'}</div>
+                        <h1 class="article-title">${post.Title}</h1>
+                        <div class="summary-box">
+                            <span class="summary-label">Summary:</span>
+                            ${post.Excerpt || 'No summary available.'}
+                        </div>
+                        <div class="article-body"><p>${formattedContent}</p></div>
+                    `;
+                    container.appendChild(article);
+                });
+            }
+        });
+    }
+
+    // --- QUIZ ENGINE ---
+    let quizData = [];
+    let currentQ = 0;
+    let score = 0;
+
     const quizUI = {
         title: document.getElementById('quiz-title'),
-        status: document.getElementById('quiz-status'),
-        spinner: document.getElementById('loading-spinner'),
         container: document.getElementById('question-container'),
         text: document.getElementById('q-text'),
         opts: document.getElementById('options-area'),
@@ -253,42 +356,25 @@
         nextBtn: document.getElementById('next-btn'),
         score: document.getElementById('score-display'),
         results: document.getElementById('results-container'),
-        finalScore: document.getElementById('final-score')
+        finalScore: document.getElementById('final-score'),
+        spinner: document.getElementById('loading-spinner')
     };
 
-    // Initialize
-    if (activeTopic && SHEET_MAP[activeTopic] !== undefined) {
-        // User wants a quiz
-        views.articles.style.display = 'none';
-        views.quiz.style.display = 'block';
-        loadQuiz(activeTopic);
-        
-        // Highlight Sidebar Link
-        const links = document.querySelectorAll(`.topic-link[href="?topic=${activeTopic}"]`);
-        if(links.length > 0) links[0].classList.add('active');
-    } else {
-        // User wants home page
-        views.articles.style.display = 'flex';
-        views.quiz.style.display = 'none';
-    }
-
     function loadQuiz(topic) {
-        quizUI.title.innerText = topic.charAt(0).toUpperCase() + topic.slice(1) + " Challenge";
+        quizUI.title.innerText = topic.charAt(0).toUpperCase() + topic.slice(1) + " Quiz";
         const url = SHEET_MAP[topic];
 
         if (!url) {
-            quizUI.spinner.innerHTML = `<div style="color:red">Error: No Google Sheet linked for '${topic}'.<br>Update the SHEET_MAP in the code.</div>`;
+            quizUI.spinner.innerHTML = `<span style="color:red">Data Missing: Update SHEET_MAP in code.</span>`;
             return;
         }
 
-        // Fetch Data
         const freshUrl = url + (url.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
         Papa.parse(freshUrl, {
             download: true, header: true,
             complete: function(results) {
                 const raw = results.data.filter(r => r.Question);
                 if (raw.length > 0) {
-                    // Limit to 20 questions if needed: raw.slice(0, 20)
                     quizData = raw.map(row => ({
                         question: row.Question,
                         options: [row.Option1, row.Option2, row.Option3, row.Option4],
@@ -296,31 +382,27 @@
                         explanation: row.Explanation
                     }));
                     startQuizEngine();
-                } else {
-                    quizUI.spinner.innerText = "Sheet found, but no questions detected.";
                 }
             },
-            error: function(err) {
-                quizUI.spinner.innerText = "Connection Failed. Check your CSV link.";
-            }
+            error: function() { quizUI.spinner.innerText = "Connection Error"; }
         });
     }
 
     function startQuizEngine() {
         quizUI.spinner.style.display = 'none';
         quizUI.container.style.display = 'block';
-        quizUI.status.innerText = `Question 1 of ${quizData.length}`;
         renderQuestion();
     }
 
     function renderQuestion() {
         if (currentQ >= quizData.length) {
-            showResults();
+            quizUI.container.style.display = 'none';
+            quizUI.results.style.display = 'block';
+            quizUI.finalScore.innerText = `${score} / ${quizData.length}`;
             return;
         }
         const data = quizData[currentQ];
-        quizUI.text.innerHTML = data.question;
-        quizUI.status.innerText = `Question ${currentQ + 1} of ${quizData.length}`;
+        quizUI.text.innerHTML = `${currentQ + 1}. ${data.question}`;
         quizUI.opts.innerHTML = '';
         quizUI.feedback.style.display = 'none';
         quizUI.nextBtn.style.display = 'none';
@@ -332,7 +414,6 @@
             btn.onclick = () => checkAnswer(index, btn);
             quizUI.opts.appendChild(btn);
         });
-
         renderMathInElement(document.body);
     }
 
@@ -344,8 +425,8 @@
         if (selectedIndex === correctIndex) {
             btn.classList.add('correct');
             score++;
-            quizUI.score.innerText = score;
-            quizUI.feedback.innerHTML = "<b>Correct!</b> " + quizData[currentQ].explanation;
+            quizUI.score.innerText = `Score: ${score}`;
+            quizUI.feedback.innerHTML = "<b>Correct.</b> " + quizData[currentQ].explanation;
         } else {
             btn.classList.add('incorrect');
             buttons[correctIndex].classList.add('correct');
@@ -356,16 +437,7 @@
         renderMathInElement(quizUI.feedback);
     }
 
-    function nextQuestion() {
-        currentQ++;
-        renderQuestion();
-    }
-
-    function showResults() {
-        quizUI.container.style.display = 'none';
-        quizUI.results.style.display = 'block';
-        quizUI.finalScore.innerText = `${score} / ${quizData.length}`;
-    }
+    function nextQuestion() { currentQ++; renderQuestion(); }
 </script>
 
 </body>
