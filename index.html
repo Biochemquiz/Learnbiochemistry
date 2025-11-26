@@ -339,8 +339,7 @@
     function initApp() {
         if (!GOOGLE_SHEET_URL) {
             console.log("No Google Sheet URL provided. Using fallback data.");
-            quizData = fallbackData;
-            startQuiz();
+            showError("Missing Link: Go to Line 287 in the code and paste your Google Sheet CSV link.");
             return;
         }
 
@@ -369,15 +368,13 @@
             },
             error: function(err) {
                 console.error("Error loading Google Sheet:", err);
-                showError("Could not load questions.<br>1. Check if 'Publish to Web' link is correct (must end in .csv).<br>2. Make sure you are NOT running this file locally (upload to Netlify).");
+                showError("Could not load questions.<br>1. Did you paste the CSV link in the code (Line 287)?<br>2. Check if the link ends in .csv");
             }
         });
     }
 
     function showError(msg) {
         dom.loader.innerHTML = `<div class="error-msg"><strong>Error:</strong><br>${msg}</div>`;
-        // If we want to fallback gracefully after error, uncomment below:
-        // quizData = fallbackData; startQuiz();
     }
 
     function startQuiz() {
