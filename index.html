@@ -14,15 +14,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
+        /* =========================================
+           THEME CONFIGURATION
+           Uncomment the block you want to use.
+           ========================================= */
+
+        /* THEME 1: ACADEMIC TEAL (Default) */
         :root {
-            --primary: #0f766e;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text: #1e293b;
-            --accent: #ccfbf1;
-            --error: #ef4444;
-            --success: #22c55e;
+            --primary: #0f766e;  /* Main color */
+            --bg: #f8fafc;       /* Background */
+            --surface: #ffffff;  /* Card color */
+            --text: #1e293b;     /* Font color */
+            --accent: #ccfbf1;   /* Light highlight */
+            --error: #ef4444;    /* Red for wrong answers */
+            --success: #22c55e;  /* Green for correct answers */
         }
+
+        /* THEME 2: MEDICAL BLUE (Uncomment to use) */
+        /*
+        :root {
+            --primary: #2563eb;
+            --bg: #eff6ff;
+            --surface: #ffffff;
+            --text: #1e3a8a;
+            --accent: #dbeafe;
+            --error: #dc2626;
+            --success: #16a34a;
+        }
+        */
+
+        /* THEME 3: DARK MODE (Uncomment to use) */
+        /*
+        :root {
+            --primary: #818cf8;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --accent: #312e81;
+            --error: #f87171;
+            --success: #4ade80;
+        }
+        */
 
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
@@ -47,7 +79,7 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary), #0d9488);
+            background: linear-gradient(135deg, var(--primary), #00000055); /* Adds slight darkness to primary */
             color: white;
             border-radius: 0 0 20px 20px;
             margin-bottom: 30px;
@@ -68,7 +100,7 @@
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e2e8f033; /* Transparent border for dark mode compatibility */
         }
 
         .section-title {
@@ -78,19 +110,31 @@
             margin-bottom: 15px;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-badge {
+            font-size: 0.8rem;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: normal;
         }
 
         .quiz-container {
             border-radius: 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e2e8f033;
             background: var(--surface);
             padding: 30px;
         }
 
         .progress-bar {
             height: 6px;
-            background: #e2e8f0;
+            background: var(--accent);
             border-radius: 3px;
             margin-bottom: 25px;
             overflow: hidden;
@@ -115,12 +159,13 @@
 
         .option-btn {
             background: var(--bg);
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--accent);
             padding: 15px 20px;
             border-radius: 8px;
             text-align: left;
             cursor: pointer;
             font-size: 1rem;
+            color: var(--text);
             transition: all 0.2s;
             display: flex;
             align-items: center;
@@ -128,19 +173,19 @@
 
         .option-btn:hover:not(.disabled) {
             border-color: var(--primary);
-            background: var(--accent);
+            filter: brightness(0.95);
         }
 
         .option-btn.correct {
-            background: #dcfce7;
+            background: var(--success);
             border-color: var(--success);
-            color: #14532d;
+            color: white;
         }
 
         .option-btn.incorrect {
-            background: #fee2e2;
+            background: var(--error);
             border-color: var(--error);
-            color: #7f1d1d;
+            color: white;
         }
 
         .feedback {
@@ -148,8 +193,9 @@
             padding: 15px;
             border-radius: 8px;
             display: none;
-            background: #f1f5f9;
+            background: var(--accent);
             border-left: 4px solid var(--primary);
+            color: var(--text);
         }
 
         .btn-next {
@@ -179,7 +225,7 @@
             padding: 10px;
             border-radius: 6px;
             transition: background 0.2s;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--accent);
         }
         .affiliate-link:hover { background-color: var(--accent); }
         .affiliate-img {
@@ -224,21 +270,16 @@
     <!-- LEFT COLUMN: Quiz & Content -->
     <div class="main-content">
         
-        <!-- Blog Teaser -->
-        <div class="card">
-            <div class="section-title">Latest Discovery</div>
-            <h3 style="margin-top:0;">CRISPR 2.0: Prime Editing Advances</h3>
-            <p>Recent studies in <i>Nature</i> suggest prime editing can correct up to 89% of known genetic variants associated with human diseases without causing double-strand breaks.</p>
-            <a href="#" style="color:var(--primary); text-decoration:none; font-weight:600;">Read Analysis &rarr;</a>
-        </div>
-
-        <!-- Quiz Section -->
+        <!-- QUIZ SECTION (Now at the top for engagement) -->
         <div class="quiz-container" id="quizApp">
-            <div class="section-title">Daily Challenge</div>
+            <div class="section-title">
+                Daily Challenge
+                <span class="date-badge" id="current-date">Today</span>
+            </div>
             
             <div id="loading-msg" class="loading-overlay">
                 Loading Daily Questions...<br>
-                <span style="font-size: 0.8em; font-weight: normal; color: #64748b;">(Connecting to Google Sheets)</span>
+                <span style="font-size: 0.8em; font-weight: normal; opacity: 0.7;">(Connecting to Google Sheets)</span>
             </div>
 
             <div id="quiz-interface" style="display:none;">
@@ -261,13 +302,40 @@
             </div>
         </div>
 
+        <!-- BLOG / TRENDS SECTION -->
+        <!-- To add a new post, copy from 'BLOG POST START' to 'BLOG POST END' and paste it above the existing one -->
+        
+        <!-- BLOG POST START -->
+        <div class="card">
+            <div class="section-title">
+                Research Update
+                <span class="date-badge">Nov 2024</span>
+            </div>
+            <h3 style="margin-top:0;">CRISPR 2.0: Prime Editing Advances</h3>
+            <p>Recent studies in <i>Nature</i> suggest prime editing can correct up to 89% of known genetic variants associated with human diseases without causing double-strand breaks. This offers a huge leap over traditional Cas9 methods.</p>
+            <!-- Optional Link -->
+            <a href="#" style="color:var(--primary); text-decoration:none; font-weight:600;">Read Analysis &rarr;</a>
+        </div>
+        <!-- BLOG POST END -->
+
+        <!-- BLOG POST START -->
+        <div class="card">
+            <div class="section-title">
+                Topic Overview
+                <span class="date-badge">Study Guide</span>
+            </div>
+            <h3 style="margin-top:0;">Lipid Metabolism: Key Points</h3>
+            <p>Remember that Beta-oxidation occurs in the mitochondria, while Fatty Acid synthesis occurs in the cytosol. The rate-limiting enzyme for synthesis is <b>Acetyl-CoA Carboxylase</b>.</p>
+        </div>
+        <!-- BLOG POST END -->
+
     </div>
 
     <!-- RIGHT COLUMN: Monetization -->
     <div class="sidebar">
         <div class="card">
             <div class="section-title">Recommended Books</div>
-            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Ace your exams with these standard texts.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Ace your exams with these standard texts.</p>
             
             <a href="https://amzn.to/YOUR_LINK_HERE" target="_blank" class="affiliate-link">
                 <div class="affiliate-img"></div> 
@@ -292,7 +360,7 @@
             <button style="width:100%; background: #22c55e; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Download PDF ($5)</button>
         </div>
 
-        <div style="text-align:center; margin-top: 20px; font-size: 0.9rem; color: #64748b;">
+        <div style="text-align:center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
             Found this helpful? <a href="#" style="color: var(--primary);">Buy me a coffee ☕</a>
         </div>
     </div>
@@ -330,8 +398,13 @@
         scoreArea: document.getElementById('score-area'),
         qArea: document.getElementById('question-area'),
         finalScore: document.getElementById('final-score'),
-        totalQ: document.getElementById('total-q')
+        totalQ: document.getElementById('total-q'),
+        dateDisplay: document.getElementById('current-date')
     };
+
+    // Set Date
+    const today = new Date();
+    if(dom.dateDisplay) dom.dateDisplay.innerText = today.toLocaleDateString();
 
     // Initialize
     document.addEventListener("DOMContentLoaded", initApp);
@@ -339,7 +412,7 @@
     function initApp() {
         if (!GOOGLE_SHEET_URL) {
             console.log("No Google Sheet URL provided. Using fallback data.");
-            showError("Missing Link: Go to Line 287 in the code and paste your Google Sheet CSV link.");
+            showError("Missing Link: Go to Line 323 in the code and paste your Google Sheet CSV link.");
             return;
         }
 
@@ -368,7 +441,7 @@
             },
             error: function(err) {
                 console.error("Error loading Google Sheet:", err);
-                showError("Could not load questions.<br>1. Did you paste the CSV link in the code (Line 287)?<br>2. Check if the link ends in .csv");
+                showError("Could not load questions.<br>1. Did you paste the CSV link in the code (Line 323)?<br>2. Check if the link ends in .csv");
             }
         });
     }
