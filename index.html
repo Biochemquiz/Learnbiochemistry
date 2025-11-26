@@ -344,8 +344,11 @@
             return;
         }
 
+        // Cache Buster: Appends a unique timestamp to force browser to fetch fresh data
+        const freshUrl = GOOGLE_SHEET_URL + (GOOGLE_SHEET_URL.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+
         // Fetch Data
-        Papa.parse(GOOGLE_SHEET_URL, {
+        Papa.parse(freshUrl, {
             download: true,
             header: true,
             complete: function(results) {
