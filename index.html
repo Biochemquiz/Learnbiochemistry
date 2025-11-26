@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioChem Mastery | MCQs & Discoveries</title>
+    <meta name="description" content="Learn Biochemistry through daily interactive MCQs, research updates, and in-depth study guides for medical and science students.">
+    <meta name="keywords" content="Biochemistry, MCQs, Medical School, USMLE, Enzyme Kinetics, Lipid Metabolism">
+    <meta name="author" content="BioChemHub">
+    <title>BioChem Mastery | Study Guides & Daily Quizzes</title>
     
     <!-- KaTeX for rendering Chemical Formulas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -14,379 +17,306 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
-        /* =========================================
-           THEME CONFIGURATION
-           Uncomment the block you want to use.
-           ========================================= */
-
-        /* THEME 1: ACADEMIC TEAL (Default) */
+        /* THEME: ACADEMIC TEAL */
         :root {
-            --primary: #0f766e;  /* Main color */
-            --bg: #f8fafc;       /* Background */
-            --surface: #ffffff;  /* Card color */
-            --text: #1e293b;     /* Font color */
-            --accent: #ccfbf1;   /* Light highlight */
-            --error: #ef4444;    /* Red for wrong answers */
-            --success: #22c55e;  /* Green for correct answers */
-        }
-
-        /* THEME 2: MEDICAL BLUE (Uncomment to use) */
-        
-        :root {
-            --primary: #2563eb;
-            --bg: #eff6ff;
+            --primary: #0f766e;
+            --bg: #f1f5f9;       /* Slightly darker bg for contrast */
             --surface: #ffffff;
-            --text: #1e3a8a;
-            --accent: #dbeafe;
-            --error: #dc2626;
-            --success: #16a34a;
+            --text: #1e293b;
+            --accent: #ccfbf1;
+            --error: #ef4444;
+            --success: #22c55e;
+            --border: #e2e8f0;
         }
-        */
-
-        /* THEME 3: DARK MODE (Uncomment to use) */
-        /*
-        :root {
-            --primary: #818cf8;
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --text: #f1f5f9;
-            --accent: #312e81;
-            --error: #f87171;
-            --success: #4ade80;
-        }
-        */
 
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7; /* Better readability for articles */
             margin: 0;
             padding: 0;
         }
 
-        /* Layout */
-        .container {
-            max-width: 1000px;
+        /* --- NAVIGATION (Required for AdSense Trust) --- */
+        nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-content {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: #64748b; font-weight: 600; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            grid-template-columns: 2fr 1fr; /* Blog takes priority (2/3) */
+            gap: 40px;
             align-items: start;
         }
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary), #00000055); /* Adds slight darkness to primary */
-            color: white;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.05em; }
-        .subtitle { opacity: 0.9; margin-top: 10px; font-weight: 300; }
-
-        .main-content {
+        /* --- LEFT COLUMN: CONTENT (AdSense Focus) --- */
+        .content-column {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
         }
 
-        .card {
+        .article-card {
             background: var(--surface);
-            padding: 25px;
+            padding: 40px;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f033; /* Transparent border for dark mode compatibility */
+            border: 1px solid var(--border);
         }
 
-        .section-title {
-            font-size: 1.25rem;
+        .article-meta {
+            font-size: 0.85rem;
             color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             font-weight: 700;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2.article-title { margin-top: 0; font-size: 2rem; line-height: 1.3; color: #0f172a; }
+        
+        .article-body { font-size: 1.05rem; color: #334155; }
+        .article-body p { margin-bottom: 20px; }
+        .article-body h3 { color: #0f172a; margin-top: 30px; }
+
+        /* --- RIGHT COLUMN: TOOLS & ADS --- */
+        .sidebar {
+            position: sticky;
+            top: 90px; /* Below Nav */
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Quiz Widget (Compact) */
+        .quiz-widget {
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .date-badge {
-            font-size: 0.8rem;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: normal;
-        }
-
-        .quiz-container {
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f033;
-            background: var(--surface);
-            padding: 30px;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: var(--accent);
-            border-radius: 3px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .question-box {
-            font-size: 1.25rem;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .options-grid {
-            display: grid;
-            gap: 12px;
-        }
+        .quiz-body { padding: 20px; }
 
         .option-btn {
             background: var(--bg);
-            border: 2px solid var(--accent);
-            padding: 15px 20px;
-            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            border-radius: 6px;
             text-align: left;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text);
             transition: all 0.2s;
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        .option-btn:hover { border-color: var(--primary); background: var(--accent); }
+        .option-btn.correct { background: var(--success); border-color: var(--success); color: white; }
+        .option-btn.incorrect { background: var(--error); border-color: var(--error); color: white; }
+        
+        .feedback { 
+            margin-top: 15px; font-size: 0.9rem; padding: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; display: none; 
+        }
+
+        /* Ad Placeholder */
+        .ad-slot {
+            background: #e2e8f0;
+            height: 250px;
             display: flex;
             align-items: center;
-        }
-
-        .option-btn:hover:not(.disabled) {
-            border-color: var(--primary);
-            filter: brightness(0.95);
-        }
-
-        .option-btn.correct {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-
-        .option-btn.incorrect {
-            background: var(--error);
-            border-color: var(--error);
-            color: white;
-        }
-
-        .feedback {
-            margin-top: 20px;
-            padding: 15px;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.9rem;
             border-radius: 8px;
-            display: none;
-            background: var(--accent);
-            border-left: 4px solid var(--primary);
-            color: var(--text);
+            text-align: center;
+            padding: 20px;
         }
 
-        .btn-next {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            display: none;
-            float: right;
-        }
-
-        .sidebar {
-            position: sticky;
-            top: 20px;
-        }
-
-        .affiliate-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text);
-            padding: 10px;
-            border-radius: 6px;
-            transition: background 0.2s;
-            border-bottom: 1px solid var(--accent);
-        }
-        .affiliate-link:hover { background-color: var(--accent); }
-        .affiliate-img {
-            width: 40px; height: 50px; background: #cbd5e1; border-radius: 4px;
-        }
-        
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
-            .sidebar { position: static; }
-        }
-
-        .katex { font-size: 1.1em; }
-        
-        /* Loading State */
-        .loading-overlay {
-            text-align: center; 
-            padding: 20px; 
-            color: var(--primary); 
-            font-weight: bold;
-        }
-        
-        .error-msg {
-            color: var(--error);
-            background: #fef2f2;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--error);
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+            padding: 40px 0;
             text-align: center;
             font-size: 0.9rem;
+            color: #64748b;
         }
+        .footer-links a { color: #64748b; text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { text-decoration: underline; }
+
+        /* Modal for Privacy Policy */
+        .modal {
+            display: none; 
+            position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+        }
+        .modal-content {
+            background-color: #fefefe; margin: 10% auto; padding: 30px; border: 1px solid #888; 
+            width: 80%; max-width: 600px; border-radius: 12px;
+        }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>BioChem<span style="font-weight:300">Hub</span></h1>
-    <div class="subtitle">Interactive MCQs & Research Updates</div>
-</header>
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-content">
+        <a href="#" class="logo">BioChem<span style="font-weight:300">Hub</span></a>
+        <div class="nav-links">
+            <a href="#">Articles</a>
+            <a href="#" onclick="document.getElementById('quizApp').scrollIntoView({behavior: 'smooth'})">Daily Quiz</a>
+            <a href="https://gumroad.com/YOUR_LINK" target="_blank" style="color:var(--primary)">Pro PDF</a>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
 
-    <!-- LEFT COLUMN: Quiz & Content -->
-    <div class="main-content">
+    <!-- LEFT: ARTICLES (Main Content for SEO/AdSense) -->
+    <div class="content-column">
         
-        <!-- QUIZ SECTION (Now at the top for engagement) -->
-        <div class="quiz-container" id="quizApp">
-            <div class="section-title">
-                Daily Challenge
-                <span class="date-badge" id="current-date">Today</span>
-            </div>
-            
-            <div id="loading-msg" class="loading-overlay">
-                Loading Daily Questions...<br>
-                <span style="font-size: 0.8em; font-weight: normal; opacity: 0.7;">(Connecting to Google Sheets)</span>
-            </div>
-
-            <div id="quiz-interface" style="display:none;">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress"></div>
+        <!-- ARTICLE 1 -->
+        <article class="article-card">
+            <div class="article-meta">Clinical Correlation • Nov 2024</div>
+            <h2 class="article-title">Why Ketoacidosis is Rare in Type 2 Diabetes</h2>
+            <div class="article-body">
+                <p>One of the most common board questions involves distinguishing DKA (Diabetic Ketoacidosis) from HHS (Hyperosmolar Hyperglycemic State). While Type 1 diabetics are prone to DKA, Type 2 patients rarely develop it. Why?</p>
+                <h3>The Role of Residual Insulin</h3>
+                <p>The key lies in the mechanism of lipolysis inhibition. It takes very little insulin to suppress <b>Hormone Sensitive Lipase (HSL)</b> in adipose tissue. Type 2 diabetics, despite having insulin resistance, usually produce enough endogenous insulin to block HSL.</p>
+                <p>Without active HSL, free fatty acids are not released in massive quantities, and the liver does not produce ketone bodies (acetoacetate and beta-hydroxybutyrate) at a rate that overwhelms the buffering capacity of the blood.</p>
+                
+                <!-- IN-ARTICLE AD SLOT -->
+                <div class="ad-slot">
+                    Google AdSense Display Ad <br>(728x90 or Responsive)
                 </div>
 
-                <div id="question-area">
-                    <div class="question-box" id="question-text">Loading...</div>
-                    <div class="options-grid" id="options-container"></div>
-                    <div class="feedback" id="feedback-area"></div>
-                    <button class="btn-next" id="next-btn" onclick="nextQuestion()">Next Question</button>
-                </div>
-
-                <div id="score-area" style="display:none; text-align:center;">
-                    <h2>Quiz Complete!</h2>
-                    <p style="font-size: 1.5rem;">Score: <span id="final-score">0</span> / <span id="total-q">0</span></p>
-                    <button class="btn-next" style="display:inline-block; float:none;" onclick="location.reload()">Restart Quiz</button>
-                </div>
+                <h3>Clinical Implications</h3>
+                <p>This is why Type 2 patients present with HHS: severe hyperglycemia (>600 mg/dL) and dehydration, but normal pH and bicarbonate levels. Treatment focuses on aggressive hydration rather than insulin loading.</p>
             </div>
-        </div>
+        </article>
 
-        <!-- BLOG / TRENDS SECTION -->
-        <!-- To add a new post, copy from 'BLOG POST START' to 'BLOG POST END' and paste it above the existing one -->
-        
-        <!-- BLOG POST START -->
-        <div class="card">
-            <div class="section-title">
-                Research Update
-                <span class="date-badge">Nov 2024</span>
+        <!-- ARTICLE 2 -->
+        <article class="article-card">
+            <div class="article-meta">Research Update • Genetics</div>
+            <h2 class="article-title">CRISPR 2.0: The Rise of Prime Editing</h2>
+            <div class="article-body">
+                <p>Traditional CRISPR-Cas9 creates double-strand breaks (DSBs), which can lead to unintended indels. Prime Editing, a newer technique, uses a "nickase" to cut only one strand.</p>
+                <p>This allows for "search-and-replace" gene editing without the risks associated with DSBs. Recent studies suggest this could correct up to 89% of known pathogenic human genetic variants.</p>
             </div>
-            <h3 style="margin-top:0;">CRISPR 2.0: Prime Editing Advances</h3>
-            <p>Recent studies in <i>Nature</i> suggest prime editing can correct up to 89% of known genetic variants associated with human diseases without causing double-strand breaks. This offers a huge leap over traditional Cas9 methods.</p>
-            <!-- Optional Link -->
-            <a href="#" style="color:var(--primary); text-decoration:none; font-weight:600;">Read Analysis &rarr;</a>
-        </div>
-        <!-- BLOG POST END -->
-
-        <!-- BLOG POST START -->
-        <div class="card">
-            <div class="section-title">
-                Topic Overview
-                <span class="date-badge">Study Guide</span>
-            </div>
-            <h3 style="margin-top:0;">Lipid Metabolism: Key Points</h3>
-            <p>Remember that Beta-oxidation occurs in the mitochondria, while Fatty Acid synthesis occurs in the cytosol. The rate-limiting enzyme for synthesis is <b>Acetyl-CoA Carboxylase</b>.</p>
-        </div>
-        <!-- BLOG POST END -->
+        </article>
 
     </div>
 
-    <!-- RIGHT COLUMN: Monetization -->
+    <!-- RIGHT: SIDEBAR (Tools & Ads) -->
     <div class="sidebar">
-        <div class="card">
-            <div class="section-title">Recommended Books</div>
-            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Ace your exams with these standard texts.</p>
+        
+        <!-- WIDGET 1: THE QUIZ -->
+        <div class="quiz-widget" id="quizApp">
+            <div class="quiz-header">
+                <span>Daily Challenge</span>
+                <span style="font-size:0.8em; opacity:0.9" id="q-counter">1/5</span>
+            </div>
             
-            <a href="https://amzn.to/YOUR_LINK_HERE" target="_blank" class="affiliate-link">
-                <div class="affiliate-img"></div> 
-                <div>
-                    <div style="font-weight:600;">Lehninger Principles</div>
-                    <div style="font-size:0.85rem; color:var(--primary);">Check Price on Amazon</div>
-                </div>
-            </a>
-            
-            <a href="https://amzn.to/YOUR_LINK_HERE" target="_blank" class="affiliate-link">
-                <div class="affiliate-img"></div>
-                <div>
-                    <div style="font-weight:600;">Lippincott's Reviews</div>
-                    <div style="font-size:0.85rem; color:var(--primary);">Check Price on Amazon</div>
-                </div>
-            </a>
+            <div id="loading-msg" style="padding:20px; text-align:center;">
+                Loading Questions...
+            </div>
+
+            <div id="quiz-interface" class="quiz-body" style="display:none;">
+                <div id="question-text" style="font-weight:600; margin-bottom:15px; font-size:1.1rem;"></div>
+                <div id="options-container"></div>
+                <div id="feedback-area" class="feedback"></div>
+                <button id="next-btn" onclick="nextQuestion()" style="width:100%; margin-top:15px; padding:10px; background:var(--primary); color:white; border:none; border-radius:6px; cursor:pointer; display:none;">Next Question</button>
+            </div>
         </div>
 
-        <div class="card" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: white;">
-            <div class="section-title" style="color: #6ee7b7; border-color: #334155;">Pro Question Bank</div>
-            <p style="font-size: 0.9rem; margin-bottom: 15px;">Get 500+ High-Yield MCQs offline (PDF format) with detailed explanations.</p>
-            <button style="width:100%; background: #22c55e; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Download PDF ($5)</button>
+        <!-- WIDGET 2: SQUARE AD -->
+        <div class="ad-slot" style="height: 300px;">
+            Google AdSense Sidebar Ad <br>(300x250)
         </div>
 
-        <div style="text-align:center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
-            Found this helpful? <a href="#" style="color: var(--primary);">Buy me a coffee ☕</a>
+        <!-- WIDGET 3: AFFILIATE -->
+        <div class="article-card" style="padding: 20px;">
+            <div class="article-meta" style="margin-bottom:10px;">Recommended Resource</div>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="width:50px; height:70px; background:#ddd; border-radius:4px;"></div>
+                <div>
+                    <div style="font-weight:700;">Lehninger Principles</div>
+                    <a href="https://amzn.to/YOUR_LINK_HERE" target="_blank" style="color:var(--primary); font-size:0.9rem;">Check on Amazon</a>
+                </div>
+            </div>
         </div>
+
     </div>
+
+</div>
+
+<!-- FOOTER (Required for AdSense) -->
+<footer>
+    <div class="footer-links">
+        <a href="#" onclick="openModal()">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+    </div>
+    <p style="margin-top:20px;">&copy; 2025 BioChemHub. All rights reserved.</p>
+</footer>
+
+<!-- PRIVACY POLICY MODAL -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Privacy Policy</h2>
+    <p>This is a standard placeholder policy required for AdSense.</p>
+    <p><b>1. Data Collection:</b> We do not collect personal data directly. We use third-party services like Google Analytics and Google AdSense which may use cookies.</p>
+    <p><b>2. Cookies:</b> Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</p>
+    <p><b>3. Contact:</b> For questions, please contact email@example.com.</p>
+  </div>
 </div>
 
 <script>
-    // --- CONFIGURATION ---
-    // STEP 1: Publish your Google Sheet to Web (File > Share > Publish to Web > CSV)
-    // STEP 2: Paste the URL inside the quotes below:
+    // --- GOOGLE SHEET CONFIGURATION ---
     const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv"; 
-    
-    // Fallback Data (Used if URL is empty)
-    const fallbackData = [
-        {
-            question: "In the Michaelis-Menten equation, what does \\( K_m \\) represent?",
-            options: ["The maximum velocity", "Substrate conc. at \\( 0.5 V_{max} \\)", "Catalytic efficiency", "Dissociation constant"],
-            correctIndex: 1,
-            explanation: "\\( K_m \\) is the substrate concentration at half \\( V_{max} \\)."
-        }
-    ];
 
+    // --- QUIZ LOGIC ---
+    // (Same logic as before, just compacted for the widget)
     let quizData = [];
     let currentQ = 0;
-    let score = 0;
 
-    // DOM Elements
     const dom = {
         loader: document.getElementById('loading-msg'),
         interface: document.getElementById('quiz-interface'),
@@ -394,60 +324,40 @@
         opts: document.getElementById('options-container'),
         feedback: document.getElementById('feedback-area'),
         nextBtn: document.getElementById('next-btn'),
-        progress: document.getElementById('progress'),
-        scoreArea: document.getElementById('score-area'),
-        qArea: document.getElementById('question-area'),
-        finalScore: document.getElementById('final-score'),
-        totalQ: document.getElementById('total-q'),
-        dateDisplay: document.getElementById('current-date')
+        counter: document.getElementById('q-counter')
     };
 
-    // Set Date
-    const today = new Date();
-    if(dom.dateDisplay) dom.dateDisplay.innerText = today.toLocaleDateString();
-
-    // Initialize
     document.addEventListener("DOMContentLoaded", initApp);
 
     function initApp() {
         if (!GOOGLE_SHEET_URL) {
-            console.log("No Google Sheet URL provided. Using fallback data.");
-            showError("Missing Link: Go to Line 323 in the code and paste your Google Sheet CSV link.");
+            // FALLBACK DATA FOR DEMO
+            quizData = [{
+                question: "Which enzyme is the rate-limiting step of Glycolysis?",
+                options: ["Hexokinase", "Pyruvate Kinase", "PFK-1", "Enolase"],
+                correctIndex: 2,
+                explanation: "PFK-1 is the rate-limiting enzyme."
+            }];
+            startQuiz();
             return;
         }
-
-        // Cache Buster: Appends a unique timestamp to force browser to fetch fresh data
+        
         const freshUrl = GOOGLE_SHEET_URL + (GOOGLE_SHEET_URL.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
-
-        // Fetch Data
         Papa.parse(freshUrl, {
-            download: true,
-            header: true,
+            download: true, header: true,
             complete: function(results) {
-                const raw = results.data;
-                const validQuestions = raw.filter(row => row.Question && row.Option1);
-
-                if (validQuestions.length > 0) {
-                    quizData = validQuestions.map(row => ({
+                const raw = results.data.filter(r => r.Question);
+                if(raw.length > 0) {
+                    quizData = raw.map(row => ({
                         question: row.Question,
                         options: [row.Option1, row.Option2, row.Option3, row.Option4],
-                        correctIndex: parseInt(row.CorrectAnswer) - 1, // Convert 1-based to 0-based
-                        explanation: row.Explanation || "No explanation provided."
+                        correctIndex: parseInt(row.CorrectAnswer) - 1,
+                        explanation: row.Explanation
                     }));
                     startQuiz();
-                } else {
-                    showError("Found the sheet, but it looks empty or columns are named wrong. Check Row 1.");
                 }
-            },
-            error: function(err) {
-                console.error("Error loading Google Sheet:", err);
-                showError("Could not load questions.<br>1. Did you paste the CSV link in the code (Line 323)?<br>2. Check if the link ends in .csv");
             }
         });
-    }
-
-    function showError(msg) {
-        dom.loader.innerHTML = `<div class="error-msg"><strong>Error:</strong><br>${msg}</div>`;
     }
 
     function startQuiz() {
@@ -458,22 +368,16 @@
 
     function loadQuestion() {
         if (currentQ >= quizData.length) {
-            showResults();
+            dom.interface.innerHTML = "<div style='text-align:center; padding:20px;'><b>All Done!</b><br>Come back tomorrow.</div>";
             return;
         }
-
         const data = quizData[currentQ];
-        
-        // Reset UI
+        dom.qText.innerHTML = data.question;
+        dom.counter.innerText = `${currentQ + 1}/${quizData.length}`;
+        dom.opts.innerHTML = '';
         dom.feedback.style.display = 'none';
         dom.nextBtn.style.display = 'none';
-        dom.opts.innerHTML = '';
-        
-        // Set Text
-        dom.qText.innerHTML = data.question;
-        dom.progress.style.width = `${((currentQ) / quizData.length) * 100}%`;
 
-        // Create Buttons
         data.options.forEach((opt, index) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
@@ -481,35 +385,23 @@
             btn.onclick = () => checkAnswer(index, btn);
             dom.opts.appendChild(btn);
         });
-
-        // Re-render Math/LaTeX
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "$$", right: "$$", display: true},
-                {left: "\\(", right: "\\)", display: false}
-            ]
-        });
+        
+        renderMathInElement(dom.qText);
     }
 
-    function checkAnswer(selectedIndex, btnElement) {
-        const buttons = document.querySelectorAll('.option-btn');
-        buttons.forEach(b => {
-            b.classList.add('disabled');
-            b.onclick = null;
-        });
-
+    function checkAnswer(selectedIndex, btn) {
         const correctIndex = quizData[currentQ].correctIndex;
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(b => { b.onclick = null; }); // Disable clicks
 
         if (selectedIndex === correctIndex) {
-            btnElement.classList.add('correct');
-            score++;
-            dom.feedback.innerHTML = `<strong>Correct!</strong> <br> ${quizData[currentQ].explanation}`;
+            btn.classList.add('correct');
+            dom.feedback.innerHTML = "<b>Correct!</b> " + quizData[currentQ].explanation;
         } else {
-            btnElement.classList.add('incorrect');
-            if (buttons[correctIndex]) buttons[correctIndex].classList.add('correct');
-            dom.feedback.innerHTML = `<strong>Incorrect.</strong> <br> ${quizData[currentQ].explanation}`;
+            btn.classList.add('incorrect');
+            buttons[correctIndex].classList.add('correct');
+            dom.feedback.innerHTML = "<b>Incorrect.</b> " + quizData[currentQ].explanation;
         }
-
         dom.feedback.style.display = 'block';
         dom.nextBtn.style.display = 'block';
         renderMathInElement(dom.feedback);
@@ -520,12 +412,11 @@
         loadQuestion();
     }
 
-    function showResults() {
-        dom.qArea.style.display = 'none';
-        dom.scoreArea.style.display = 'block';
-        dom.finalScore.innerText = score;
-        dom.totalQ.innerText = quizData.length;
-        dom.progress.style.width = '100%';
+    // Modal Logic
+    function openModal() { document.getElementById("privacyModal").style.display = "block"; }
+    function closeModal() { document.getElementById("privacyModal").style.display = "none"; }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("privacyModal")) closeModal();
     }
 </script>
 
