@@ -88,9 +88,15 @@
         .article-body p { margin-bottom: 15px; }
         .article-body h3 { font-family: var(--font-ui); color: #444; margin-top: 25px; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
 
-        /* Quiz Styles (Adapted to look clean) */
+        /* Quiz & Tool Styles (Adapted to look clean) */
         .quiz-view { border: 1px solid var(--primary); background: #fff; padding: 20px; margin-top: 10px; }
         .quiz-header { background: var(--primary); color: white; padding: 10px 15px; margin: -20px -20px 20px -20px; font-family: var(--font-ui); display: flex; justify-content: space-between; }
+        
+        /* Form Inputs for Calculator */
+        .form-group { margin-bottom: 15px; }
+        .form-label { display: block; font-weight: bold; margin-bottom: 5px; font-family: var(--font-ui); font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 8px; border: 1px solid #ccc; font-family: var(--font-ui); box-sizing: border-box; }
+
         .option-btn {
             display: block; width: 100%; text-align: left; padding: 10px 15px; margin-bottom: 8px;
             background: #f9f9f9; border: 1px solid #ccc; font-family: var(--font-ui); font-size: 0.95rem; cursor: pointer;
@@ -153,7 +159,8 @@
 
         <div class="nav-header" style="margin-top: 30px;">Tools</div>
         <ul class="topic-list">
-            <li class="topic-item"><a href="#" class="topic-link">Calculator: Michaelis-Menten</a></li>
+            <!-- Updated Link to Activate Calculator -->
+            <li class="topic-item"><a href="?tool=michaelis" class="topic-link">Calculator: Michaelis-Menten</a></li>
             <li class="topic-item"><a href="#" class="topic-link">Reference: Amino Acids</a></li>
         </ul>
         
@@ -196,6 +203,41 @@
                 <h3 style="margin-top:0;">Module Complete</h3>
                 <p>Final Score: <span id="final-score">0</span></p>
                 <button class="btn-action" onclick="location.reload()">Return to Index</button>
+            </div>
+        </div>
+
+        <!-- VIEW C: CALCULATOR INTERFACE (New Feature) -->
+        <div id="view-calculator" class="quiz-view" style="display:none;">
+            <div class="quiz-header">
+                <span id="calc-title">Michaelis-Menten Calculator</span>
+            </div>
+            
+            <div style="padding: 20px;">
+                <p style="margin-bottom: 20px; font-family: var(--font-ui); font-size: 0.9rem;">
+                    Calculate the initial reaction velocity ($v_0$) based on enzyme kinetics parameters.
+                    <br>Formula: $v_0 = \frac{V_{max}[S]}{K_m + [S]}$
+                </p>
+                
+                <div class="form-group">
+                    <label class="form-label">Vmax (Maximum Velocity)</label>
+                    <input type="number" id="mm-vmax" class="form-input" placeholder="e.g., 100">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Km (Michaelis Constant)</label>
+                    <input type="number" id="mm-km" class="form-input" placeholder="e.g., 50">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">[S] (Substrate Concentration)</label>
+                    <input type="number" id="mm-s" class="form-input" placeholder="e.g., 10">
+                </div>
+
+                <button onclick="calculateMM()" class="btn-action" style="width:100%;">Calculate Velocity</button>
+
+                <div id="calc-result" class="feedback" style="border-left: 4px solid var(--primary); color: #333;">
+                    <strong>Result ($v_0$):</strong> <span id="mm-result" style="font-weight: bold; color: var(--primary);">0</span> units/sec
+                </div>
             </div>
         </div>
 
@@ -258,21 +300,54 @@
     // --- APP LOGIC ---
     const urlParams = new URLSearchParams(window.location.search);
     const activeTopic = urlParams.get('topic');
+    const activeTool = urlParams.get('tool');
 
     document.addEventListener("DOMContentLoaded", () => {
+        // 1. Check for Quiz Topic
         if (activeTopic && SHEET_MAP[activeTopic] !== undefined) {
             document.getElementById('view-articles').style.display = 'none';
             document.getElementById('view-quiz').style.display = 'block';
             loadQuiz(activeTopic);
-            // Active Link
             const links = document.querySelectorAll(`.topic-link[href="?topic=${activeTopic}"]`);
             if(links.length > 0) links[0].classList.add('active');
+        
+        // 2. Check for Tool (Calculator)
+        } else if (activeTool === 'michaelis') {
+            document.getElementById('view-articles').style.display = 'none';
+            document.getElementById('view-quiz').style.display = 'none';
+            document.getElementById('view-calculator').style.display = 'block';
+            const links = document.querySelectorAll(`.topic-link[href="?tool=michaelis"]`);
+            if(links.length > 0) links[0].classList.add('active');
+            renderMathInElement(document.getElementById('view-calculator'));
+
+        // 3. Default to Blog
         } else {
             document.getElementById('view-articles').style.display = 'block';
             document.getElementById('view-quiz').style.display = 'none';
+            document.getElementById('view-calculator').style.display = 'none';
             loadBlog();
         }
     });
+
+    // --- CALCULATOR LOGIC ---
+    function calculateMM() {
+        const vmax = parseFloat(document.getElementById('mm-vmax').value);
+        const km = parseFloat(document.getElementById('mm-km').value);
+        const s = parseFloat(document.getElementById('mm-s').value);
+        
+        if(isNaN(vmax) || isNaN(km) || isNaN(s)) {
+            alert("Please enter valid numbers for all fields.");
+            return;
+        }
+
+        // V0 = (Vmax * [S]) / (Km + [S])
+        const v0 = (vmax * s) / (km + s);
+        
+        const resultDisplay = document.getElementById('mm-result');
+        resultDisplay.innerText = v0.toFixed(4); // 4 decimal places
+        
+        document.getElementById('calc-result').style.display = 'block';
+    }
 
     // --- BLOG ENGINE (ScienceDaily Style) ---
     function loadBlog() {
