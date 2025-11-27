@@ -164,26 +164,21 @@
         
         <!-- VIEW A: NEWS FEED (List of Summaries) -->
         <div id="view-feed">
-            <!-- Article 1 Preview -->
-            <div class="article-preview">
-                <h2><a href="#" onclick="openArticle('diabetes')">Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation</a></h2>
-                <div class="meta-line">November 26, 2025 &mdash; Stanford Medicine</div>
-                <div class="summary-box">
-                    <span class="summary-label">Summary</span>
-                    Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant. The procedure creates a hybrid immune system that stops autoimmune attacks without chronic immunosuppression.
-                </div>
-                <a href="#" onclick="openArticle('diabetes')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
+            <div style="text-align:center; padding:40px; color:#64748b;" id="blog-loading">
+                Loading Latest Research...
             </div>
-
-            <!-- Article 2 Preview -->
-            <div class="article-preview">
-                <h2><a href="#" onclick="openArticle('crispr')">CRISPR 2.0: The Rise of Prime Editing</a></h2>
-                <div class="meta-line">November 22, 2025 &mdash; Genetics</div>
-                <div class="summary-box">
-                    <span class="summary-label">Summary</span>
-                    New techniques allow for "search-and-replace" gene editing without the double-strand breaks associated with traditional Cas9, potentially correcting 89% of pathogenic variants.
+            <!-- Static/Fallback Articles in case sheet is empty -->
+            <div id="static-articles">
+                <!-- Article 1 Preview -->
+                <div class="article-preview">
+                    <h2><a href="#" onclick="openArticle('diabetes')">Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation</a></h2>
+                    <div class="meta-line">November 26, 2025 &mdash; Stanford Medicine</div>
+                    <div class="summary-box">
+                        <span class="summary-label">Summary</span>
+                        Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant. The procedure creates a hybrid immune system that stops autoimmune attacks without chronic immunosuppression.
+                    </div>
+                    <a href="#" onclick="openArticle('diabetes')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
                 </div>
-                <a href="#" onclick="openArticle('crispr')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
             </div>
         </div>
 
@@ -191,45 +186,26 @@
         <div id="view-article-detail" class="full-article">
             <div onclick="closeArticle()" class="back-btn">&larr; Back to Latest News</div>
             
-            <!-- Content injected dynamically or static below -->
+            <!-- Static Content Container -->
             <div id="article-content-diabetes" style="display:none;">
                 <div class="meta-line">Date: November 26, 2025<br>Source: Stanford Medicine / JCI</div>
                 <h1>Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation</h1>
-                
-                <div class="summary-box">
-                    <span class="summary-label">Summary</span>
-                    Researchers at Stanford found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant. The procedure creates a hybrid immune system that stops autoimmune attacks and eliminates the need for immune-suppressing drugs.
-                </div>
-
+                <div class="summary-box"><span class="summary-label">Summary</span>Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant.</div>
                 <div class="article-body">
                     <p><strong>FULL STORY</strong></p>
-                    <p>Stanford Medicine scientists report that giving mice both blood-forming stem cells and pancreatic islet cells from an immunologically mismatched donor either completely prevented or fully reversed Type 1 diabetes. In this disease, the body's own immune defenses mistakenly attack and destroy the insulin-producing islet cells in the pancreas.</p>
-                    
-                    <p>None of the animals developed graft-versus-host disease (GVHD), a condition in which the immune system arising from the donated blood stem cells attacks healthy tissue in the recipient. The destruction of islet cells by the animals' original immune system came to a stop. After receiving the transplants, the mice no longer needed immune suppressive drugs or insulin at any point during the six-month study.</p>
-
+                    <p>Stanford Medicine scientists report that giving mice both blood-forming stem cells and pancreatic islet cells from an immunologically mismatched donor either completely prevented or fully reversed Type 1 diabetes.</p>
                     <h3>A Hybrid Immune System</h3>
-                    <p>"The possibility of translating these findings into humans is very exciting," said Seung K. Kim, MD, PhD, the senior author of the study published in the <em>Journal of Clinical Investigation</em>. "The key steps in our study -- which result in animals with a hybrid immune system containing cells from both the donor and the recipient -- are already being used in the clinic for other conditions."</p>
-
-                    <p>The team developed a chemotherapy-free, non-myeloablative (NMA) conditioning regimen. They used anti-c-Kit monoclonal antibodies, T-cell depleting antibodies, and JAK1/2 inhibition to prepare the mice. This allowed the donor stem cells to settle in the bone marrow without the harsh side effects of traditional radiation.</p>
-
-                    <h3>Simple Drug Tweak</h3>
-                    <p>The team found a relatively straightforward way around the problem of autoimmunity. Lead author Preksha Bhagchandani added a medication commonly used to treat autoimmune diseases to the pre-transplant regimen. With this adjusted protocol, 19 out of 19 mice did not go on to develop Type 1 diabetes.</p>
-
-                    <p>Analysis of the chimeric mice revealed mechanisms of "central thymic deletion" and "peripheral tolerance," meaning the immune system effectively learned to recognize the new islet cells as "self" rather than foreign invaders.</p>
-
+                    <p>"The possibility of translating these findings into humans is very exciting," said Seung K. Kim, MD, PhD. "The key steps in our study -- which result in animals with a hybrid immune system containing cells from both the donor and the recipient -- are already being used in the clinic for other conditions."</p>
+                    <p>The team developed a chemotherapy-free, non-myeloablative (NMA) conditioning regimen. They used anti-c-Kit monoclonal antibodies, T-cell depleting antibodies, and JAK1/2 inhibition to prepare the mice.</p>
                     <p><em><strong>Journal Reference:</strong><br> Bhagchandani et al., "Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation after CD117 antibody-based conditioning." J Clin Invest. 2025. DOI: 10.1172/JCI190034</em></p>
                 </div>
             </div>
-
-            <!-- Placeholder for CRISPR Article -->
-            <div id="article-content-crispr" style="display:none;">
-                <h1>CRISPR 2.0: Prime Editing</h1>
-                <div class="article-body"><p>Full text of CRISPR article would go here...</p></div>
-            </div>
-
+            
+            <!-- Container for Dynamic Sheet Articles -->
+            <div id="dynamic-article-container"></div>
         </div>
 
-        <!-- VIEW C: QUIZZES & TOOLS (Same as before) -->
+        <!-- VIEW C: QUIZZES & TOOLS -->
         <div id="view-quiz" class="quiz-view">
             <div class="quiz-header"><span id="quiz-title">Topic Quiz</span><span id="score-display">Score: 0</span></div>
             <div id="loading-spinner" style="text-align:center; padding:20px;">Connecting...</div>
@@ -245,7 +221,7 @@
             </div>
         </div>
 
-        <!-- Calculator Views (Hidden by default) -->
+        <!-- Calculator Views -->
         <div id="view-calc-mm" class="quiz-view">
             <div class="quiz-header"><span>Michaelis-Menten Calculator</span></div>
             <div style="padding:10px;">
@@ -254,11 +230,11 @@
                 <div class="form-group"><label class="form-label">Km</label><input type="number" id="mm-km" class="form-input"></div>
                 <div class="form-group"><label class="form-label">[S]</label><input type="number" id="mm-s" class="form-input"></div>
                 <button onclick="calculateMM()" class="btn-action" style="width:100%;">Calculate</button>
+                <!-- Fixed display logic here -->
                 <div id="calc-result-mm" class="feedback"><strong>Result:</strong> <span id="mm-result">0</span></div>
             </div>
         </div>
         
-        <!-- (Other calculators kept in code structure but collapsed for brevity in display) -->
         <div id="view-calc-ph" class="quiz-view">
             <div class="quiz-header"><span>pH & pOH Calculator</span></div>
             <div style="padding:10px;">
@@ -267,6 +243,7 @@
                 <div id="calc-result-ph" class="feedback"><span id="res-ph"></span></div>
             </div>
         </div>
+        
         <div id="view-calc-kw" class="quiz-view">
             <div class="quiz-header"><span>Kw Calculator</span></div>
             <div style="padding:10px;">
@@ -275,6 +252,7 @@
                 <div id="calc-result-kw" class="feedback"><span id="res-oh"></span></div>
             </div>
         </div>
+        
         <div id="view-calc-entropy" class="quiz-view">
             <div class="quiz-header"><span>Entropy Calculator</span></div>
             <div style="padding:10px;">
@@ -285,6 +263,7 @@
                 <div id="calc-result-ent" class="feedback"><span id="res-g"></span></div>
             </div>
         </div>
+        
         <div id="view-calc-conversions" class="quiz-view">
             <div class="quiz-header"><span>Unit Conversions</span></div>
             <div style="padding:10px;">
@@ -300,6 +279,7 @@
                 <div id="calc-result-conv" class="feedback"><span id="res-conv"></span><div id="res-explain" class="explanation-box"></div></div>
             </div>
         </div>
+        
         <div id="view-calc-molarmass" class="quiz-view">
             <div class="quiz-header"><span>Molar Mass</span></div>
             <div style="padding:10px;">
@@ -331,8 +311,11 @@
 </div>
 
 <script>
-    // CONFIG
+    // CONFIG: SHEET LINKS
     const SHEET_MAP = {'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv', 'enzymes': '', 'lipids': '', 'carbs': '', 'genetics': '', 'clinical': ''};
+    
+    // NEW: Paste your Article Sheet link here. 
+    // Columns Required: Date, Category, Title, Source, Summary, Content
     const BLOG_SHEET_URL = ""; 
 
     // APP LOGIC
@@ -353,13 +336,18 @@
         hideAllViews();
         document.getElementById('view-article-detail').style.display = 'block';
         
-        // Hide all contents first
+        // Hide all static contents first
         document.getElementById('article-content-diabetes').style.display = 'none';
-        document.getElementById('article-content-crispr').style.display = 'none';
         
-        // Show selected
-        const content = document.getElementById(`article-content-${id}`);
-        if(content) content.style.display = 'block';
+        // Check if it is a dynamic or static article
+        if(id.startsWith('dynamic-')) {
+            const content = document.getElementById(`article-content-${id}`);
+            if(content) content.style.display = 'block';
+        } else {
+            const content = document.getElementById(`article-content-${id}`);
+            if(content) content.style.display = 'block';
+        }
+        window.scrollTo(0, 0);
     }
 
     function closeArticle() {
@@ -382,31 +370,36 @@
             renderMathInElement(document.body);
         } else {
             document.getElementById('view-feed').style.display = 'block';
-            // Load Dynamic Blog if URL exists
             if(BLOG_SHEET_URL) loadBlog();
+            else document.getElementById('blog-loading').style.display = 'none';
         }
     });
 
-    // --- CALCULATOR LOGIC (All Functions Preserved) ---
+    // --- FIXED CALCULATOR LOGIC ---
+    // Added display='block' to all success paths
     function calculateMM() {
         const v=parseFloat(document.getElementById('mm-vmax').value), k=parseFloat(document.getElementById('mm-km').value), s=parseFloat(document.getElementById('mm-s').value);
         if(isNaN(v)||isNaN(k)||isNaN(s)) return alert("Invalid");
         document.getElementById('mm-result').innerText = ((v*s)/(k+s)).toFixed(4);
+        document.getElementById('calc-result-mm').style.display='block'; // FIXED
     }
     function calculatePH() {
         const c = parseFloat(document.getElementById('ph-conc').value);
         if(isNaN(c)||c<=0) return alert("Invalid");
-        document.getElementById('res-ph').innerText = (-Math.log10(c)).toFixed(2);
+        document.getElementById('res-ph').innerText = "pH " + (-Math.log10(c)).toFixed(2);
+        document.getElementById('calc-result-ph').style.display='block'; // FIXED
     }
     function calculateKw() {
         const h = parseFloat(document.getElementById('kw-h-conc').value);
         if(isNaN(h)||h<=0) return alert("Invalid");
         document.getElementById('res-oh').innerText = (1.0e-14/h).toExponential(2);
+        document.getElementById('calc-result-kw').style.display='block'; // FIXED
     }
     function calculateEntropy() {
         const h=parseFloat(document.getElementById('ent-h').value), s=parseFloat(document.getElementById('ent-s').value), t=parseFloat(document.getElementById('ent-t').value);
         if(isNaN(h)||isNaN(s)) return alert("Invalid");
         document.getElementById('res-g').innerText = (h - (t*(s/1000))).toFixed(2);
+        document.getElementById('calc-result-ent').style.display='block'; // FIXED
     }
     function calculateConversion() {
         const v=parseFloat(document.getElementById('conv-val').value), t=document.getElementById('conv-type').value;
@@ -418,10 +411,10 @@
         document.getElementById('res-conv').innerText = r;
         document.getElementById('res-explain').innerText = e;
         document.getElementById('res-explain').style.display='block';
+        document.getElementById('calc-result-conv').style.display='block'; // FIXED
     }
     function calculateMolarMass() {
         const f=document.getElementById('mm-formula').value;
-        // Simplified parser logic for brevity in this display, assumes previous full logic exists
         const ATOMIC_MASS = {'H':1.008,'C':12.01,'N':14.01,'O':16.00,'P':30.97,'S':32.07,'Na':22.99,'Cl':35.45};
         let t=0; const r=/([A-Z][a-z]*)(\d*)/g; let m;
         while((m=r.exec(f))!==null){
@@ -429,41 +422,51 @@
             if(ATOMIC_MASS[e]) t+=ATOMIC_MASS[e]*c;
         }
         document.getElementById('res-mass').innerText = t>0?t.toFixed(2):"Error";
+        document.getElementById('calc-result-mass').style.display='block'; // FIXED
     }
 
-    // --- BLOG & QUIZ FETCHERS ---
+    // --- DYNAMIC BLOG FETCHER ---
     function loadBlog() {
-        // Dynamic sheet loading logic (renders previews)
         const freshUrl = BLOG_SHEET_URL + '&t=' + new Date().getTime();
         Papa.parse(freshUrl, {
             download: true, header: true,
             complete: function(results) {
                 const container = document.getElementById('view-feed');
-                // Clear static content if dynamic loads successfully
-                if(results.data.length > 0) container.innerHTML = ""; 
+                const detailContainer = document.getElementById('dynamic-article-container');
+                document.getElementById('blog-loading').style.display = 'none';
+                
+                // Keep static articles or clear them? Let's append dynamic ones to the top if you prefer
+                // For now, we append dynamic ones to the list
+                
                 results.data.forEach((post, index) => {
                     if(!post.Title) return;
+                    
+                    // Create Feed Entry
                     const div = document.createElement('div');
                     div.className = 'article-preview';
                     div.innerHTML = `
                         <h2><a href="#" onclick="openArticle('dynamic-${index}')">${post.Title}</a></h2>
-                        <div class="meta-line">${post.Date || 'Recent'} &mdash; ${post.Category || 'News'}</div>
-                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Excerpt}</div>
-                        <a href="#" onclick="openArticle('dynamic-${index}')" style="font-weight:bold; font-size:0.9rem;">Read Full Story &rarr;</a>
+                        <div class="meta-line">${post.Date || 'Recent'} &mdash; ${post.Source || 'News'}</div>
+                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary || ''}</div>
+                        <a href="#" onclick="openArticle('dynamic-${index}')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
                     `;
-                    container.appendChild(div);
+                    // Insert at top of feed (after loading msg)
+                    container.insertBefore(div, document.getElementById('static-articles'));
                     
-                    // Inject Detail View
+                    // Create Detail View
                     const detailDiv = document.createElement('div');
                     detailDiv.id = `article-content-dynamic-${index}`;
                     detailDiv.style.display = 'none';
                     detailDiv.innerHTML = `
-                        <div class="meta-line">${post.Date}</div>
+                        <div class="meta-line">Date: ${post.Date}<br>Source: ${post.Source}</div>
                         <h1>${post.Title}</h1>
-                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Excerpt}</div>
-                        <div class="article-body"><p>${post.Content ? post.Content.replace(/\n/g, '<br><br>') : ''}</p></div>
+                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary}</div>
+                        <div class="article-body">
+                            <p><strong>FULL STORY</strong></p>
+                            ${post.Content ? post.Content.replace(/\n/g, '<p>') : ''}
+                        </div>
                     `;
-                    document.getElementById('view-article-detail').appendChild(detailDiv);
+                    detailContainer.appendChild(detailDiv);
                 });
             }
         });
