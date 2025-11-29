@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BioChemHub: Daily MCQs, Topic-wise Quizzes, and Research Updates for Medical Students.">
+    <meta property="og:title" content="BioChemHub | Medical Biochemistry Resources">
+    <meta property="og:description" content="Daily MCQs, interactive calculators (pH, Michaelis-Menten), and research updates for medical students.">
     <title>BioChem Mastery | Science News & Research</title>
     
     <!-- KaTeX for rendering Chemical Formulas -->
@@ -34,17 +36,49 @@
 
         /* --- HEADER (Classic Portal Style) --- */
         nav { background: var(--header-bg); padding: 0; border-bottom: 4px solid #004488; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--font-ui); font-weight: 700; font-size: 1.8rem; color: white; text-transform: uppercase; letter-spacing: 1px; }
         .logo span { color: #4dabf7; } 
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #e0e0e0; font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
-        .nav-links a:hover { color: white; text-decoration: none; }
+        
+        .nav-links { display: flex; gap: 20px; height: 100%; align-items: center; }
+        .nav-links > a, .dropbtn { color: #e0e0e0; font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+        .nav-links > a:hover, .dropdown:hover .dropbtn { color: white; text-decoration: none; }
+
+        /* --- DROPDOWN MENU --- */
+        .dropdown { position: relative; height: 100%; display: flex; align-items: center; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 260px; /* Widened for longer topic names */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border: 1px solid #ddd;
+            border-top: 3px solid var(--primary);
+            max-height: 80vh; /* Scroll if too long */
+            overflow-y: auto;
+        }
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 12px 16px;
+            text-decoration: none !important;
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            text-transform: none !important;
+            font-weight: normal !important;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: #f4f4f4; color: var(--primary) !important; }
+        .dropdown:hover .dropdown-content { display: block; }
 
         /* --- LAYOUT --- */
         .layout {
             display: grid;
-            grid-template-columns: 220px 1fr 300px;
+            grid-template-columns: 240px 1fr 300px; /* Widened left sidebar slightly */
             gap: 20px;
             max-width: 1200px;
             margin: 20px auto;
@@ -69,6 +103,20 @@
         .news-item span { font-size: 0.7rem; color: #888; display: block; margin-top: 3px; }
         .ad-box { background: #f0f0f0; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.7rem; margin-bottom: 20px; }
 
+        /* Social Share Buttons */
+        .share-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .share-btn {
+            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 14px; transition: opacity 0.2s;
+        }
+        .share-btn:hover { opacity: 0.8; text-decoration: none; }
+        .bg-fb { background-color: #1877f2; }
+        .bg-x { background-color: #000000; }
+        .bg-wa { background-color: #25d366; }
+        .bg-in { background-color: #0077b5; }
+        
+        .share-btn svg { width: 16px; height: 16px; fill: white; }
+
         /* --- CENTER STAGE --- */
         .main-stage { padding: 0 10px; }
 
@@ -79,7 +127,7 @@
         .article-preview h2 a:hover { color: var(--primary); }
         .meta-line { font-family: var(--font-ui); font-size: 0.75rem; color: #666; text-transform: uppercase; margin-bottom: 10px; }
         
-        /* The Summary Box (ScienceDaily Style) */
+        /* The ScienceDaily Summary Box */
         .summary-box {
             background: var(--summary-bg);
             border: 1px solid #eee;
@@ -130,8 +178,37 @@
         <a href="?page=home" class="logo">BioChem<span>Hub</span></a>
         <div class="nav-links">
             <a href="?page=home">Home</a>
-            <a href="#">Research</a>
-            <a href="#">Tools</a>
+            
+            <!-- MCQ DROPDOWN -->
+            <div class="dropdown">
+                <span class="dropbtn">Biochemistry MCQ ▾</span>
+                <div class="dropdown-content">
+                    <a href="?topic=daily">📅 Daily Challenge</a>
+                    <a href="?topic=molecular">Molecular Biology & Genetics</a>
+                    <a href="?topic=enzymes">Enzymology</a>
+                    <a href="?topic=protein">Protein & Amino Acid</a>
+                    <a href="?topic=carbs">Carbohydrate Metabolism</a>
+                    <a href="?topic=vitamins">Vitamins & Minerals</a>
+                    <a href="?topic=hormones">Hormones & Endocrine</a>
+                    <a href="?topic=clinical">Clinical Biochemistry</a>
+                    <a href="?topic=techniques">Techniques in Biochem</a>
+                    <a href="?topic=metabolic">Metabolic Integration</a>
+                    <a href="?topic=immunology">Immunology Interface</a>
+                </div>
+            </div>
+
+            <!-- TOOLS DROPDOWN -->
+            <div class="dropdown">
+                <span class="dropbtn">Lab Tools ▾</span>
+                <div class="dropdown-content">
+                    <a href="?tool=michaelis">Michaelis-Menten Calc</a>
+                    <a href="?tool=ph">pH & pOH Calc</a>
+                    <a href="?tool=kw">Kw (Ion Product) Calc</a>
+                    <a href="?tool=entropy">Entropy & Gibbs Calc</a>
+                    <a href="?tool=conversions">Unit Conversions</a>
+                    <a href="?tool=molarmass">Molar Mass Calculator</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -139,16 +216,8 @@
 <div class="layout">
     
     <aside class="topic-nav">
-        <div class="nav-header">Biochemistry MCQs</div>
-        <ul class="topic-list">
-            <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
-            <li class="topic-item"><a href="?topic=enzymes" class="topic-link">Enzyme Kinetics</a></li>
-            <li class="topic-item"><a href="?topic=lipids" class="topic-link">Lipid Metabolism</a></li>
-            <li class="topic-item"><a href="?topic=carbs" class="topic-link">Carbohydrates</a></li>
-            <li class="topic-item"><a href="?topic=genetics" class="topic-link">Molecular Genetics</a></li>
-            <li class="topic-item"><a href="?topic=clinical" class="topic-link">Clinical Cases</a></li>
-        </ul>
-        <div class="nav-header" style="margin-top: 30px;">Lab Tools</div>
+        <!-- MOVED TOOLS TO TOP LEFT -->
+        <div class="nav-header">Lab Tools</div>
         <ul class="topic-list">
             <li class="topic-item"><a href="?tool=michaelis" class="topic-link">Calc: Michaelis-Menten</a></li>
             <li class="topic-item"><a href="?tool=ph" class="topic-link">Calc: pH & pOH</a></li>
@@ -157,6 +226,22 @@
             <li class="topic-item"><a href="?tool=conversions" class="topic-link">Calc: Unit Conversions</a></li>
             <li class="topic-item"><a href="?tool=molarmass" class="topic-link">Calc: Molar Mass</a></li>
         </ul>
+
+        <div class="nav-header" style="margin-top: 30px;">Biochemistry MCQs</div>
+        <ul class="topic-list">
+            <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
+            <li class="topic-item"><a href="?topic=molecular" class="topic-link">Molecular Biology & Genetics</a></li>
+            <li class="topic-item"><a href="?topic=enzymes" class="topic-link">Enzymology</a></li>
+            <li class="topic-item"><a href="?topic=protein" class="topic-link">Protein & Amino Acid Metab</a></li>
+            <li class="topic-item"><a href="?topic=carbs" class="topic-link">Carbohydrate Metabolism</a></li>
+            <li class="topic-item"><a href="?topic=vitamins" class="topic-link">Vitamins & Minerals</a></li>
+            <li class="topic-item"><a href="?topic=hormones" class="topic-link">Hormones & Endocrine</a></li>
+            <li class="topic-item"><a href="?topic=clinical" class="topic-link">Clinical Biochemistry</a></li>
+            <li class="topic-item"><a href="?topic=techniques" class="topic-link">Techniques in Biochem</a></li>
+            <li class="topic-item"><a href="?topic=metabolic" class="topic-link">Metabolic Integration</a></li>
+            <li class="topic-item"><a href="?topic=immunology" class="topic-link">Immunology Interface</a></li>
+        </ul>
+        
         <div style="margin-top:30px; font-size: 0.75rem; color:#888;">
             <a href="#" onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> <br>
             &copy; 2025 BioChemHub
@@ -199,6 +284,7 @@
                     <p>"The possibility of translating these findings into humans is very exciting," said Seung K. Kim, MD, PhD. "The key steps in our study -- which result in animals with a hybrid immune system containing cells from both the donor and the recipient -- are already being used in the clinic for other conditions."</p>
                     <p>The team developed a chemotherapy-free, non-myeloablative (NMA) conditioning regimen. They used anti-c-Kit monoclonal antibodies, T-cell depleting antibodies, and JAK1/2 inhibition to prepare the mice.</p>
                     <p><em><strong>Journal Reference:</strong><br> Bhagchandani et al., "Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation after CD117 antibody-based conditioning." J Clin Invest. 2025. DOI: 10.1172/JCI190034</em></p>
+                    <p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><strong>Reference:</strong> <a href="https://www.jci.org/articles/view/190034" target="_blank" style="color:var(--primary); font-weight:bold;">View Original Source (JCI) &rarr;</a></p>
                 </div>
             </div>
             
@@ -316,6 +402,23 @@
     </main>
 
     <aside class="right-sidebar">
+        <!-- Social Share Widget -->
+        <div class="sidebar-header">Share This Page</div>
+        <div class="share-container">
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-fb" title="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-x" title="X (Twitter)">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-wa" title="WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+            <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-in" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        </div>
+
         <div class="sidebar-header">Advertisements</div>
         <div class="ad-box">Google AdSense (300x250)</div>
         <div class="sidebar-header">Resources</div>
@@ -335,7 +438,21 @@
 </div>
 
 <script>
-    const SHEET_MAP = {'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv', 'enzymes': '', 'lipids': '', 'carbs': '', 'genetics': '', 'clinical': ''};
+    // UPDATED SHEET MAP WITH NEW TOPICS (PASTE LINKS HERE)
+    const SHEET_MAP = {
+        'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',
+        'molecular': '',
+        'enzymes': '',
+        'protein': '',
+        'carbs': '',
+        'vitamins': '',
+        'hormones': '',
+        'clinical': '',
+        'techniques': '',
+        'metabolic': '',
+        'immunology': ''
+    };
+    
     const BLOG_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3ZlgFhkSowtqTzfCCZtar4xPNwHz_OoXW2no5Oi-ry-pp_9vE4D2DNZ6Tk7gTx3squbRmgjJrM-Qo/pub?output=csv"; 
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -392,7 +509,6 @@
         const res = (v * s) / (k + s);
         document.getElementById('mm-result').innerText = res.toFixed(4);
         
-        // Steps
         const steps = `$$ v_0 = \\frac{V_{max}[S]}{K_m + [S]} $$ <br> $$ v_0 = \\frac{${v} \\times ${s}}{${k} + ${s}} $$ <br> $$ v_0 = \\frac{${v*s}}{${k+s}} = ${res.toFixed(4)} $$`;
         document.getElementById('mm-steps').innerHTML = steps;
         
@@ -410,7 +526,6 @@
         
         document.getElementById('res-ph').innerText = "pH: " + ph.toFixed(2) + " | pOH: " + poh.toFixed(2);
         
-        // Steps
         const steps = `$$ pH = -\\log[H^+] $$ <br> $$ pH = -\\log(${c}) = ${ph.toFixed(4)} $$ <br> Solution is <b>${type}</b>.`;
         document.getElementById('ph-steps').innerHTML = steps;
         
@@ -424,7 +539,6 @@
         
         const oh = 1.0e-14 / h;
         
-        // Format sci notation
         const ohStr = oh.toExponential(2);
         const steps = `$$ [OH^-] = \\frac{K_w}{[H^+]} $$ <br> $$ [OH^-] = \\frac{1.0 \\times 10^{-14}}{${h}} $$ <br> $$ [OH^-] = ${ohStr} \\text{ M} $$`;
         
@@ -544,6 +658,9 @@
                     const detailDiv = document.createElement('div');
                     detailDiv.id = `article-content-dynamic-${index}`;
                     detailDiv.style.display = 'none';
+                    
+                    const referenceHtml = (post.Link || post.URL || post['Source Link']) ? `<p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><strong>Reference:</strong> <a href="${post.Link || post.URL || post['Source Link']}" target="_blank" style="color:var(--primary); font-weight:bold;">View Original Source &rarr;</a></p>` : '';
+
                     detailDiv.innerHTML = `
                         <div class="meta-line">Date: ${post.Date}<br>Source: ${post.Source}</div>
                         <h1>${post.Title}</h1>
@@ -551,6 +668,7 @@
                         <div class="article-body">
                             <p><strong>FULL STORY</strong></p>
                             ${post.Content ? post.Content.replace(/\n/g, '<p>') : ''}
+                            ${referenceHtml}
                         </div>
                     `;
                     detailContainer.appendChild(detailDiv);
