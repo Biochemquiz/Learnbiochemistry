@@ -75,10 +75,12 @@
         .dropdown-content a:hover { background-color: #f4f4f4; color: var(--primary) !important; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* --- LAYOUT --- */
+        /* --- LAYOUT (Desktop Grid) --- */
         .layout {
             display: grid;
-            grid-template-columns: 240px 1fr 300px; /* Widened left sidebar slightly */
+            grid-template-columns: 240px 1fr 300px; /* Left Sidebar | Main | Right Sidebar */
+            /* Grid Areas allow us to reorder content on mobile easily */
+            grid-template-areas: "left main right";
             gap: 20px;
             max-width: 1200px;
             margin: 20px auto;
@@ -87,16 +89,24 @@
         }
 
         /* --- SIDEBARS --- */
-        .topic-nav, .right-sidebar { font-family: var(--font-ui); }
-        .topic-nav { border-right: 1px solid var(--border); padding-right: 15px; }
-        .right-sidebar { border-left: 1px solid var(--border); padding-left: 15px; }
+        .topic-nav { grid-area: left; font-family: var(--font-ui); border-right: 1px solid var(--border); padding-right: 15px; }
+        .right-sidebar { grid-area: right; font-family: var(--font-ui); border-left: 1px solid var(--border); padding-left: 15px; }
+        .main-stage { grid-area: main; padding: 0 10px; }
         
         .nav-header, .sidebar-header { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #666; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
         .topic-list, .news-list { list-style: none; padding: 0; margin: 0; }
         .topic-item { border-bottom: 1px solid #eee; }
-        .topic-link { display: block; padding: 8px 5px; font-size: 0.85rem; color: #444; transition: all 0.1s; }
+        
+        /* Parent Topic Link (Clickable Header) */
+        .topic-link { display: block; padding: 8px 5px; font-size: 0.85rem; color: #444; transition: all 0.1s; cursor: pointer; }
         .topic-link:hover { background: #f4f4f4; color: var(--primary); text-decoration: none; }
         .topic-link.active { font-weight: 700; color: var(--primary); border-left: 3px solid var(--primary); padding-left: 8px; }
+
+        /* Sub-Menu Styles */
+        .sub-menu { display: none; padding-left: 15px; background: #f9f9f9; border-top: 1px solid #eee; }
+        .sub-link { display: block; padding: 6px 0; font-size: 0.8rem; color: #666; border-bottom: 1px dashed #eee; }
+        .sub-link:hover { color: var(--primary); padding-left: 3px; }
+        .sub-link.active { color: var(--primary); font-weight: 700; }
 
         .news-item { margin-bottom: 12px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
         .news-item a { font-size: 0.85rem; color: var(--primary); font-weight: 600; display: block; line-height: 1.3; }
@@ -116,9 +126,6 @@
         .bg-in { background-color: #0077b5; }
         
         .share-btn svg { width: 16px; height: 16px; fill: white; }
-
-        /* --- CENTER STAGE --- */
-        .main-stage { padding: 0 10px; }
 
         /* Article FEED (Summary View) */
         .article-preview { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
@@ -164,10 +171,53 @@
         .btn-action { background: var(--primary); color: white; border: none; padding: 8px 20px; font-family: var(--font-ui); font-weight: bold; cursor: pointer; margin-top: 15px; }
         .explanation-box { margin-top: 10px; padding: 12px; background-color: #fdf6e3; border: 1px solid #f0e6cc; color: #5c523e; font-size: 0.9rem; font-style: italic; display: none; }
 
+        /* --- MOBILE OPTIMIZATIONS --- */
         @media (max-width: 900px) {
-            .layout { grid-template-columns: 1fr; }
-            .topic-nav { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 20px; }
-            .right-sidebar { border-left: none; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; }
+            /* 1. Header Optimization */
+            .nav-inner { 
+                flex-direction: column; 
+                height: auto; 
+                padding: 10px; 
+            }
+            .nav-links { 
+                width: 100%; 
+                justify-content: center; 
+                margin-top: 10px; 
+                flex-wrap: wrap; /* Allow links to wrap */
+            }
+            .dropdown-content { position: static; box-shadow: none; border: 1px solid #eee; width: 100%; }
+            .dropdown:hover .dropdown-content { position: absolute; left: 0; width: 250px; } /* Keep dropdown popover on small screens if possible, or stack */
+
+            /* 2. Layout Reordering */
+            .layout { 
+                grid-template-columns: 1fr; /* Single Column */
+                grid-template-areas: 
+                    "main"
+                    "left"
+                    "right";
+                gap: 10px;
+            }
+
+            /* 3. Sidebar Styling for Mobile */
+            .topic-nav { 
+                border-right: none; 
+                border-top: 4px solid var(--primary); 
+                padding: 20px 0; 
+                background: #f9f9f9;
+                margin-top: 30px;
+            }
+            .right-sidebar { 
+                border-left: none; 
+                border-top: 4px solid #333; 
+                padding: 20px 0; 
+                margin-top: 20px; 
+            }
+
+            /* 4. Touch Targets & Fonts */
+            .topic-link, .sub-link { padding: 12px 5px; font-size: 1rem; border-bottom: 1px solid #e0e0e0; }
+            .form-input, .form-select { font-size: 16px; /* Prevents iOS Zoom */ }
+            h1.article-title { font-size: 1.6rem; }
+            .article-body { font-size: 1rem; }
         }
     </style>
 </head>
@@ -215,7 +265,7 @@
 
 <div class="layout">
     
-    <aside class="topic-nav">
+    <aside class="topic-nav" id="tools-sidebar">
         <!-- MOVED TOOLS TO TOP LEFT -->
         <div class="nav-header">Lab Tools</div>
         <ul class="topic-list">
@@ -230,7 +280,26 @@
         <div class="nav-header" style="margin-top: 30px;">Biochemistry MCQs</div>
         <ul class="topic-list">
             <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
-            <li class="topic-item"><a href="?topic=molecular" class="topic-link">Molecular Biology & Genetics</a></li>
+            
+            <!-- EXPANDABLE SECTION: MOLECULAR BIO -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('mol-menu')">Molecular Biology & Genetics ▾</div>
+                <ul id="mol-menu" class="sub-menu">
+                    <li><a href="?topic=mol_dna" class="sub-link">DNA Structure & Replication</a></li>
+                    <li><a href="?topic=mol_pol" class="sub-link">DNA Polymerases & Fidelity</a></li>
+                    <li><a href="?topic=mol_telo" class="sub-link">Telomeres & Telomerase</a></li>
+                    <li><a href="?topic=mol_repair" class="sub-link">DNA Repair Pathways</a></li>
+                    <li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA Pol)</a></li>
+                    <li><a href="?topic=mol_post_trans" class="sub-link">Post-transcriptional Mods</a></li>
+                    <li><a href="?topic=mol_transl" class="sub-link">Translation & Ribosomes</a></li>
+                    <li><a href="?topic=mol_reg" class="sub-link">Gene Reg (Operons)</a></li>
+                    <li><a href="?topic=mol_epi" class="sub-link">Epigenetics</a></li>
+                    <li><a href="?topic=mol_chrom" class="sub-link">Chromatin & Histones</a></li>
+                    <li><a href="?topic=mol_mut" class="sub-link">Mutations</a></li>
+                    <li><a href="?topic=mol_code" class="sub-link">Genetic Code</a></li>
+                </ul>
+            </li>
+
             <li class="topic-item"><a href="?topic=enzymes" class="topic-link">Enzymology</a></li>
             <li class="topic-item"><a href="?topic=protein" class="topic-link">Protein & Amino Acid Metab</a></li>
             <li class="topic-item"><a href="?topic=carbs" class="topic-link">Carbohydrate Metabolism</a></li>
@@ -442,6 +511,8 @@
     const SHEET_MAP = {
         'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',
         'molecular': '',
+        'mol_dna': '', 'mol_pol': '', 'mol_telo': '', 'mol_repair': '', 'mol_transc': '',
+        'mol_post_trans': '', 'mol_transl': '', 'mol_reg': '', 'mol_epi': '', 'mol_chrom': '', 'mol_mut': '', 'mol_code': '',
         'enzymes': '',
         'protein': '',
         'carbs': '',
@@ -458,6 +529,15 @@
     const urlParams = new URLSearchParams(window.location.search);
     const activeTopic = urlParams.get('topic');
     const activeTool = urlParams.get('tool');
+
+    function toggleMenu(id) {
+        const menu = document.getElementById(id);
+        if(menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    }
 
     function hideAllViews() {
         const ids = ['view-feed', 'view-article-detail', 'view-quiz', 'view-calc-mm', 'view-calc-ph', 'view-calc-kw', 'view-calc-entropy', 'view-calc-conversions', 'view-calc-molarmass'];
