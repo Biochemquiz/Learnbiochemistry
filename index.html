@@ -21,7 +21,7 @@
         a { text-decoration: none; color: var(--primary); } a:hover { text-decoration: underline; }
 
         /* Header & Nav */
-        nav { background: var(--header-bg); padding: 0; border-bottom: 4px solid #004488; }
+        nav { background: var(--header-bg); padding: 0; border-bottom: 4px solid #004488; position: sticky; top: 0; z-index: 1000; }
         .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: var(--font-ui); font-weight: 700; font-size: 1.8rem; color: white; text-transform: uppercase; letter-spacing: 1px; }
         .logo span { color: #4dabf7; } 
@@ -35,8 +35,24 @@
 
         /* Layout */
         .layout { display: grid; grid-template-columns: 280px 1fr 300px; gap: 20px; max-width: 1400px; margin: 20px auto; padding: 0 15px; align-items: start; }
-        .topic-nav { font-family: var(--font-ui); border-right: 1px solid var(--border); padding-right: 15px; }
-        .right-sidebar { font-family: var(--font-ui); border-left: 1px solid var(--border); padding-left: 15px; }
+        
+        /* Sidebar Fixed Scaling & Scrolling */
+        .topic-nav { 
+            font-family: var(--font-ui); 
+            border-right: 1px solid var(--border); 
+            padding-right: 15px; 
+            position: sticky; 
+            top: 80px; 
+            max-height: calc(100vh - 100px); /* Allow scrolling if menu gets too long */
+            overflow-y: auto;
+        }
+        
+        /* Custom Scrollbar for Sidebar */
+        .topic-nav::-webkit-scrollbar { width: 6px; }
+        .topic-nav::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+
+        .right-sidebar { font-family: var(--font-ui); border-left: 1px solid var(--border); padding-left: 15px; position: sticky; top: 80px; }
+        
         .main-stage { padding: 0 10px; }
         .nav-header, .sidebar-header { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #666; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
         .topic-list, .news-list { list-style: none; padding: 0; margin: 0; }
@@ -50,24 +66,10 @@
         .sub-link:hover { color: var(--primary); padding-left: 3px; }
         .mega-link { color: var(--primary); font-weight: 700; background-color: #eef6ff; border-bottom: 1px solid #cce5ff; }
 
-        /* Share Buttons (Fixed Sizing) */
-        .share-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .share-btn {
-            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
-            color: white; transition: opacity 0.2s; flex-shrink: 0; /* Prevent resizing */
-        }
-        .share-btn:hover { opacity: 0.8; }
-        .bg-fb { background-color: #1877f2; }
-        .bg-x { background-color: #000000; }
-        .bg-wa { background-color: #25d366; }
-        .bg-in { background-color: #0077b5; }
-        .share-btn svg { width: 16px; height: 16px; fill: white; }
-
         /* Quiz Styles */
         .quiz-view { border: 1px solid var(--primary); background: #fff; padding: 20px; display: none; margin-bottom: 50px; }
         .quiz-header { background: var(--primary); color: white; padding: 10px 15px; margin: -20px -20px 20px -20px; font-family: var(--font-ui); display: flex; justify-content: space-between; }
         
-        /* List View Specifics */
         .question-wrapper { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .question-header { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #222; }
         
@@ -94,9 +96,28 @@
         
         .error-box { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: 20px; border: 1px solid transparent; border-radius: 4px; margin-top: 20px; text-align: center; }
 
+        .news-item { margin-bottom: 12px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+        .news-item a { font-size: 0.85rem; color: var(--primary); font-weight: 600; display: block; line-height: 1.3; }
+        .news-item span { font-size: 0.7rem; color: #888; display: block; margin-top: 3px; }
+        .ad-box { background: #f0f0f0; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.7rem; margin-bottom: 20px; }
+
+        /* Share Buttons (Fixed Sizing & Layout) */
+        .share-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .share-btn {
+            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            color: white; transition: opacity 0.2s; 
+            flex: 0 0 32px; /* STRICTLY FIXED SIZE: Grow 0, Shrink 0, Base 32px */
+        }
+        .share-btn:hover { opacity: 0.8; }
+        .bg-fb { background-color: #1877f2; }
+        .bg-x { background-color: #000000; }
+        .bg-wa { background-color: #25d366; }
+        .bg-in { background-color: #0077b5; }
+        .share-btn svg { width: 16px; height: 16px; fill: white; }
+
         @media (max-width: 900px) {
             .layout { grid-template-columns: 1fr; grid-template-areas: "main" "left" "right"; gap: 10px; }
-            .topic-nav { border-right: none; border-top: 4px solid var(--primary); padding: 20px 0; margin-top: 30px; }
+            .topic-nav { border-right: none; border-top: 4px solid var(--primary); padding: 20px 0; margin-top: 30px; max-height: none; overflow-y: visible; }
             .right-sidebar { border-left: none; border-top: 4px solid #333; padding: 20px 0; margin-top: 20px; }
             .nav-inner { flex-direction: column; height: auto; padding: 10px; }
             .nav-links { width: 100%; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
@@ -149,205 +170,184 @@
         <ul class="topic-list">
             <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
             
-            <!-- 1. Molecular Biology -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div>
+            <!-- 1. MOLECULAR BIO -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div>
                 <ul id="mol-menu" class="sub-menu">
                     <li><a href="?topic=mol_all" class="sub-link mega-link">★ Molecular Bio 100 MCQ</a></li>
-                    <li><a href="?topic=mol_dna" class="sub-link">DNA structure & replication</a></li>
-                    <li><a href="?topic=mol_pol" class="sub-link">DNA polymerases & fidelity</a></li>
-                    <li><a href="?topic=mol_telo" class="sub-link">Telomeres & telomerase</a></li>
-                    <li><a href="?topic=mol_repair" class="sub-link">DNA repair pathways</a></li>
-                    <li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA pol)</a></li>
-                    <li><a href="?topic=mol_post_trans" class="sub-link">Post-transcriptional modifications</a></li>
-                    <li><a href="?topic=mol_transl" class="sub-link">Translation & ribosomes</a></li>
-                    <li><a href="?topic=mol_reg" class="sub-link">Operons & regulation</a></li>
+                    <li><a href="?topic=mol_dna" class="sub-link">DNA Structure & Replication</a></li>
+                    <li><a href="?topic=mol_pol" class="sub-link">DNA Polymerases & Fidelity</a></li>
+                    <li><a href="?topic=mol_telo" class="sub-link">Telomeres & Telomerase</a></li>
+                    <li><a href="?topic=mol_repair" class="sub-link">DNA Repair Pathways</a></li>
+                    <li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA Pol)</a></li>
+                    <li><a href="?topic=mol_post_trans" class="sub-link">Post-Transcriptional Mods</a></li>
+                    <li><a href="?topic=mol_transl" class="sub-link">Translation & Ribosomes</a></li>
+                    <li><a href="?topic=mol_reg" class="sub-link">Operons & Regulation</a></li>
                     <li><a href="?topic=mol_epi" class="sub-link">Epigenetics</a></li>
-                    <li><a href="?topic=mol_chrom" class="sub-link">Chromatin structure</a></li>
+                    <li><a href="?topic=mol_chrom" class="sub-link">Chromatin & Histones</a></li>
                     <li><a href="?topic=mol_mut" class="sub-link">Mutations</a></li>
-                    <li><a href="?topic=mol_code" class="sub-link">Genetic code</a></li>
+                    <li><a href="?topic=mol_code" class="sub-link">Genetic Code</a></li>
                 </ul>
             </li>
 
-            <!-- 2. Carbohydrate Metabolism -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('carb-menu')">2. Carbohydrate Metab ▾</div>
+            <!-- 2. CARBOHYDRATE METABOLISM -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('carb-menu')">2. Carbohydrate Metab ▾</div>
                 <ul id="carb-menu" class="sub-menu">
                     <li><a href="?topic=carb_all" class="sub-link mega-link">★ Carbohydrate 100 MCQ</a></li>
-                    <li><a href="?topic=carb_glyc" class="sub-link">Glycolysis steps & reg</a></li>
-                    <li><a href="?topic=carb_tca" class="sub-link">TCA cycle & energetics</a></li>
-                    <li><a href="?topic=carb_etc" class="sub-link">ETC & oxidative phos</a></li>
+                    <li><a href="?topic=carb_glyc" class="sub-link">Glycolysis Steps/Reg</a></li>
+                    <li><a href="?topic=carb_tca" class="sub-link">TCA Cycle</a></li>
+                    <li><a href="?topic=carb_etc" class="sub-link">ETC & Oxidative Phos</a></li>
                     <li><a href="?topic=carb_gluco" class="sub-link">Gluconeogenesis</a></li>
-                    <li><a href="?topic=carb_glycogen" class="sub-link">Glycogen metabolism</a></li>
-                    <li><a href="?topic=carb_gsd" class="sub-link">Glycogen storage diseases</a></li>
-                    <li><a href="?topic=carb_hmp" class="sub-link">HMP shunt (G6PD)</a></li>
-                    <li><a href="?topic=carb_fruct" class="sub-link">Fructose & galactose</a></li>
-                    <li><a href="?topic=carb_lactic" class="sub-link">Lactic acidosis</a></li>
-                    <li><a href="?topic=carb_warburg" class="sub-link">Warburg effect</a></li>
+                    <li><a href="?topic=carb_glycogen" class="sub-link">Glycogen Metabolism</a></li>
+                    <li><a href="?topic=carb_gsd" class="sub-link">Glycogen Storage Diseases</a></li>
+                    <li><a href="?topic=carb_hmp" class="sub-link">HMP Shunt (G6PD)</a></li>
+                    <li><a href="?topic=carb_fruct" class="sub-link">Fructose & Galactose</a></li>
+                    <li><a href="?topic=carb_warburg" class="sub-link">Warburg Effect</a></li>
                 </ul>
             </li>
 
-            <!-- 3. Lipid Metabolism -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('lip-menu')">3. Lipid Metabolism ▾</div>
+            <!-- 3. LIPID METABOLISM -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('lip-menu')">3. Lipid Metabolism ▾</div>
                 <ul id="lip-menu" class="sub-menu">
                     <li><a href="?topic=lip_all" class="sub-link mega-link">★ Lipids 100 MCQ</a></li>
-                    <li><a href="?topic=lip_oxi" class="sub-link">Fatty acid oxidation</a></li>
-                    <li><a href="?topic=lip_syn" class="sub-link">Fatty acid synthesis</a></li>
-                    <li><a href="?topic=lip_keto" class="sub-link">Ketogenesis & ketoacidosis</a></li>
-                    <li><a href="?topic=lip_chol" class="sub-link">Cholesterol synthesis</a></li>
+                    <li><a href="?topic=lip_oxi" class="sub-link">Fatty Acid Oxidation</a></li>
+                    <li><a href="?topic=lip_syn" class="sub-link">Fatty Acid Synthesis</a></li>
+                    <li><a href="?topic=lip_keto" class="sub-link">Ketogenesis & Ketoacidosis</a></li>
+                    <li><a href="?topic=lip_chol" class="sub-link">Cholesterol Synthesis</a></li>
                     <li><a href="?topic=lip_lipo" class="sub-link">Lipoproteins (LDL/HDL)</a></li>
-                    <li><a href="?topic=lip_storage" class="sub-link">Lipid storage diseases</a></li>
-                    <li><a href="?topic=lip_omega" class="sub-link">Omega-3 / omega-6 roles</a></li>
-                    <li><a href="?topic=lip_eico" class="sub-link">Prostaglandins & leukotrienes</a></li>
+                    <li><a href="?topic=lip_storage" class="sub-link">Lipid Storage Diseases</a></li>
+                    <li><a href="?topic=lip_eico" class="sub-link">Prostaglandins & Eicosanoids</a></li>
                 </ul>
             </li>
 
-            <!-- 4. Protein & Amino Acid -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('prot-menu')">4. Protein & AA Metab ▾</div>
+            <!-- 4. PROTEIN METABOLISM -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('prot-menu')">4. Protein & AA Metab ▾</div>
                 <ul id="prot-menu" class="sub-menu">
                     <li><a href="?topic=prot_all" class="sub-link mega-link">★ Proteins 100 MCQ</a></li>
-                    <li><a href="?topic=prot_aa" class="sub-link">Essential vs nonessential AAs</a></li>
-                    <li><a href="?topic=prot_trans" class="sub-link">Transamination & deamination</a></li>
-                    <li><a href="?topic=prot_urea" class="sub-link">Urea cycle & disorders</a></li>
-                    <li><a href="?topic=prot_phe" class="sub-link">Phenylalanine–tyrosine (PKU)</a></li>
-                    <li><a href="?topic=prot_bcaa" class="sub-link">Branched-chain AAs (MSUD)</a></li>
-                    <li><a href="?topic=prot_oneC" class="sub-link">One-carbon metabolism</a></li>
-                    <li><a href="?topic=prot_glut" class="sub-link">Glutathione cycle</a></li>
-                    <li><a href="?topic=prot_heme" class="sub-link">Porphyrin & heme synthesis</a></li>
+                    <li><a href="?topic=prot_aa" class="sub-link">Essential vs Non-Essential</a></li>
+                    <li><a href="?topic=prot_urea" class="sub-link">Urea Cycle & Disorders</a></li>
+                    <li><a href="?topic=prot_phe" class="sub-link">Phe-Tyr Pathway (PKU)</a></li>
+                    <li><a href="?topic=prot_bcaa" class="sub-link">Branched-Chain AAs</a></li>
+                    <li><a href="?topic=prot_oneC" class="sub-link">One-Carbon Metab</a></li>
+                    <li><a href="?topic=prot_heme" class="sub-link">Porphyrin & Heme</a></li>
                 </ul>
             </li>
 
-            <!-- 5. Enzymology -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('enz-menu')">5. Enzymology ▾</div>
+            <!-- 5. ENZYMOLOGY -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('enz-menu')">5. Enzymology ▾</div>
                 <ul id="enz-menu" class="sub-menu">
                     <li><a href="?topic=enz_all" class="sub-link mega-link">★ Enzymology 100 MCQ</a></li>
                     <li><a href="?topic=enz_class" class="sub-link">Classification (EC 1–6)</a></li>
-                    <li><a href="?topic=enz_kinetics" class="sub-link">Km, Vmax, Kcat, Efficiency</a></li>
-                    <li><a href="?topic=enz_inhib" class="sub-link">Competitive vs Non-competitive</a></li>
-                    <li><a href="?topic=enz_allo" class="sub-link">Allosteric regulation</a></li>
-                    <li><a href="?topic=enz_graphs" class="sub-link">Enzyme kinetics graphs</a></li>
-                    <li><a href="?topic=enz_iso" class="sub-link">Isoenzymes (LDH, CK)</a></li>
-                    <li><a href="?topic=enz_co" class="sub-link">Coenzymes & cofactors</a></li>
-                    <li><a href="?topic=enz_mm" class="sub-link">Michaelis–Menten derivations</a></li>
-                    <li><a href="?topic=enz_clin" class="sub-link">Clinical enzyme markers</a></li>
+                    <li><a href="?topic=enz_kinetics" class="sub-link">Kinetics (Km, Vmax)</a></li>
+                    <li><a href="?topic=enz_inhib" class="sub-link">Inhibition Types</a></li>
+                    <li><a href="?topic=enz_allo" class="sub-link">Allosteric Regulation</a></li>
+                    <li><a href="?topic=enz_iso" class="sub-link">Isoenzymes</a></li>
+                    <li><a href="?topic=enz_clin" class="sub-link">Clinical Markers</a></li>
                 </ul>
             </li>
 
-            <!-- 6. Vitamins & Minerals -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('vit-menu')">6. Vitamins & Minerals ▾</div>
+            <!-- 6. VITAMINS -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('vit-menu')">6. Vitamins & Minerals ▾</div>
                 <ul id="vit-menu" class="sub-menu">
                     <li><a href="?topic=vit_all" class="sub-link mega-link">★ Vitamins 100 MCQ</a></li>
-                    <li><a href="?topic=vit_water" class="sub-link">Water-soluble vitamins</a></li>
-                    <li><a href="?topic=vit_fat" class="sub-link">Fat-soluble vitamins</a></li>
-                    <li><a href="?topic=vit_def" class="sub-link">Deficiency diseases</a></li>
-                    <li><a href="?topic=vit_iron" class="sub-link">Iron metabolism</a></li>
-                    <li><a href="?topic=vit_calcium" class="sub-link">Calcium, phosphorus homeostasis</a></li>
-                    <li><a href="?topic=vit_trace" class="sub-link">Trace elements (Zn, Se, Cu, I)</a></li>
+                    <li><a href="?topic=vit_water" class="sub-link">Water-Soluble Vitamins</a></li>
+                    <li><a href="?topic=vit_fat" class="sub-link">Fat-Soluble Vitamins</a></li>
+                    <li><a href="?topic=vit_def" class="sub-link">Deficiency Diseases</a></li>
+                    <li><a href="?topic=vit_iron" class="sub-link">Iron Metabolism</a></li>
+                    <li><a href="?topic=vit_trace" class="sub-link">Trace Elements</a></li>
                 </ul>
             </li>
 
-            <!-- 7. Hormones -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('horm-menu')">7. Hormones ▾</div>
+            <!-- 7. HORMONES -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('horm-menu')">7. Hormones ▾</div>
                 <ul id="horm-menu" class="sub-menu">
                     <li><a href="?topic=horm_all" class="sub-link mega-link">★ Hormones 100 MCQ</a></li>
-                    <li><a href="?topic=horm_sig" class="sub-link">Insulin/glucagon signaling</a></li>
-                    <li><a href="?topic=horm_thyroid" class="sub-link">Thyroid hormone synthesis</a></li>
-                    <li><a href="?topic=horm_steroid" class="sub-link">Steroid hormones</a></li>
-                    <li><a href="?topic=horm_2nd" class="sub-link">Second messengers</a></li>
-                    <li><a href="?topic=horm_growth" class="sub-link">Growth hormone pathways</a></li>
-                    <li><a href="?topic=horm_recep" class="sub-link">Receptor types</a></li>
+                    <li><a href="?topic=horm_sig" class="sub-link">Insulin/Glucagon Sig</a></li>
+                    <li><a href="?topic=horm_thyroid" class="sub-link">Thyroid Synthesis</a></li>
+                    <li><a href="?topic=horm_steroid" class="sub-link">Steroid Hormones</a></li>
+                    <li><a href="?topic=horm_2nd" class="sub-link">Second Messengers</a></li>
                 </ul>
             </li>
 
-            <!-- 8. Clinical Biochemistry -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('clin-menu')">8. Clinical Biochem ▾</div>
+            <!-- 8. CLINICAL BIOCHEM -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('clin-menu')">8. Clinical Biochem ▾</div>
                 <ul id="clin-menu" class="sub-menu">
                     <li><a href="?topic=clin_all" class="sub-link mega-link">★ Clinical 100 MCQ</a></li>
-                    <li><a href="?topic=clin_liver" class="sub-link">Liver function tests</a></li>
-                    <li><a href="?topic=clin_renal" class="sub-link">Renal markers</a></li>
-                    <li><a href="?topic=clin_acid" class="sub-link">Acid–base balance</a></li>
-                    <li><a href="?topic=clin_abg" class="sub-link">Arterial blood gas</a></li>
-                    <li><a href="?topic=clin_plasma" class="sub-link">Plasma proteins</a></li>
+                    <li><a href="?topic=clin_liver" class="sub-link">Liver Function Tests</a></li>
+                    <li><a href="?topic=clin_renal" class="sub-link">Renal Markers</a></li>
+                    <li><a href="?topic=clin_acid" class="sub-link">Acid–Base Balance</a></li>
                     <li><a href="?topic=clin_hb" class="sub-link">Hemoglobinopathies</a></li>
-                    <li><a href="?topic=clin_dm" class="sub-link">Diabetes mellitus</a></li>
-                    <li><a href="?topic=clin_tumor" class="sub-link">Tumor markers</a></li>
+                    <li><a href="?topic=clin_dm" class="sub-link">Diabetes Mellitus</a></li>
+                    <li><a href="?topic=clin_tumor" class="sub-link">Tumor Markers</a></li>
                 </ul>
             </li>
 
-            <!-- 9. Techniques -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('tech-menu')">9. Techniques ▾</div>
+            <!-- 9. TECHNIQUES -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('tech-menu')">9. Techniques ▾</div>
                 <ul id="tech-menu" class="sub-menu">
                     <li><a href="?topic=tech_all" class="sub-link mega-link">★ Techniques 100 MCQ</a></li>
                     <li><a href="?topic=tech_chrom" class="sub-link">Chromatography</a></li>
                     <li><a href="?topic=tech_electro" class="sub-link">Electrophoresis</a></li>
                     <li><a href="?topic=tech_spec" class="sub-link">Spectroscopy</a></li>
-                    <li><a href="?topic=tech_mass" class="sub-link">Mass spectrometry</a></li>
-                    <li><a href="?topic=tech_elisa" class="sub-link">ELISA, RIA</a></li>
-                    <li><a href="?topic=tech_pcr" class="sub-link">PCR, qPCR</a></li>
-                    <li><a href="?topic=tech_blot" class="sub-link">Western/Southern/Northern</a></li>
-                    <li><a href="?topic=tech_seq" class="sub-link">DNA sequencing</a></li>
+                    <li><a href="?topic=tech_pcr" class="sub-link">PCR & qPCR</a></li>
+                    <li><a href="?topic=tech_blot" class="sub-link">Blotting Techniques</a></li>
                 </ul>
             </li>
 
-            <!-- 10. Metabolic Integration -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('met-menu')">10. Metabolic Reg ▾</div>
+            <!-- 10. METABOLIC INTEGRATION -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('met-menu')">10. Metabolic Reg ▾</div>
                 <ul id="met-menu" class="sub-menu">
                     <li><a href="?topic=met_all" class="sub-link mega-link">★ Metabolic 100 MCQ</a></li>
-                    <li><a href="?topic=met_fed" class="sub-link">Fed vs fasting state</a></li>
-                    <li><a href="?topic=met_starve" class="sub-link">Starvation metabolism</a></li>
-                    <li><a href="?topic=met_randle" class="sub-link">Randle cycle</a></li>
-                    <li><a href="?topic=met_cori" class="sub-link">Cori cycle, Cahill cycle</a></li>
-                    <li><a href="?topic=met_organ" class="sub-link">Organelle-based metabolism</a></li>
+                    <li><a href="?topic=met_fed" class="sub-link">Fed vs Fasting State</a></li>
+                    <li><a href="?topic=met_starve" class="sub-link">Starvation</a></li>
+                    <li><a href="?topic=met_randle" class="sub-link">Randle Cycle</a></li>
+                    <li><a href="?topic=met_cori" class="sub-link">Cori & Cahill Cycles</a></li>
                 </ul>
             </li>
 
-            <!-- 11. Immunology Interface -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('imm-menu')">11. Immunology ▾</div>
+            <!-- 11. IMMUNOLOGY -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('imm-menu')">11. Immunology ▾</div>
                 <ul id="imm-menu" class="sub-menu">
                     <li><a href="?topic=imm_all" class="sub-link mega-link">★ Immunology 100 MCQ</a></li>
-                    <li><a href="?topic=imm_comp" class="sub-link">Complement pathways</a></li>
-                    <li><a href="?topic=imm_ab" class="sub-link">Antibody structure</a></li>
+                    <li><a href="?topic=imm_ab" class="sub-link">Antibody Structure</a></li>
                     <li><a href="?topic=imm_mhc" class="sub-link">MHC I & II</a></li>
-                    <li><a href="?topic=imm_cyto" class="sub-link">Cytokines & chemokines</a></li>
-                    <li><a href="?topic=imm_vac" class="sub-link">Vaccines & adjuvants</a></li>
-                    <li><a href="?topic=imm_inf" class="sub-link">Inflammatory signaling</a></li>
+                    <li><a href="?topic=imm_cyto" class="sub-link">Cytokines</a></li>
+                    <li><a href="?topic=imm_vac" class="sub-link">Vaccines & Adjuvants</a></li>
                 </ul>
             </li>
 
-            <!-- 12. Neurochemistry -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('neuro-menu')">12. Neurochemistry ▾</div>
+            <!-- 12. NEURO & OMICS -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('neuro-menu')">12. Neuro & Omics ▾</div>
                 <ul id="neuro-menu" class="sub-menu">
-                    <li><a href="?topic=neuro_all" class="sub-link mega-link">★ Neurochem 100 MCQ</a></li>
+                    <li><a href="?topic=neuro_all" class="sub-link mega-link">★ Neuro/Omics 100 MCQ</a></li>
                     <li><a href="?topic=neuro_trans" class="sub-link">Neurotransmitters</a></li>
-                    <li><a href="?topic=neuro_bbb" class="sub-link">Blood–brain barrier</a></li>
-                    <li><a href="?topic=neuro_park" class="sub-link">Parkinson’s biochemistry</a></li>
-                    <li><a href="?topic=neuro_syn" class="sub-link">Neurotransmitter synthesis</a></li>
-                </ul>
-            </li>
-
-            <!-- 13. Molecular Diagnostics -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('omic-menu')">13. Omics & Diagnostics ▾</div>
-                <ul id="omic-menu" class="sub-menu">
-                    <li><a href="?topic=omic_all" class="sub-link mega-link">★ Omics 100 MCQ</a></li>
-                    <li><a href="?topic=omic_meta" class="sub-link">Metabolomics basics</a></li>
+                    <li><a href="?topic=neuro_bbb" class="sub-link">Blood–Brain Barrier</a></li>
                     <li><a href="?topic=omic_prot" class="sub-link">Proteomics</a></li>
-                    <li><a href="?topic=omic_gen" class="sub-link">Genomics & transcriptomics</a></li>
-                    <li><a href="?topic=omic_bio" class="sub-link">Biomarker discovery</a></li>
-                    <li><a href="?topic=omic_crispr" class="sub-link">CRISPR basics</a></li>
+                    <li><a href="?topic=omic_gen" class="sub-link">Genomics</a></li>
+                    <li><a href="?topic=omic_crispr" class="sub-link">CRISPR Basics</a></li>
                 </ul>
             </li>
 
-            <!-- 14. Special Topics -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('spec-menu')">14. Special Topics ▾</div>
+            <!-- 13. SPECIAL TOPICS -->
+            <li class="topic-item">
+                <div class="topic-link" onclick="toggleMenu('spec-menu')">13. Special Topics ▾</div>
                 <ul id="spec-menu" class="sub-menu">
                     <li><a href="?topic=spec_all" class="sub-link mega-link">★ Special 100 MCQ</a></li>
-                    <li><a href="?topic=spec_free" class="sub-link">Free radicals & antioxidants</a></li>
-                    <li><a href="?topic=spec_detox" class="sub-link">Detoxification (P450)</a></li>
-                    <li><a href="?topic=spec_aging" class="sub-link">Biochemistry of aging</a></li>
-                    <li><a href="?topic=spec_stress" class="sub-link">Oxidative stress & redox</a></li>
-                    <li><a href="?topic=spec_apop" class="sub-link">Apoptosis pathways</a></li>
-                    <li><a href="?topic=spec_no" class="sub-link">Nitric oxide signaling</a></li>
-                    <li><a href="?topic=spec_bio" class="sub-link">Bioenergetics (ATP yield)</a></li>
-                    <li><a href="?topic=spec_ph" class="sub-link">pH, buffers, Henderson–Hasselbalch</a></li>
-                    <li><a href="?topic=spec_memb" class="sub-link">Membrane transport</a></li>
+                    <li><a href="?topic=spec_free" class="sub-link">Free Radicals</a></li>
+                    <li><a href="?topic=spec_detox" class="sub-link">Detoxification</a></li>
+                    <li><a href="?topic=spec_aging" class="sub-link">Biochem of Aging</a></li>
+                    <li><a href="?topic=spec_apop" class="sub-link">Apoptosis</a></li>
                 </ul>
             </li>
         </ul>
