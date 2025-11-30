@@ -171,7 +171,11 @@
         .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
         .option-btn.incorrect { background: #f8d7da; border-color: #dc3545; color: #721c24; }
         
-        .feedback { margin-top: 25px; padding: 15px; background: #e2e6ea; font-size: 0.95rem; font-family: var(--font-ui); display: none; border: 1px solid #ccc; }
+        /* Question List View Styling */
+        .question-wrapper { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .question-header { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; font-family: var(--font-main); color: #222; }
+        .feedback { margin-top: 10px; padding: 15px; background: #e2e6ea; font-size: 0.95rem; font-family: var(--font-ui); display: none; border: 1px solid #ccc; border-left: 4px solid var(--primary); }
+        
         .step-box { background: #fff; border: 1px solid #ddd; padding: 10px; margin-top: 10px; font-size: 0.85rem; color: #555; }
         
         .btn-action { background: var(--primary); color: white; border: none; padding: 8px 20px; font-family: var(--font-ui); font-weight: bold; cursor: pointer; margin-top: 15px; }
@@ -516,20 +520,14 @@
             <div id="dynamic-article-container"></div>
         </div>
 
-        <!-- VIEW C: QUIZ -->
+        <!-- VIEW C: QUIZ LIST (NEW LIST VIEW) -->
         <div id="view-quiz" class="quiz-view">
             <div class="quiz-header"><span id="quiz-title">Topic Quiz</span><span id="score-display">Score: 0</span></div>
             <div id="loading-spinner" style="text-align:center; padding:20px;">Connecting...</div>
-            <div id="question-container" style="display:none;">
-                <div id="q-text" style="font-size:1.1rem; font-weight:700; margin-bottom:15px;"></div>
-                <div id="options-area"></div>
-                <div id="feedback-area" class="feedback"></div>
-                <button id="next-btn" class="btn-action" onclick="nextQuestion()" style="display:none;">Next Question &rarr;</button>
-            </div>
-            <div id="results-container" style="display:none; text-align:center;">
-                <h3>Module Complete</h3><p>Final Score: <span id="final-score">0</span></p>
-                <button class="btn-action" onclick="location.reload()">Return to Index</button>
-            </div>
+            
+            <!-- LIST CONTAINER FOR ALL QUESTIONS -->
+            <div id="quiz-list-container" style="display:none;"></div>
+
         </div>
 
         <!-- VIEW D: CALCULATORS -->
@@ -663,63 +661,26 @@
 </div>
 
 <script>
-    // UPDATED SHEET MAP WITH NEW MEGA QUIZZES (PASTE LINKS HERE)
+    // UPDATED SHEET MAP WITH NEW TOPICS (PASTE LINKS HERE)
     const SHEET_MAP = {
         'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',
-        
-        // 1. MOLECULAR
-        'mol_all': '',
+        'molecular': '',
         'mol_dna': '', 'mol_pol': '', 'mol_telo': '', 'mol_repair': '', 'mol_transc': '', 
-        'mol_post_trans': '', 'mol_transl': '', 'mol_reg': '', 'mol_epi': '', 'mol_mut': '',
+        'mol_post_trans': '', 'mol_transl': '', 'mol_reg': '', 'mol_epi': '', 'mol_mut': '', 'mol_code': '',
+        
+        // ENZYMOLOGY SUBTOPICS
+        'enzymes': '',
+        'enz_class': '', 'enz_kinetics': '', 'enz_inhib': '', 'enz_allo': '', 'enz_graphs': '',
+        'enz_iso': '', 'enz_co': '', 'enz_mm': '', 'enz_clin': '',
 
-        // 2. CARBS
-        'carb_all': '',
-        'carb_glyc': '', 'carb_tca': '', 'carb_etc': '', 'carb_gluco': '', 'carb_glycogen': '', 
-        'carb_gsd': '', 'carb_hmp': '', 'carb_fruct': '', 'carb_warburg': '',
-
-        // 3. LIPIDS
-        'lip_all': '',
-        'lip_oxi': '', 'lip_syn': '', 'lip_keto': '', 'lip_chol': '', 'lip_lipo': '', 'lip_storage': '', 'lip_eico': '',
-
-        // 4. PROTEIN
-        'prot_all': '',
-        'prot_aa': '', 'prot_urea': '', 'prot_phe': '', 'prot_bcaa': '', 'prot_oneC': '', 'prot_heme': '',
-
-        // 5. ENZYMES
-        'enz_all': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpYLsRx_A7fzPWH1MmVoOeMRuSurz10CVlXuJem3FXkhXYdqluPZn9JWpVY1N2nkbgF9Tq68s39fwQ/pub?output=csv',
-        'enz_class': '', 'enz_kinetics': '', 'enz_inhib': '', 'enz_allo': '', 'enz_iso': '', 'enz_clin': '',
-
-        // 6. VITAMINS
-        'vit_all': '',
-        'vit_water': '', 'vit_fat': '', 'vit_def': '', 'vit_iron': '', 'vit_trace': '',
-
-        // 7. HORMONES
-        'horm_all': '',
-        'horm_sig': '', 'horm_thyroid': '', 'horm_steroid': '', 'horm_2nd': '',
-
-        // 8. CLINICAL
-        'clin_all': '',
-        'clin_liver': '', 'clin_renal': '', 'clin_acid': '', 'clin_hb': '', 'clin_dm': '', 'clin_tumor': '',
-
-        // 9. TECHNIQUES
-        'tech_all': '',
-        'tech_chrom': '', 'tech_electro': '', 'tech_spec': '', 'tech_pcr': '', 'tech_blot': '',
-
-        // 10. METABOLIC
-        'met_all': '',
-        'met_fed': '', 'met_starve': '', 'met_randle': '', 'met_cori': '',
-
-        // 11. IMMUNO
-        'imm_all': '',
-        'imm_ab': '', 'imm_mhc': '', 'imm_cyto': '', 'imm_vac': '',
-
-        // 12. NEURO/OMICS
-        'neuro_all': '',
-        'neuro_trans': '', 'neuro_bbb': '', 'omic_prot': '', 'omic_gen': '', 'omic_crispr': '',
-
-        // 13. SPECIAL
-        'spec_all': '',
-        'spec_free': '', 'spec_detox': '', 'spec_aging': '', 'spec_apop': ''
+        'protein': '',
+        'carbs': '',
+        'vitamins': '',
+        'hormones': '',
+        'clinical': '',
+        'techniques': '',
+        'metabolic': '',
+        'immunology': ''
     };
     
     const BLOG_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3ZlgFhkSowtqTzfCCZtar4xPNwHz_OoXW2no5Oi-ry-pp_9vE4D2DNZ6Tk7gTx3squbRmgjJrM-Qo/pub?output=csv"; 
@@ -982,42 +943,108 @@
         });
     }
     
-    // Quiz Logic
-    let quizData=[], currentQ=0, score=0;
-    const quizUI={title:document.getElementById('quiz-title'), text:document.getElementById('q-text'), opts:document.getElementById('options-area'), feedback:document.getElementById('feedback-area'), nextBtn:document.getElementById('next-btn'), score:document.getElementById('score-display'), container:document.getElementById('question-container'), results:document.getElementById('results-container'), spinner:document.getElementById('loading-spinner')};
-    
-    function loadQuiz(topic){
-        const url=SHEET_MAP[topic];
-        if(!url) return;
-        Papa.parse(url,{download:true,header:true,complete:function(r){
-            quizData=r.data.filter(d=>d.Question).map(d=>({question:d.Question, options:[d.Option1,d.Option2,d.Option3,d.Option4], correct:parseInt(d.CorrectAnswer)-1, explain:d.Explanation}));
-            quizUI.spinner.style.display='none';
-            quizUI.container.style.display='block';
-            renderQuestion();
+    // Quiz Logic Refactored for List View
+    let quizData=[], score=0;
+    const quizUI = {
+        title: document.getElementById('quiz-title'),
+        score: document.getElementById('score-display'),
+        container: document.getElementById('quiz-list-container'),
+        results: document.getElementById('results-container'),
+        spinner: document.getElementById('loading-spinner'),
+        qContainer: document.getElementById('question-container') // Old container, hiding it
+    };
+
+    function loadQuiz(topic) {
+        const url = SHEET_MAP[topic];
+        if(!url) { quizUI.spinner.innerText = "No Data Link Found"; return; }
+        
+        // Clear old views
+        quizUI.container.innerHTML = '';
+        quizUI.results.style.display = 'none';
+        quizUI.spinner.style.display = 'block';
+        score = 0;
+        quizUI.score.innerText = `Score: 0`;
+
+        Papa.parse(url, { download: true, header: true, complete: res => {
+            quizData = res.data.filter(d => d.Question).map(d => ({ 
+                q: d.Question, 
+                o: [d.Option1, d.Option2, d.Option3, d.Option4], 
+                c: parseInt(d.CorrectAnswer)-1, 
+                e: d.Explanation 
+            }));
+            
+            quizUI.spinner.style.display = 'none';
+            quizUI.container.style.display = 'block';
+            renderQuizList();
         }});
     }
-    function renderQuestion(){
-        if(currentQ>=quizData.length){quizUI.container.style.display='none'; quizUI.results.style.display='block'; return;}
-        const d=quizData[currentQ];
-        quizUI.text.innerHTML=`${currentQ+1}. ${d.question}`;
-        quizUI.opts.innerHTML='';
-        quizUI.feedback.style.display='none'; quizUI.nextBtn.style.display='none';
-        d.options.forEach((o,i)=>{
-            const b=document.createElement('button'); b.className='option-btn'; b.innerHTML=o;
-            b.onclick=()=>checkAnswer(i,b); quizUI.opts.appendChild(b);
+
+    function renderQuizList() {
+        quizData.forEach((d, qIndex) => {
+            // Create Question Block
+            const block = document.createElement('div');
+            block.className = 'question-wrapper';
+            block.id = `q-block-${qIndex}`;
+            
+            // Question Text
+            const qHeader = document.createElement('div');
+            qHeader.className = 'question-header';
+            qHeader.innerHTML = `${qIndex + 1}. ${d.q}`;
+            block.appendChild(qHeader);
+            
+            // Options Container
+            const optsDiv = document.createElement('div');
+            d.o.forEach((opt, oIndex) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = opt;
+                btn.onclick = () => checkAnswer(qIndex, oIndex, btn);
+                optsDiv.appendChild(btn);
+            });
+            block.appendChild(optsDiv);
+            
+            // Feedback Container (Hidden)
+            const feedDiv = document.createElement('div');
+            feedDiv.className = 'feedback';
+            feedDiv.id = `feedback-${qIndex}`;
+            block.appendChild(feedDiv);
+
+            quizUI.container.appendChild(block);
         });
-        renderMathInElement(document.body);
+        
+        // Math rendering for the whole list
+        renderMathInElement(quizUI.container);
     }
-    function checkAnswer(i,b){
-        const c=quizData[currentQ].correct;
-        document.querySelectorAll('.option-btn').forEach(btn=>{btn.onclick=null; btn.classList.add('disabled');});
-        if(i===c){b.classList.add('correct'); score++; quizUI.feedback.innerHTML='<b>Correct.</b> '+quizData[currentQ].explain;}
-        else{b.classList.add('incorrect'); document.querySelectorAll('.option-btn')[c].classList.add('correct'); quizUI.feedback.innerHTML='<b>Incorrect.</b> '+quizData[currentQ].explain;}
-        quizUI.score.innerText='Score: '+score;
-        quizUI.feedback.style.display='block'; quizUI.nextBtn.style.display='block';
-        renderMathInElement(quizUI.feedback);
+
+    function checkAnswer(qIndex, oIndex, btn) {
+        const d = quizData[qIndex];
+        const block = document.getElementById(`q-block-${qIndex}`);
+        const feedback = document.getElementById(`feedback-${qIndex}`);
+        
+        // Disable buttons in this block
+        const buttons = block.querySelectorAll('.option-btn');
+        buttons.forEach(b => {
+            b.onclick = null;
+            b.classList.add('disabled');
+        });
+
+        if(oIndex === d.c) {
+            btn.classList.add('correct');
+            score++;
+            feedback.innerHTML = "<b>Correct!</b> " + d.e;
+        } else {
+            btn.classList.add('incorrect');
+            // Highlight correct one
+            buttons[d.c].classList.add('correct');
+            feedback.innerHTML = "<b>Incorrect.</b> " + d.e;
+        }
+        
+        feedback.style.display = 'block';
+        quizUI.score.innerText = `Score: ${score} / ${quizData.length}`;
+        renderMathInElement(feedback);
     }
-    function nextQuestion(){currentQ++; renderQuestion();}
+
+    // Note: nextQuestion is no longer needed in list view
 </script>
 
 </body>
