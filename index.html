@@ -50,6 +50,19 @@
         .sub-link:hover { color: var(--primary); padding-left: 3px; }
         .mega-link { color: var(--primary); font-weight: 700; background-color: #eef6ff; border-bottom: 1px solid #cce5ff; }
 
+        /* Share Buttons (Fixed Sizing) */
+        .share-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .share-btn {
+            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            color: white; transition: opacity 0.2s; flex-shrink: 0; /* Prevent resizing */
+        }
+        .share-btn:hover { opacity: 0.8; }
+        .bg-fb { background-color: #1877f2; }
+        .bg-x { background-color: #000000; }
+        .bg-wa { background-color: #25d366; }
+        .bg-in { background-color: #0077b5; }
+        .share-btn svg { width: 16px; height: 16px; fill: white; }
+
         /* Quiz Styles */
         .quiz-view { border: 1px solid var(--primary); background: #fff; padding: 20px; display: none; margin-bottom: 50px; }
         .quiz-header { background: var(--primary); color: white; padding: 10px 15px; margin: -20px -20px 20px -20px; font-family: var(--font-ui); display: flex; justify-content: space-between; }
@@ -136,34 +149,213 @@
         <ul class="topic-list">
             <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
             
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div>
+            <!-- 1. Molecular Biology -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div>
                 <ul id="mol-menu" class="sub-menu">
                     <li><a href="?topic=mol_all" class="sub-link mega-link">★ Molecular Bio 100 MCQ</a></li>
-                    <li><a href="?topic=mol_dna" class="sub-link">DNA Structure & Replication</a></li>
-                    <li><a href="?topic=mol_pol" class="sub-link">DNA Polymerases</a></li>
-                    <!-- Add more molecular subtopics here -->
+                    <li><a href="?topic=mol_dna" class="sub-link">DNA structure & replication</a></li>
+                    <li><a href="?topic=mol_pol" class="sub-link">DNA polymerases & fidelity</a></li>
+                    <li><a href="?topic=mol_telo" class="sub-link">Telomeres & telomerase</a></li>
+                    <li><a href="?topic=mol_repair" class="sub-link">DNA repair pathways</a></li>
+                    <li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA pol)</a></li>
+                    <li><a href="?topic=mol_post_trans" class="sub-link">Post-transcriptional modifications</a></li>
+                    <li><a href="?topic=mol_transl" class="sub-link">Translation & ribosomes</a></li>
+                    <li><a href="?topic=mol_reg" class="sub-link">Operons & regulation</a></li>
+                    <li><a href="?topic=mol_epi" class="sub-link">Epigenetics</a></li>
+                    <li><a href="?topic=mol_chrom" class="sub-link">Chromatin structure</a></li>
+                    <li><a href="?topic=mol_mut" class="sub-link">Mutations</a></li>
+                    <li><a href="?topic=mol_code" class="sub-link">Genetic code</a></li>
                 </ul>
             </li>
 
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('enz-menu')">2. Enzymology ▾</div>
+            <!-- 2. Carbohydrate Metabolism -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('carb-menu')">2. Carbohydrate Metab ▾</div>
+                <ul id="carb-menu" class="sub-menu">
+                    <li><a href="?topic=carb_all" class="sub-link mega-link">★ Carbohydrate 100 MCQ</a></li>
+                    <li><a href="?topic=carb_glyc" class="sub-link">Glycolysis steps & reg</a></li>
+                    <li><a href="?topic=carb_tca" class="sub-link">TCA cycle & energetics</a></li>
+                    <li><a href="?topic=carb_etc" class="sub-link">ETC & oxidative phos</a></li>
+                    <li><a href="?topic=carb_gluco" class="sub-link">Gluconeogenesis</a></li>
+                    <li><a href="?topic=carb_glycogen" class="sub-link">Glycogen metabolism</a></li>
+                    <li><a href="?topic=carb_gsd" class="sub-link">Glycogen storage diseases</a></li>
+                    <li><a href="?topic=carb_hmp" class="sub-link">HMP shunt (G6PD)</a></li>
+                    <li><a href="?topic=carb_fruct" class="sub-link">Fructose & galactose</a></li>
+                    <li><a href="?topic=carb_lactic" class="sub-link">Lactic acidosis</a></li>
+                    <li><a href="?topic=carb_warburg" class="sub-link">Warburg effect</a></li>
+                </ul>
+            </li>
+
+            <!-- 3. Lipid Metabolism -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('lip-menu')">3. Lipid Metabolism ▾</div>
+                <ul id="lip-menu" class="sub-menu">
+                    <li><a href="?topic=lip_all" class="sub-link mega-link">★ Lipids 100 MCQ</a></li>
+                    <li><a href="?topic=lip_oxi" class="sub-link">Fatty acid oxidation</a></li>
+                    <li><a href="?topic=lip_syn" class="sub-link">Fatty acid synthesis</a></li>
+                    <li><a href="?topic=lip_keto" class="sub-link">Ketogenesis & ketoacidosis</a></li>
+                    <li><a href="?topic=lip_chol" class="sub-link">Cholesterol synthesis</a></li>
+                    <li><a href="?topic=lip_lipo" class="sub-link">Lipoproteins (LDL/HDL)</a></li>
+                    <li><a href="?topic=lip_storage" class="sub-link">Lipid storage diseases</a></li>
+                    <li><a href="?topic=lip_omega" class="sub-link">Omega-3 / omega-6 roles</a></li>
+                    <li><a href="?topic=lip_eico" class="sub-link">Prostaglandins & leukotrienes</a></li>
+                </ul>
+            </li>
+
+            <!-- 4. Protein & Amino Acid -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('prot-menu')">4. Protein & AA Metab ▾</div>
+                <ul id="prot-menu" class="sub-menu">
+                    <li><a href="?topic=prot_all" class="sub-link mega-link">★ Proteins 100 MCQ</a></li>
+                    <li><a href="?topic=prot_aa" class="sub-link">Essential vs nonessential AAs</a></li>
+                    <li><a href="?topic=prot_trans" class="sub-link">Transamination & deamination</a></li>
+                    <li><a href="?topic=prot_urea" class="sub-link">Urea cycle & disorders</a></li>
+                    <li><a href="?topic=prot_phe" class="sub-link">Phenylalanine–tyrosine (PKU)</a></li>
+                    <li><a href="?topic=prot_bcaa" class="sub-link">Branched-chain AAs (MSUD)</a></li>
+                    <li><a href="?topic=prot_oneC" class="sub-link">One-carbon metabolism</a></li>
+                    <li><a href="?topic=prot_glut" class="sub-link">Glutathione cycle</a></li>
+                    <li><a href="?topic=prot_heme" class="sub-link">Porphyrin & heme synthesis</a></li>
+                </ul>
+            </li>
+
+            <!-- 5. Enzymology -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('enz-menu')">5. Enzymology ▾</div>
                 <ul id="enz-menu" class="sub-menu">
                     <li><a href="?topic=enz_all" class="sub-link mega-link">★ Enzymology 100 MCQ</a></li>
                     <li><a href="?topic=enz_class" class="sub-link">Classification (EC 1–6)</a></li>
-                    <li><a href="?topic=enz_kinetics" class="sub-link">Kinetics (Km, Vmax)</a></li>
-                    <li><a href="?topic=enz_inhib" class="sub-link">Inhibition Types</a></li>
-                    <li><a href="?topic=enz_allo" class="sub-link">Allosteric Regulation</a></li>
-                    <li><a href="?topic=enz_iso" class="sub-link">Isoenzymes</a></li>
-                    <li><a href="?topic=enz_clin" class="sub-link">Clinical Markers</a></li>
+                    <li><a href="?topic=enz_kinetics" class="sub-link">Km, Vmax, Kcat, Efficiency</a></li>
+                    <li><a href="?topic=enz_inhib" class="sub-link">Competitive vs Non-competitive</a></li>
+                    <li><a href="?topic=enz_allo" class="sub-link">Allosteric regulation</a></li>
+                    <li><a href="?topic=enz_graphs" class="sub-link">Enzyme kinetics graphs</a></li>
+                    <li><a href="?topic=enz_iso" class="sub-link">Isoenzymes (LDH, CK)</a></li>
+                    <li><a href="?topic=enz_co" class="sub-link">Coenzymes & cofactors</a></li>
+                    <li><a href="?topic=enz_mm" class="sub-link">Michaelis–Menten derivations</a></li>
+                    <li><a href="?topic=enz_clin" class="sub-link">Clinical enzyme markers</a></li>
                 </ul>
             </li>
-            
-            <!-- Additional Topics (Carbs, Lipids, etc.) kept collapsed for brevity -->
-            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('carb-menu')">3. Carbohydrates ▾</div>
-                <ul id="carb-menu" class="sub-menu"><li><a href="?topic=carb_all" class="sub-link mega-link">★ Carbohydrate 100 MCQ</a></li><li><a href="?topic=carb_glyc" class="sub-link">Glycolysis</a></li></ul>
+
+            <!-- 6. Vitamins & Minerals -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('vit-menu')">6. Vitamins & Minerals ▾</div>
+                <ul id="vit-menu" class="sub-menu">
+                    <li><a href="?topic=vit_all" class="sub-link mega-link">★ Vitamins 100 MCQ</a></li>
+                    <li><a href="?topic=vit_water" class="sub-link">Water-soluble vitamins</a></li>
+                    <li><a href="?topic=vit_fat" class="sub-link">Fat-soluble vitamins</a></li>
+                    <li><a href="?topic=vit_def" class="sub-link">Deficiency diseases</a></li>
+                    <li><a href="?topic=vit_iron" class="sub-link">Iron metabolism</a></li>
+                    <li><a href="?topic=vit_calcium" class="sub-link">Calcium, phosphorus homeostasis</a></li>
+                    <li><a href="?topic=vit_trace" class="sub-link">Trace elements (Zn, Se, Cu, I)</a></li>
+                </ul>
+            </li>
+
+            <!-- 7. Hormones -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('horm-menu')">7. Hormones ▾</div>
+                <ul id="horm-menu" class="sub-menu">
+                    <li><a href="?topic=horm_all" class="sub-link mega-link">★ Hormones 100 MCQ</a></li>
+                    <li><a href="?topic=horm_sig" class="sub-link">Insulin/glucagon signaling</a></li>
+                    <li><a href="?topic=horm_thyroid" class="sub-link">Thyroid hormone synthesis</a></li>
+                    <li><a href="?topic=horm_steroid" class="sub-link">Steroid hormones</a></li>
+                    <li><a href="?topic=horm_2nd" class="sub-link">Second messengers</a></li>
+                    <li><a href="?topic=horm_growth" class="sub-link">Growth hormone pathways</a></li>
+                    <li><a href="?topic=horm_recep" class="sub-link">Receptor types</a></li>
+                </ul>
+            </li>
+
+            <!-- 8. Clinical Biochemistry -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('clin-menu')">8. Clinical Biochem ▾</div>
+                <ul id="clin-menu" class="sub-menu">
+                    <li><a href="?topic=clin_all" class="sub-link mega-link">★ Clinical 100 MCQ</a></li>
+                    <li><a href="?topic=clin_liver" class="sub-link">Liver function tests</a></li>
+                    <li><a href="?topic=clin_renal" class="sub-link">Renal markers</a></li>
+                    <li><a href="?topic=clin_acid" class="sub-link">Acid–base balance</a></li>
+                    <li><a href="?topic=clin_abg" class="sub-link">Arterial blood gas</a></li>
+                    <li><a href="?topic=clin_plasma" class="sub-link">Plasma proteins</a></li>
+                    <li><a href="?topic=clin_hb" class="sub-link">Hemoglobinopathies</a></li>
+                    <li><a href="?topic=clin_dm" class="sub-link">Diabetes mellitus</a></li>
+                    <li><a href="?topic=clin_tumor" class="sub-link">Tumor markers</a></li>
+                </ul>
+            </li>
+
+            <!-- 9. Techniques -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('tech-menu')">9. Techniques ▾</div>
+                <ul id="tech-menu" class="sub-menu">
+                    <li><a href="?topic=tech_all" class="sub-link mega-link">★ Techniques 100 MCQ</a></li>
+                    <li><a href="?topic=tech_chrom" class="sub-link">Chromatography</a></li>
+                    <li><a href="?topic=tech_electro" class="sub-link">Electrophoresis</a></li>
+                    <li><a href="?topic=tech_spec" class="sub-link">Spectroscopy</a></li>
+                    <li><a href="?topic=tech_mass" class="sub-link">Mass spectrometry</a></li>
+                    <li><a href="?topic=tech_elisa" class="sub-link">ELISA, RIA</a></li>
+                    <li><a href="?topic=tech_pcr" class="sub-link">PCR, qPCR</a></li>
+                    <li><a href="?topic=tech_blot" class="sub-link">Western/Southern/Northern</a></li>
+                    <li><a href="?topic=tech_seq" class="sub-link">DNA sequencing</a></li>
+                </ul>
+            </li>
+
+            <!-- 10. Metabolic Integration -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('met-menu')">10. Metabolic Reg ▾</div>
+                <ul id="met-menu" class="sub-menu">
+                    <li><a href="?topic=met_all" class="sub-link mega-link">★ Metabolic 100 MCQ</a></li>
+                    <li><a href="?topic=met_fed" class="sub-link">Fed vs fasting state</a></li>
+                    <li><a href="?topic=met_starve" class="sub-link">Starvation metabolism</a></li>
+                    <li><a href="?topic=met_randle" class="sub-link">Randle cycle</a></li>
+                    <li><a href="?topic=met_cori" class="sub-link">Cori cycle, Cahill cycle</a></li>
+                    <li><a href="?topic=met_organ" class="sub-link">Organelle-based metabolism</a></li>
+                </ul>
+            </li>
+
+            <!-- 11. Immunology Interface -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('imm-menu')">11. Immunology ▾</div>
+                <ul id="imm-menu" class="sub-menu">
+                    <li><a href="?topic=imm_all" class="sub-link mega-link">★ Immunology 100 MCQ</a></li>
+                    <li><a href="?topic=imm_comp" class="sub-link">Complement pathways</a></li>
+                    <li><a href="?topic=imm_ab" class="sub-link">Antibody structure</a></li>
+                    <li><a href="?topic=imm_mhc" class="sub-link">MHC I & II</a></li>
+                    <li><a href="?topic=imm_cyto" class="sub-link">Cytokines & chemokines</a></li>
+                    <li><a href="?topic=imm_vac" class="sub-link">Vaccines & adjuvants</a></li>
+                    <li><a href="?topic=imm_inf" class="sub-link">Inflammatory signaling</a></li>
+                </ul>
+            </li>
+
+            <!-- 12. Neurochemistry -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('neuro-menu')">12. Neurochemistry ▾</div>
+                <ul id="neuro-menu" class="sub-menu">
+                    <li><a href="?topic=neuro_all" class="sub-link mega-link">★ Neurochem 100 MCQ</a></li>
+                    <li><a href="?topic=neuro_trans" class="sub-link">Neurotransmitters</a></li>
+                    <li><a href="?topic=neuro_bbb" class="sub-link">Blood–brain barrier</a></li>
+                    <li><a href="?topic=neuro_park" class="sub-link">Parkinson’s biochemistry</a></li>
+                    <li><a href="?topic=neuro_syn" class="sub-link">Neurotransmitter synthesis</a></li>
+                </ul>
+            </li>
+
+            <!-- 13. Molecular Diagnostics -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('omic-menu')">13. Omics & Diagnostics ▾</div>
+                <ul id="omic-menu" class="sub-menu">
+                    <li><a href="?topic=omic_all" class="sub-link mega-link">★ Omics 100 MCQ</a></li>
+                    <li><a href="?topic=omic_meta" class="sub-link">Metabolomics basics</a></li>
+                    <li><a href="?topic=omic_prot" class="sub-link">Proteomics</a></li>
+                    <li><a href="?topic=omic_gen" class="sub-link">Genomics & transcriptomics</a></li>
+                    <li><a href="?topic=omic_bio" class="sub-link">Biomarker discovery</a></li>
+                    <li><a href="?topic=omic_crispr" class="sub-link">CRISPR basics</a></li>
+                </ul>
+            </li>
+
+            <!-- 14. Special Topics -->
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('spec-menu')">14. Special Topics ▾</div>
+                <ul id="spec-menu" class="sub-menu">
+                    <li><a href="?topic=spec_all" class="sub-link mega-link">★ Special 100 MCQ</a></li>
+                    <li><a href="?topic=spec_free" class="sub-link">Free radicals & antioxidants</a></li>
+                    <li><a href="?topic=spec_detox" class="sub-link">Detoxification (P450)</a></li>
+                    <li><a href="?topic=spec_aging" class="sub-link">Biochemistry of aging</a></li>
+                    <li><a href="?topic=spec_stress" class="sub-link">Oxidative stress & redox</a></li>
+                    <li><a href="?topic=spec_apop" class="sub-link">Apoptosis pathways</a></li>
+                    <li><a href="?topic=spec_no" class="sub-link">Nitric oxide signaling</a></li>
+                    <li><a href="?topic=spec_bio" class="sub-link">Bioenergetics (ATP yield)</a></li>
+                    <li><a href="?topic=spec_ph" class="sub-link">pH, buffers, Henderson–Hasselbalch</a></li>
+                    <li><a href="?topic=spec_memb" class="sub-link">Membrane transport</a></li>
+                </ul>
             </li>
         </ul>
+        
+        <div style="margin-top:30px; font-size: 0.75rem; color:#888;">
+            <a href="#" onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> <br>
+            &copy; 2025 BioChemHub
+        </div>
     </aside>
 
     <main class="main-stage">
@@ -233,6 +425,8 @@
         <div class="share-container">
             <a href="#" class="share-btn bg-fb"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
             <a href="#" class="share-btn bg-x"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" class="share-btn bg-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+            <a href="#" class="share-btn bg-in"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
         </div>
         <div class="sidebar-header">Advertisements</div>
         <div class="ad-box">AdSense</div>
@@ -246,13 +440,54 @@
     // --- 1. MAP YOUR LINKS HERE ---
     const SHEET_MAP = {
         // MEGA QUIZZES
-        'enz_all': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpYLsRx_A7fzPWH1MmVoOeMRuSurz10CVlXuJem3FXkhXYdqluPZn9JWpVY1N2nkbgF9Tq68s39fwQ/pub?output=csv', 'mol_all': '', 'carb_all': '', 
+        'enz_all': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQpYLsRx_A7fzPWH1MmVoOeMRuSurz10CVlXuJem3FXkhXYdqluPZn9JWpVY1N2nkbgF9Tq68s39fwQ/pub?output=csv', 'mol_all': '', 'carb_all': '', 'lip_all': '', 'prot_all': '', 'vit_all': '', 
+        'horm_all': '', 'clin_all': '', 'tech_all': '', 'met_all': '', 'imm_all': '', 'neuro_all': '', 
+        'omic_all': '', 'spec_all': '',
         
         // DAILY
         'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',
         
-        // TOPICS
-        'mol_dna': '', 'enz_kinetics': '' // Add others here
+        // 1. MOLECULAR
+        'mol_dna': '', 'mol_pol': '', 'mol_telo': '', 'mol_repair': '', 'mol_transc': '', 
+        'mol_post_trans': '', 'mol_transl': '', 'mol_reg': '', 'mol_epi': '', 'mol_chrom': '', 'mol_mut': '', 'mol_code': '',
+
+        // 2. CARBOHYDRATE
+        'carb_glyc': '', 'carb_tca': '', 'carb_etc': '', 'carb_gluco': '', 'carb_glycogen': '', 
+        'carb_gsd': '', 'carb_hmp': '', 'carb_fruct': '', 'carb_lactic': '', 'carb_warburg': '',
+
+        // 3. LIPID
+        'lip_oxi': '', 'lip_syn': '', 'lip_keto': '', 'lip_chol': '', 'lip_lipo': '', 'lip_storage': '', 'lip_omega': '', 'lip_eico': '',
+
+        // 4. PROTEIN
+        'prot_aa': '', 'prot_trans': '', 'prot_urea': '', 'prot_phe': '', 'prot_bcaa': '', 'prot_oneC': '', 'prot_glut': '', 'prot_heme': '',
+
+        // 5. ENZYMES
+        'enz_class': '', 'enz_kinetics': '', 'enz_inhib': '', 'enz_allo': '', 'enz_graphs': '', 'enz_iso': '', 'enz_co': '', 'enz_mm': '', 'enz_clin': '',
+
+        // 6. VITAMINS
+        'vit_water': '', 'vit_fat': '', 'vit_def': '', 'vit_iron': '', 'vit_calcium': '', 'vit_trace': '',
+
+        // 7. HORMONES
+        'horm_sig': '', 'horm_thyroid': '', 'horm_steroid': '', 'horm_2nd': '', 'horm_growth': '', 'horm_recep': '',
+
+        // 8. CLINICAL
+        'clin_liver': '', 'clin_renal': '', 'clin_acid': '', 'clin_abg': '', 'clin_plasma': '', 'clin_hb': '', 'clin_dm': '', 'clin_tumor': '',
+
+        // 9. TECHNIQUES
+        'tech_chrom': '', 'tech_electro': '', 'tech_spec': '', 'tech_mass': '', 'tech_elisa': '', 'tech_pcr': '', 'tech_blot': '', 'tech_seq': '',
+
+        // 10. METABOLIC
+        'met_fed': '', 'met_starve': '', 'met_randle': '', 'met_cori': '', 'met_organ': '',
+
+        // 11. IMMUNO
+        'imm_comp': '', 'imm_ab': '', 'imm_mhc': '', 'imm_cyto': '', 'imm_vac': '', 'imm_inf': '',
+
+        // 12. NEURO/OMICS
+        'neuro_trans': '', 'neuro_bbb': '', 'neuro_park': '', 'neuro_syn': '',
+        'omic_meta': '', 'omic_prot': '', 'omic_gen': '', 'omic_bio': '', 'omic_crispr': '',
+
+        // 13. SPECIAL
+        'spec_free': '', 'spec_detox': '', 'spec_aging': '', 'spec_stress': '', 'spec_apop': '', 'spec_no': '', 'spec_bio': '', 'spec_ph': '', 'spec_memb': ''
     };
     
     const BLOG_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3ZlgFhkSowtqTzfCCZtar4xPNwHz_OoXW2no5Oi-ry-pp_9vE4D2DNZ6Tk7gTx3squbRmgjJrM-Qo/pub?output=csv"; 
@@ -411,7 +646,10 @@
             // Basic tool switching
             if(activeTool === 'michaelis') { document.getElementById('view-calc-mm').style.display = 'block'; renderMathInElement(document.body); }
             else if(activeTool === 'ph') { document.getElementById('view-calc-ph').style.display = 'block'; renderMathInElement(document.body); }
-            // ... other tools ...
+            else if(activeTool === 'kw') { document.getElementById('view-calc-kw').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'entropy') { document.getElementById('view-calc-entropy').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'conversions') { document.getElementById('view-calc-conversions').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'molarmass') { document.getElementById('view-calc-molarmass').style.display = 'block'; renderMathInElement(document.body); }
         } else {
             document.getElementById('view-feed').style.display = 'block';
             if(BLOG_SHEET_URL) loadBlog();
@@ -428,12 +666,161 @@
         renderMathInElement(document.getElementById('calc-result-mm'));
     }
     
-    // (Add other calculator functions like calculatePH, calculateKw here same as before)
+    function calculatePH() {
+        const c = parseFloat(document.getElementById('ph-conc').value);
+        if(isNaN(c)) return alert("Invalid");
+        document.getElementById('res-ph').innerText = (-Math.log10(c)).toFixed(2);
+        document.getElementById('ph-steps').innerHTML = `$$ pH = -\\log(${c}) $$`;
+        document.getElementById('calc-result-ph').style.display = 'block';
+        renderMathInElement(document.getElementById('calc-result-ph'));
+    }
+
+    // (Add other calculator functions like calculateKw here same as before)
+    function calculateKw() {
+        const h = parseFloat(document.getElementById('kw-h-conc').value);
+        if(isNaN(h)||h<=0) return alert("Invalid");
+        const oh = 1.0e-14 / h;
+        const ohStr = oh.toExponential(2);
+        const steps = `$$ [OH^-] = \\frac{K_w}{[H^+]} $$ <br> $$ [OH^-] = \\frac{1.0 \\times 10^{-14}}{${h}} $$ <br> $$ [OH^-] = ${ohStr} \\text{ M} $$`;
+        document.getElementById('res-oh').innerText = ohStr + " M";
+        document.getElementById('kw-steps').innerHTML = steps;
+        document.getElementById('calc-result-kw').style.display = 'block';
+        renderMathInElement(document.getElementById('calc-result-kw'));
+    }
+
+    function calculateEntropy() {
+        const h = parseFloat(document.getElementById('ent-h').value);
+        const s = parseFloat(document.getElementById('ent-s').value);
+        const t = parseFloat(document.getElementById('ent-t').value);
+        if(isNaN(h)||isNaN(s)||isNaN(t)) return alert("Invalid");
+        const s_kj = s / 1000;
+        const g = h - (t * s_kj);
+        const spont = g < 0 ? "Spontaneous" : "Non-spontaneous";
+        document.getElementById('res-g').innerText = g.toFixed(2) + " kJ/mol";
+        const steps = `$$ \\Delta G = \\Delta H - T\\Delta S $$ <br> Convert S to kJ: $$ ${s} \\text{ J} = ${s_kj} \\text{ kJ} $$ <br> $$ \\Delta G = ${h} - (${t} \\times ${s_kj}) $$ <br> $$ \\Delta G = ${g.toFixed(2)} \\text{ kJ/mol} $$ <br> Result: <b>${spont}</b>`;
+        document.getElementById('ent-steps').innerHTML = steps;
+        document.getElementById('calc-result-ent').style.display = 'block';
+        renderMathInElement(document.getElementById('calc-result-ent'));
+    }
+
+    function calculateConversion() {
+        const v = parseFloat(document.getElementById('conv-val').value);
+        const t = document.getElementById('conv-type').value;
+        if(isNaN(v)) return alert("Invalid");
+        let res, steps;
+        if(t=='ppm-ppb') {
+            res = v * 1000;
+            steps = `$$ \\text{ppb} = \\text{ppm} \\times 1000 $$ <br> $$ ${v} \\times 1000 = ${res} \\text{ ppb} $$`;
+        } else if(t=='ppb-ppm') {
+            res = v / 1000;
+            steps = `$$ \\text{ppm} = \\frac{\\text{ppb}}{1000} $$ <br> $$ \\frac{${v}}{1000} = ${res} \\text{ ppm} $$`;
+        } else {
+            res = v;
+            steps = `$$ \\text{1 mg/L} \\approx \\text{1 ppm} $$ (assuming water density = 1 kg/L).`;
+        }
+        document.getElementById('res-conv').innerText = res;
+        document.getElementById('conv-steps').innerHTML = steps;
+        document.getElementById('calc-result-conv').style.display = 'block';
+        renderMathInElement(document.getElementById('calc-result-conv'));
+    }
+
+    function calculateMolarMass() {
+        const formula = document.getElementById('mm-formula').value.trim();
+        if(!formula) return alert("Enter Formula");
+        const ATOMIC_MASS = {
+            'H': 1.008, 'He': 4.003, 'Li': 6.941, 'Be': 9.012, 'B': 10.81, 'C': 12.01, 'N': 14.01, 'O': 16.00, 
+            'F': 19.00, 'Ne': 20.18, 'Na': 22.99, 'Mg': 24.31, 'Al': 26.98, 'Si': 28.09, 'P': 30.97, 'S': 32.07, 
+            'Cl': 35.45, 'K': 39.10, 'Ca': 40.08, 'Fe': 55.85, 'Cu': 63.55, 'Zn': 65.38, 'I': 126.90
+        };
+        let totalMass = 0;
+        let breakdown = [];
+        const regex = /([A-Z][a-z]*)(\d*)/g;
+        let match;
+        let valid = true;
+        while ((match = regex.exec(formula)) !== null) {
+            const element = match[1];
+            const count = match[2] ? parseInt(match[2]) : 1;
+            if (ATOMIC_MASS[element]) {
+                const mass = ATOMIC_MASS[element] * count;
+                totalMass += mass;
+                breakdown.push(`<b>${element}</b>: ${ATOMIC_MASS[element]} × ${count} = ${mass.toFixed(2)}`);
+            } else {
+                breakdown.push(`<span style="color:red">Unknown: ${element}</span>`);
+                valid = false;
+            }
+        }
+        if (totalMass === 0 || !valid) {
+            document.getElementById('res-mass').innerText = "Error";
+            document.getElementById('res-mass-breakdown').innerHTML = "Invalid element found.";
+        } else {
+            document.getElementById('res-mass').innerText = totalMass.toFixed(2) + " g/mol";
+            document.getElementById('res-mass-breakdown').innerHTML = breakdown.join("<br>") + `<br><hr>Total: <b>${totalMass.toFixed(2)}</b>`;
+        }
+        document.getElementById('calc-result-mass').style.display = 'block';
+    }
+
 
     // --- 6. BLOG ---
-    function loadBlog() { /* Same blog logic as before */ }
-    function openArticle(id) { /* Same article logic */ }
-    function closeArticle() { /* Same close logic */ }
+    function loadBlog() { /* Same blog logic as before */ 
+        const freshUrl = BLOG_SHEET_URL + '&t=' + new Date().getTime();
+        Papa.parse(freshUrl, {
+            download: true, header: true,
+            complete: function(results) {
+                const container = document.getElementById('view-feed');
+                const detailContainer = document.getElementById('dynamic-article-container');
+                document.getElementById('blog-loading').style.display = 'none';
+                
+                results.data.forEach((post, index) => {
+                    if(!post.Title) return;
+                    
+                    const div = document.createElement('div');
+                    div.className = 'article-preview';
+                    div.innerHTML = `
+                        <h2><a href="#" onclick="openArticle('dynamic-${index}')">${post.Title}</a></h2>
+                        <div class="meta-line">${post.Date || 'Recent'} &mdash; ${post.Source || 'News'}</div>
+                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary || ''}</div>
+                        <a href="#" onclick="openArticle('dynamic-${index}')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
+                    `;
+                    container.insertBefore(div, document.getElementById('static-articles'));
+                    
+                    const detailDiv = document.createElement('div');
+                    detailDiv.id = `article-content-dynamic-${index}`;
+                    detailDiv.style.display = 'none';
+                    
+                    const referenceHtml = (post.Link || post.URL || post['Source Link']) ? `<p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><strong>Reference:</strong> <a href="${post.Link || post.URL || post['Source Link']}" target="_blank" style="color:var(--primary); font-weight:bold;">View Original Source &rarr;</a></p>` : '';
+
+                    detailDiv.innerHTML = `
+                        <div class="meta-line">Date: ${post.Date}<br>Source: ${post.Source}</div>
+                        <h1>${post.Title}</h1>
+                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary}</div>
+                        <div class="article-body">
+                            <p><strong>FULL STORY</strong></p>
+                            ${post.Content ? post.Content.replace(/\n/g, '<p>') : ''}
+                            ${referenceHtml}
+                        </div>
+                    `;
+                    detailContainer.appendChild(detailDiv);
+                });
+            }
+        });
+    }
+    function openArticle(id) { /* Same article logic */ 
+        hideAllViews();
+        document.getElementById('view-article-detail').style.display = 'block';
+        document.getElementById('article-content-diabetes').style.display = 'none';
+        
+        if(id.startsWith('dynamic-')) {
+            const content = document.getElementById(`article-content-${id}`);
+            if(content) content.style.display = 'block';
+        } else {
+            const content = document.getElementById(`article-content-${id}`);
+            if(content) content.style.display = 'block';
+        }
+        window.scrollTo(0, 0);
+    }
+    function closeArticle() { /* Same close logic */ 
+        hideAllViews(); document.getElementById('view-feed').style.display = 'block'; 
+    }
 
 </script>
 
