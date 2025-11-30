@@ -50,45 +50,37 @@
         .sub-link:hover { color: var(--primary); padding-left: 3px; }
         .mega-link { color: var(--primary); font-weight: 700; background-color: #eef6ff; border-bottom: 1px solid #cce5ff; }
 
-        /* Share Buttons (Fixed Sizing & Layout) */
+        /* Share Buttons */
         .share-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .share-btn {
-            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
-            color: white; transition: opacity 0.2s; 
-            flex: 0 0 32px; /* STRICTLY FIXED SIZE: Grow 0, Shrink 0, Base 32px */
-        }
+        .share-btn { width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; transition: opacity 0.2s; flex: 0 0 32px; }
         .share-btn:hover { opacity: 0.8; }
-        .bg-fb { background-color: #1877f2; }
-        .bg-x { background-color: #000000; }
-        .bg-wa { background-color: #25d366; }
-        .bg-in { background-color: #0077b5; }
+        .bg-fb { background-color: #1877f2; } .bg-x { background-color: #000000; } .bg-wa { background-color: #25d366; } .bg-in { background-color: #0077b5; }
         .share-btn svg { width: 16px; height: 16px; fill: white; }
 
         /* Quiz Styles */
         .quiz-view { border: 1px solid var(--primary); background: #fff; padding: 20px; display: none; margin-bottom: 50px; }
         .quiz-header { background: var(--primary); color: white; padding: 10px 15px; margin: -20px -20px 20px -20px; font-family: var(--font-ui); display: flex; justify-content: space-between; }
-        
-        /* List View Specifics */
         .question-wrapper { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
         .question-header { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #222; }
-        
         .option-btn { display: block; width: 100%; text-align: left; padding: 10px 15px; margin-bottom: 8px; background: #f9f9f9; border: 1px solid #ccc; font-family: var(--font-ui); font-size: 0.95rem; cursor: pointer; }
         .option-btn:hover:not(.disabled) { background: #eef6ff; border-color: var(--primary); }
         .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
         .option-btn.incorrect { background: #f8d7da; border-color: #dc3545; color: #721c24; }
-        
         .feedback { margin-top: 15px; padding: 15px; background: #e2e6ea; font-size: 0.9rem; font-family: var(--font-ui); display: none; border-left: 4px solid var(--primary); }
-        
-        /* Info Pages Styles (About, Contact, Feedback) */
-        .info-container { padding: 20px; background: #fff; border: 1px solid #ddd; margin-bottom: 40px; font-family: var(--font-ui); }
-        .info-container h1 { margin-top: 0; color: var(--primary); border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        .info-container p { color: #444; line-height: 1.7; }
+
+        /* Info Pages */
+        .info-container { padding: 30px; background: #fff; border: 1px solid #ddd; margin-bottom: 40px; font-family: var(--font-main); }
+        .info-container h1 { margin-top: 0; color: var(--primary); border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; font-family: var(--font-ui); }
+        .info-container p { color: #444; line-height: 1.8; margin-bottom: 15px; }
+        .info-container ul { list-style-type: disc; padding-left: 20px; margin-bottom: 20px; }
+        .info-container li { margin-bottom: 8px; color: #444; }
+        .info-container h3 { color: #222; margin-top: 25px; font-family: var(--font-ui); }
         
         /* Feedback Form */
         .feedback-form textarea { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; font-family: inherit; margin-bottom: 10px; box-sizing: border-box; }
         .feedback-actions { display: flex; gap: 10px; }
-        .btn-github { background: #24292e; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; flex: 1; }
-        .btn-email { background: var(--primary); color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; flex: 1; }
+        .btn-email { background: var(--primary); color: white; border: none; padding: 12px 20px; cursor: pointer; font-weight: bold; width: 100%; border-radius: 4px; font-size: 1rem; }
+        .btn-email:hover { background-color: #004494; }
         
         /* Calculators */
         .form-group { margin-bottom: 15px; }
@@ -97,15 +89,72 @@
         .btn-action { background: var(--primary); color: white; border: none; padding: 8px 20px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; }
         .explanation-box { margin-top: 10px; padding: 12px; background: #fdf6e3; border: 1px solid #f0e6cc; font-size: 0.9rem; display: none; }
 
-        /* Article Styles */
-        .article-preview { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-        .article-preview h2 { margin: 0 0 10px 0; font-family: var(--font-ui); font-size: 1.4rem; font-weight: 700; }
-        .summary-box { background: var(--summary-bg); border: 1px solid #eee; border-left: 5px solid var(--primary); padding: 15px; margin-bottom: 15px; font-size: 0.95rem; }
+        /* -----------------------------------------------------------
+           UPDATED: ScienceDaily-Style Article Layout
+        ----------------------------------------------------------- */
+        .feed-header { 
+            margin: 0 0 15px 0; 
+            padding-bottom: 5px; 
+            border-bottom: 1px solid #ddd; 
+            color: #333; 
+            font-family: var(--font-ui); 
+            font-size: 1.1rem; /* Reduced Size */
+            font-weight: 700; 
+            text-transform: uppercase; 
+        }
+
+        .article-preview { 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
+            border-bottom: 1px dotted #ccc; /* Dotted line like ScienceDaily */
+        }
+
+        .article-preview h2 { 
+            margin: 0 0 5px 0; 
+            font-family: var(--font-main); /* Serif Headline */
+            font-size: 1.2rem; /* Reduced Size */
+            font-weight: 700; 
+            line-height: 1.2;
+        }
+        .article-preview h2 a { color: var(--primary); text-decoration: none; }
+        .article-preview h2 a:hover { text-decoration: underline; }
+
+        .meta-line { 
+            font-family: var(--font-ui); 
+            font-size: 0.75rem; 
+            color: #666; 
+            margin-bottom: 8px; 
+        }
+
+        /* ScienceDaily style: No box, just text */
+        .summary-box { 
+            background: transparent; 
+            border: none; 
+            padding: 0; 
+            margin-bottom: 8px; 
+            font-size: 0.95rem; 
+            color: #222; 
+            font-family: var(--font-main);
+            line-height: 1.5;
+        }
+        .summary-label { display: none; } /* Hide "Summary" label */
+        
+        .read-more-link {
+            font-size: 0.85rem;
+            font-family: var(--font-ui);
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .read-more-link:hover { text-decoration: underline; }
+
+        /* Full Article */
         .full-article { display: none; }
-        .article-body { font-size: 1.1rem; text-align: justify; margin-top: 20px; }
+        .full-article h1 { font-family: var(--font-main); font-size: 1.8rem; line-height: 1.2; color: #222; margin-bottom: 10px; }
+        .article-body { font-size: 1.1rem; text-align: justify; margin-top: 20px; color: #333; }
         
         .error-box { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; padding: 20px; border: 1px solid transparent; border-radius: 4px; margin-top: 20px; text-align: center; }
-
+        
         .news-item { margin-bottom: 12px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
         .news-item a { font-size: 0.85rem; color: var(--primary); font-weight: 600; display: block; line-height: 1.3; }
         .news-item span { font-size: 0.7rem; color: #888; display: block; margin-top: 3px; }
@@ -127,273 +176,60 @@
     <div class="nav-inner">
         <a href="?page=home" class="logo">BioChem<span>Hub</span></a>
         <div class="nav-links">
-            <!-- Main Nav Links -->
             <a href="?page=home">Home</a>
             <a href="?page=about">About</a>
             <a href="?page=contact">Contact</a>
             <a href="?page=feedback">Feedback</a>
-            
-            <!-- MCQ DROPDOWN (Click for Touch) -->
-            <div class="dropdown">
-                <span class="dropbtn" onclick="toggleHeaderDropdown('nav-mcq')">Biochemistry MCQ ▾</span>
-                <div id="nav-mcq" class="dropdown-content">
-                    <a href="?topic=daily">📅 Daily Challenge</a>
-                    <a href="?topic=enz_all" style="font-weight:bold; color:var(--primary);">★ Enzymology 100 MCQ</a>
-                    <a href="?topic=mol_all" style="font-weight:bold; color:var(--primary);">★ Molecular Bio 100 MCQ</a>
-                    <a href="#tools-sidebar">See All Topics...</a>
-                </div>
-            </div>
-
-            <!-- TOOLS DROPDOWN (Click for Touch) -->
-            <div class="dropdown">
-                <span class="dropbtn" onclick="toggleHeaderDropdown('nav-tools')">Lab Tools ▾</span>
-                <div id="nav-tools" class="dropdown-content">
-                    <a href="?tool=michaelis">Michaelis-Menten</a>
-                    <a href="?tool=ph">pH Calc</a>
-                    <a href="?tool=kw">Kw Calc</a>
-                    <a href="?tool=molarmass">Molar Mass</a>
-                </div>
-            </div>
+            <div class="dropdown"><span class="dropbtn" onclick="toggleHeaderDropdown('nav-mcq')">Biochemistry MCQ ▾</span><div id="nav-mcq" class="dropdown-content"><a href="?topic=daily">📅 Daily Challenge</a><a href="?topic=enz_all" style="font-weight:bold; color:var(--primary);">★ Enzymology 100 MCQ</a><a href="?topic=mol_all" style="font-weight:bold; color:var(--primary);">★ Molecular Bio 100 MCQ</a><a href="#tools-sidebar">See All Topics...</a></div></div>
+            <div class="dropdown"><span class="dropbtn" onclick="toggleHeaderDropdown('nav-tools')">Lab Tools ▾</span><div id="nav-tools" class="dropdown-content"><a href="?tool=michaelis">Michaelis-Menten</a><a href="?tool=ph">pH Calc</a><a href="?tool=kw">Kw Calc</a><a href="?tool=molarmass">Molar Mass</a></div></div>
         </div>
     </div>
 </nav>
 
 <div class="layout">
-    
     <aside class="topic-nav" id="tools-sidebar">
-        <!-- MOVED TOOLS TO TOP LEFT -->
         <div class="nav-header">Lab Tools</div>
-        <ul class="topic-list">
-            <li class="topic-item"><a href="?tool=michaelis" class="topic-link">Calc: Michaelis-Menten</a></li>
-            <li class="topic-item"><a href="?tool=ph" class="topic-link">Calc: pH & pOH</a></li>
-            <li class="topic-item"><a href="?tool=kw" class="topic-link">Calc: Ion Product (Kw)</a></li>
-            <li class="topic-item"><a href="?tool=entropy" class="topic-link">Calc: Entropy & Gibbs</a></li>
-            <li class="topic-item"><a href="?tool=conversions" class="topic-link">Calc: Unit Conversions</a></li>
-            <li class="topic-item"><a href="?tool=molarmass" class="topic-link">Calc: Molar Mass</a></li>
-        </ul>
-
+        <ul class="topic-list"><li class="topic-item"><a href="?tool=michaelis" class="topic-link">Calc: Michaelis-Menten</a></li><li class="topic-item"><a href="?tool=ph" class="topic-link">Calc: pH & pOH</a></li><li class="topic-item"><a href="?tool=kw" class="topic-link">Calc: Ion Product (Kw)</a></li><li class="topic-item"><a href="?tool=entropy" class="topic-link">Calc: Entropy & Gibbs</a></li><li class="topic-item"><a href="?tool=conversions" class="topic-link">Calc: Unit Conversions</a></li><li class="topic-item"><a href="?tool=molarmass" class="topic-link">Calc: Molar Mass</a></li></ul>
         <div class="nav-header" style="margin-top: 30px;">Biochemistry MCQs</div>
         <ul class="topic-list">
             <li class="topic-item"><a href="?topic=daily" class="topic-link">Daily Challenge</a></li>
-            
-            <!-- 1. MOLECULAR BIO -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div>
-                <ul id="mol-menu" class="sub-menu">
-                    <li><a href="?topic=mol_all" class="sub-link mega-link">★ Molecular Bio 100 MCQ</a></li>
-                    <li><a href="?topic=mol_dna" class="sub-link">DNA Structure & Replication</a></li>
-                    <li><a href="?topic=mol_pol" class="sub-link">DNA Polymerases & Fidelity</a></li>
-                    <li><a href="?topic=mol_telo" class="sub-link">Telomeres & Telomerase</a></li>
-                    <li><a href="?topic=mol_repair" class="sub-link">DNA Repair Pathways</a></li>
-                    <li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA Pol)</a></li>
-                    <li><a href="?topic=mol_post_trans" class="sub-link">Post-Transcriptional Mods</a></li>
-                    <li><a href="?topic=mol_transl" class="sub-link">Translation & Ribosomes</a></li>
-                    <li><a href="?topic=mol_reg" class="sub-link">Operons & Regulation</a></li>
-                    <li><a href="?topic=mol_epi" class="sub-link">Epigenetics</a></li>
-                    <li><a href="?topic=mol_chrom" class="sub-link">Chromatin & Histones</a></li>
-                    <li><a href="?topic=mol_mut" class="sub-link">Mutations</a></li>
-                    <li><a href="?topic=mol_code" class="sub-link">Genetic Code</a></li>
-                </ul>
-            </li>
-
-            <!-- 2. CARBOHYDRATE METABOLISM -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('carb-menu')">2. Carbohydrate Metab ▾</div>
-                <ul id="carb-menu" class="sub-menu">
-                    <li><a href="?topic=carb_all" class="sub-link mega-link">★ Carbohydrate 100 MCQ</a></li>
-                    <li><a href="?topic=carb_glyc" class="sub-link">Glycolysis Steps/Reg</a></li>
-                    <li><a href="?topic=carb_tca" class="sub-link">TCA Cycle</a></li>
-                    <li><a href="?topic=carb_etc" class="sub-link">ETC & Oxidative Phos</a></li>
-                    <li><a href="?topic=carb_gluco" class="sub-link">Gluconeogenesis</a></li>
-                    <li><a href="?topic=carb_glycogen" class="sub-link">Glycogen Metabolism</a></li>
-                    <li><a href="?topic=carb_gsd" class="sub-link">Glycogen Storage Diseases</a></li>
-                    <li><a href="?topic=carb_hmp" class="sub-link">HMP Shunt (G6PD)</a></li>
-                    <li><a href="?topic=carb_fruct" class="sub-link">Fructose & Galactose</a></li>
-                    <li><a href="?topic=carb_warburg" class="sub-link">Warburg Effect</a></li>
-                </ul>
-            </li>
-
-            <!-- 3. LIPID METABOLISM -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('lip-menu')">3. Lipid Metabolism ▾</div>
-                <ul id="lip-menu" class="sub-menu">
-                    <li><a href="?topic=lip_all" class="sub-link mega-link">★ Lipids 100 MCQ</a></li>
-                    <li><a href="?topic=lip_oxi" class="sub-link">Fatty Acid Oxidation</a></li>
-                    <li><a href="?topic=lip_syn" class="sub-link">Fatty Acid Synthesis</a></li>
-                    <li><a href="?topic=lip_keto" class="sub-link">Ketogenesis & Ketoacidosis</a></li>
-                    <li><a href="?topic=lip_chol" class="sub-link">Cholesterol Synthesis</a></li>
-                    <li><a href="?topic=lip_lipo" class="sub-link">Lipoproteins (LDL/HDL)</a></li>
-                    <li><a href="?topic=lip_storage" class="sub-link">Lipid Storage Diseases</a></li>
-                    <li><a href="?topic=lip_eico" class="sub-link">Prostaglandins & Eicosanoids</a></li>
-                </ul>
-            </li>
-
-            <!-- 4. PROTEIN METABOLISM -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('prot-menu')">4. Protein & AA Metab ▾</div>
-                <ul id="prot-menu" class="sub-menu">
-                    <li><a href="?topic=prot_all" class="sub-link mega-link">★ Proteins 100 MCQ</a></li>
-                    <li><a href="?topic=prot_aa" class="sub-link">Essential vs Non-Essential</a></li>
-                    <li><a href="?topic=prot_trans" class="sub-link">Transamination & deamination</a></li>
-                    <li><a href="?topic=prot_urea" class="sub-link">Urea Cycle & Disorders</a></li>
-                    <li><a href="?topic=prot_phe" class="sub-link">Phe-Tyr Pathway (PKU)</a></li>
-                    <li><a href="?topic=prot_bcaa" class="sub-link">Branched-Chain AAs</a></li>
-                    <li><a href="?topic=prot_oneC" class="sub-link">One-Carbon Metab</a></li>
-                    <li><a href="?topic=prot_heme" class="sub-link">Porphyrin & Heme</a></li>
-                </ul>
-            </li>
-
-            <!-- 5. ENZYMOLOGY -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('enz-menu')">5. Enzymology ▾</div>
-                <ul id="enz-menu" class="sub-menu">
-                    <li><a href="?topic=enz_all" class="sub-link mega-link">★ Enzymology 100 MCQ</a></li>
-                    <li><a href="?topic=enz_class" class="sub-link">Classification (EC 1–6)</a></li>
-                    <li><a href="?topic=enz_kinetics" class="sub-link">Kinetics (Km, Vmax)</a></li>
-                    <li><a href="?topic=enz_inhib" class="sub-link">Inhibition Types</a></li>
-                    <li><a href="?topic=enz_allo" class="sub-link">Allosteric Regulation</a></li>
-                    <li><a href="?topic=enz_iso" class="sub-link">Isoenzymes</a></li>
-                    <li><a href="?topic=enz_clin" class="sub-link">Clinical Markers</a></li>
-                </ul>
-            </li>
-
-            <!-- 6. VITAMINS -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('vit-menu')">6. Vitamins & Minerals ▾</div>
-                <ul id="vit-menu" class="sub-menu">
-                    <li><a href="?topic=vit_all" class="sub-link mega-link">★ Vitamins 100 MCQ</a></li>
-                    <li><a href="?topic=vit_water" class="sub-link">Water-Soluble Vitamins</a></li>
-                    <li><a href="?topic=vit_fat" class="sub-link">Fat-Soluble Vitamins</a></li>
-                    <li><a href="?topic=vit_def" class="sub-link">Deficiency Diseases</a></li>
-                    <li><a href="?topic=vit_iron" class="sub-link">Iron Metabolism</a></li>
-                    <li><a href="?topic=vit_trace" class="sub-link">Trace Elements</a></li>
-                </ul>
-            </li>
-
-            <!-- 7. HORMONES -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('horm-menu')">7. Hormones ▾</div>
-                <ul id="horm-menu" class="sub-menu">
-                    <li><a href="?topic=horm_all" class="sub-link mega-link">★ Hormones 100 MCQ</a></li>
-                    <li><a href="?topic=horm_sig" class="sub-link">Insulin/Glucagon Sig</a></li>
-                    <li><a href="?topic=horm_thyroid" class="sub-link">Thyroid Synthesis</a></li>
-                    <li><a href="?topic=horm_steroid" class="sub-link">Steroid Hormones</a></li>
-                    <li><a href="?topic=horm_2nd" class="sub-link">Second Messengers</a></li>
-                </ul>
-            </li>
-
-            <!-- 8. CLINICAL BIOCHEM -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('clin-menu')">8. Clinical Biochem ▾</div>
-                <ul id="clin-menu" class="sub-menu">
-                    <li><a href="?topic=clin_all" class="sub-link mega-link">★ Clinical 100 MCQ</a></li>
-                    <li><a href="?topic=clin_liver" class="sub-link">Liver Function Tests</a></li>
-                    <li><a href="?topic=clin_renal" class="sub-link">Renal Markers</a></li>
-                    <li><a href="?topic=clin_acid" class="sub-link">Acid–Base Balance</a></li>
-                    <li><a href="?topic=clin_hb" class="sub-link">Hemoglobinopathies</a></li>
-                    <li><a href="?topic=clin_dm" class="sub-link">Diabetes Mellitus</a></li>
-                    <li><a href="?topic=clin_tumor" class="sub-link">Tumor Markers</a></li>
-                </ul>
-            </li>
-
-            <!-- 9. TECHNIQUES -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('tech-menu')">9. Techniques ▾</div>
-                <ul id="tech-menu" class="sub-menu">
-                    <li><a href="?topic=tech_all" class="sub-link mega-link">★ Techniques 100 MCQ</a></li>
-                    <li><a href="?topic=tech_chrom" class="sub-link">Chromatography</a></li>
-                    <li><a href="?topic=tech_electro" class="sub-link">Electrophoresis</a></li>
-                    <li><a href="?topic=tech_spec" class="sub-link">Spectroscopy</a></li>
-                    <li><a href="?topic=tech_pcr" class="sub-link">PCR & qPCR</a></li>
-                    <li><a href="?topic=tech_blot" class="sub-link">Blotting Techniques</a></li>
-                </ul>
-            </li>
-
-            <!-- 10. METABOLIC INTEGRATION -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('met-menu')">10. Metabolic Reg ▾</div>
-                <ul id="met-menu" class="sub-menu">
-                    <li><a href="?topic=met_all" class="sub-link mega-link">★ Metabolic 100 MCQ</a></li>
-                    <li><a href="?topic=met_fed" class="sub-link">Fed vs Fasting State</a></li>
-                    <li><a href="?topic=met_starve" class="sub-link">Starvation</a></li>
-                    <li><a href="?topic=met_randle" class="sub-link">Randle Cycle</a></li>
-                    <li><a href="?topic=met_cori" class="sub-link">Cori & Cahill Cycles</a></li>
-                </ul>
-            </li>
-
-            <!-- 11. IMMUNOLOGY -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('imm-menu')">11. Immunology ▾</div>
-                <ul id="imm-menu" class="sub-menu">
-                    <li><a href="?topic=imm_all" class="sub-link mega-link">★ Immunology 100 MCQ</a></li>
-                    <li><a href="?topic=imm_ab" class="sub-link">Antibody Structure</a></li>
-                    <li><a href="?topic=imm_mhc" class="sub-link">MHC I & II</a></li>
-                    <li><a href="?topic=imm_cyto" class="sub-link">Cytokines</a></li>
-                    <li><a href="?topic=imm_vac" class="sub-link">Vaccines & Adjuvants</a></li>
-                </ul>
-            </li>
-
-            <!-- 12. NEURO & OMICS -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('neuro-menu')">12. Neuro & Omics ▾</div>
-                <ul id="neuro-menu" class="sub-menu">
-                    <li><a href="?topic=neuro_all" class="sub-link mega-link">★ Neuro/Omics 100 MCQ</a></li>
-                    <li><a href="?topic=neuro_trans" class="sub-link">Neurotransmitters</a></li>
-                    <li><a href="?topic=neuro_bbb" class="sub-link">Blood–Brain Barrier</a></li>
-                    <li><a href="?topic=omic_prot" class="sub-link">Proteomics</a></li>
-                    <li><a href="?topic=omic_gen" class="sub-link">Genomics</a></li>
-                    <li><a href="?topic=omic_crispr" class="sub-link">CRISPR Basics</a></li>
-                </ul>
-            </li>
-
-            <!-- 13. SPECIAL TOPICS -->
-            <li class="topic-item">
-                <div class="topic-link" onclick="toggleMenu('spec-menu')">13. Special Topics ▾</div>
-                <ul id="spec-menu" class="sub-menu">
-                    <li><a href="?topic=spec_all" class="sub-link mega-link">★ Special 100 MCQ</a></li>
-                    <li><a href="?topic=spec_free" class="sub-link">Free Radicals</a></li>
-                    <li><a href="?topic=spec_detox" class="sub-link">Detoxification</a></li>
-                    <li><a href="?topic=spec_aging" class="sub-link">Biochem of Aging</a></li>
-                    <li><a href="?topic=spec_apop" class="sub-link">Apoptosis</a></li>
-                </ul>
-            </li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('mol-menu')">1. Molecular Biology ▾</div><ul id="mol-menu" class="sub-menu"><li><a href="?topic=mol_all" class="sub-link mega-link">★ Molecular Bio 100 MCQ</a></li><li><a href="?topic=mol_dna" class="sub-link">DNA Structure & Replication</a></li><li><a href="?topic=mol_pol" class="sub-link">DNA Polymerases & Fidelity</a></li><li><a href="?topic=mol_telo" class="sub-link">Telomeres & Telomerase</a></li><li><a href="?topic=mol_repair" class="sub-link">DNA Repair Pathways</a></li><li><a href="?topic=mol_transc" class="sub-link">Transcription (RNA Pol)</a></li><li><a href="?topic=mol_post_trans" class="sub-link">Post-Transcriptional Mods</a></li><li><a href="?topic=mol_transl" class="sub-link">Translation & Ribosomes</a></li><li><a href="?topic=mol_reg" class="sub-link">Operons & Regulation</a></li><li><a href="?topic=mol_epi" class="sub-link">Epigenetics</a></li><li><a href="?topic=mol_chrom" class="sub-link">Chromatin & Histones</a></li><li><a href="?topic=mol_mut" class="sub-link">Mutations</a></li><li><a href="?topic=mol_code" class="sub-link">Genetic Code</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('carb-menu')">2. Carbohydrate Metab ▾</div><ul id="carb-menu" class="sub-menu"><li><a href="?topic=carb_all" class="sub-link mega-link">★ Carbohydrate 100 MCQ</a></li><li><a href="?topic=carb_glyc" class="sub-link">Glycolysis Steps/Reg</a></li><li><a href="?topic=carb_tca" class="sub-link">TCA Cycle</a></li><li><a href="?topic=carb_etc" class="sub-link">ETC & Oxidative Phos</a></li><li><a href="?topic=carb_gluco" class="sub-link">Gluconeogenesis</a></li><li><a href="?topic=carb_glycogen" class="sub-link">Glycogen Metabolism</a></li><li><a href="?topic=carb_gsd" class="sub-link">Glycogen Storage Diseases</a></li><li><a href="?topic=carb_hmp" class="sub-link">HMP Shunt (G6PD)</a></li><li><a href="?topic=carb_fruct" class="sub-link">Fructose & Galactose</a></li><li><a href="?topic=carb_warburg" class="sub-link">Warburg Effect</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('lip-menu')">3. Lipid Metabolism ▾</div><ul id="lip-menu" class="sub-menu"><li><a href="?topic=lip_all" class="sub-link mega-link">★ Lipids 100 MCQ</a></li><li><a href="?topic=lip_oxi" class="sub-link">Fatty Acid Oxidation</a></li><li><a href="?topic=lip_syn" class="sub-link">Fatty Acid Synthesis</a></li><li><a href="?topic=lip_keto" class="sub-link">Ketogenesis & Ketoacidosis</a></li><li><a href="?topic=lip_chol" class="sub-link">Cholesterol Synthesis</a></li><li><a href="?topic=lip_lipo" class="sub-link">Lipoproteins (LDL/HDL)</a></li><li><a href="?topic=lip_storage" class="sub-link">Lipid Storage Diseases</a></li><li><a href="?topic=lip_eico" class="sub-link">Prostaglandins & Eicosanoids</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('prot-menu')">4. Protein & AA Metab ▾</div><ul id="prot-menu" class="sub-menu"><li><a href="?topic=prot_all" class="sub-link mega-link">★ Proteins 100 MCQ</a></li><li><a href="?topic=prot_aa" class="sub-link">Essential vs Non-Essential</a></li><li><a href="?topic=prot_trans" class="sub-link">Transamination & deamination</a></li><li><a href="?topic=prot_urea" class="sub-link">Urea Cycle & Disorders</a></li><li><a href="?topic=prot_phe" class="sub-link">Phe-Tyr Pathway (PKU)</a></li><li><a href="?topic=prot_bcaa" class="sub-link">Branched-Chain AAs</a></li><li><a href="?topic=prot_oneC" class="sub-link">One-Carbon Metab</a></li><li><a href="?topic=prot_heme" class="sub-link">Porphyrin & Heme</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('enz-menu')">5. Enzymology ▾</div><ul id="enz-menu" class="sub-menu"><li><a href="?topic=enz_all" class="sub-link mega-link">★ Enzymology 100 MCQ</a></li><li><a href="?topic=enz_class" class="sub-link">Classification (EC 1–6)</a></li><li><a href="?topic=enz_kinetics" class="sub-link">Kinetics (Km, Vmax)</a></li><li><a href="?topic=enz_inhib" class="sub-link">Inhibition Types</a></li><li><a href="?topic=enz_allo" class="sub-link">Allosteric Regulation</a></li><li><a href="?topic=enz_iso" class="sub-link">Isoenzymes</a></li><li><a href="?topic=enz_clin" class="sub-link">Clinical Markers</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('vit-menu')">6. Vitamins & Minerals ▾</div><ul id="vit-menu" class="sub-menu"><li><a href="?topic=vit_all" class="sub-link mega-link">★ Vitamins 100 MCQ</a></li><li><a href="?topic=vit_water" class="sub-link">Water-Soluble Vitamins</a></li><li><a href="?topic=vit_fat" class="sub-link">Fat-Soluble Vitamins</a></li><li><a href="?topic=vit_def" class="sub-link">Deficiency Diseases</a></li><li><a href="?topic=vit_iron" class="sub-link">Iron Metabolism</a></li><li><a href="?topic=vit_trace" class="sub-link">Trace Elements</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('horm-menu')">7. Hormones ▾</div><ul id="horm-menu" class="sub-menu"><li><a href="?topic=horm_all" class="sub-link mega-link">★ Hormones 100 MCQ</a></li><li><a href="?topic=horm_sig" class="sub-link">Insulin/Glucagon Sig</a></li><li><a href="?topic=horm_thyroid" class="sub-link">Thyroid Synthesis</a></li><li><a href="?topic=horm_steroid" class="sub-link">Steroid Hormones</a></li><li><a href="?topic=horm_2nd" class="sub-link">Second Messengers</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('clin-menu')">8. Clinical Biochem ▾</div><ul id="clin-menu" class="sub-menu"><li><a href="?topic=clin_all" class="sub-link mega-link">★ Clinical 100 MCQ</a></li><li><a href="?topic=clin_liver" class="sub-link">Liver Function Tests</a></li><li><a href="?topic=clin_renal" class="sub-link">Renal Markers</a></li><li><a href="?topic=clin_acid" class="sub-link">Acid–Base Balance</a></li><li><a href="?topic=clin_hb" class="sub-link">Hemoglobinopathies</a></li><li><a href="?topic=clin_dm" class="sub-link">Diabetes Mellitus</a></li><li><a href="?topic=clin_tumor" class="sub-link">Tumor Markers</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('tech-menu')">9. Techniques ▾</div><ul id="tech-menu" class="sub-menu"><li><a href="?topic=tech_all" class="sub-link mega-link">★ Techniques 100 MCQ</a></li><li><a href="?topic=tech_chrom" class="sub-link">Chromatography</a></li><li><a href="?topic=tech_electro" class="sub-link">Electrophoresis</a></li><li><a href="?topic=tech_spec" class="sub-link">Spectroscopy</a></li><li><a href="?topic=tech_pcr" class="sub-link">PCR & qPCR</a></li><li><a href="?topic=tech_blot" class="sub-link">Blotting Techniques</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('met-menu')">10. Metabolic Reg ▾</div><ul id="met-menu" class="sub-menu"><li><a href="?topic=met_all" class="sub-link mega-link">★ Metabolic 100 MCQ</a></li><li><a href="?topic=met_fed" class="sub-link">Fed vs Fasting State</a></li><li><a href="?topic=met_starve" class="sub-link">Starvation</a></li><li><a href="?topic=met_randle" class="sub-link">Randle Cycle</a></li><li><a href="?topic=met_cori" class="sub-link">Cori & Cahill Cycles</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('imm-menu')">11. Immunology ▾</div><ul id="imm-menu" class="sub-menu"><li><a href="?topic=imm_all" class="sub-link mega-link">★ Immunology 100 MCQ</a></li><li><a href="?topic=imm_ab" class="sub-link">Antibody Structure</a></li><li><a href="?topic=imm_mhc" class="sub-link">MHC I & II</a></li><li><a href="?topic=imm_cyto" class="sub-link">Cytokines</a></li><li><a href="?topic=imm_vac" class="sub-link">Vaccines & Adjuvants</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('neuro-menu')">12. Neuro & Omics ▾</div><ul id="neuro-menu" class="sub-menu"><li><a href="?topic=neuro_all" class="sub-link mega-link">★ Neuro/Omics 100 MCQ</a></li><li><a href="?topic=neuro_trans" class="sub-link">Neurotransmitters</a></li><li><a href="?topic=neuro_bbb" class="sub-link">Blood–Brain Barrier</a></li><li><a href="?topic=omic_prot" class="sub-link">Proteomics</a></li><li><a href="?topic=omic_gen" class="sub-link">Genomics</a></li><li><a href="?topic=omic_crispr" class="sub-link">CRISPR Basics</a></li></ul></li>
+            <li class="topic-item"><div class="topic-link" onclick="toggleMenu('spec-menu')">13. Special Topics ▾</div><ul id="spec-menu" class="sub-menu"><li><a href="?topic=spec_all" class="sub-link mega-link">★ Special 100 MCQ</a></li><li><a href="?topic=spec_free" class="sub-link">Free Radicals</a></li><li><a href="?topic=spec_detox" class="sub-link">Detoxification</a></li><li><a href="?topic=spec_aging" class="sub-link">Biochem of Aging</a></li><li><a href="?topic=spec_apop" class="sub-link">Apoptosis</a></li></ul></li>
         </ul>
-        
-        <div style="margin-top:30px; font-size: 0.75rem; color:#888;">
-            <a href="#" onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> <br>
-            &copy; 2025 BioChemHub
-        </div>
+        <div style="margin-top:30px; font-size: 0.75rem; color:#888;"><a href="#" onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> <br> &copy; 2025 BioChemHub</div>
     </aside>
 
     <main class="main-stage">
-        
-        <!-- VIEW A: NEWS FEED -->
         <div id="view-feed">
-            <div style="text-align:center; padding:40px; color:#64748b;" id="blog-loading">
-                Loading Latest Research...
-            </div>
-            <!-- Static Article Fallback -->
+            <div class="feed-header">Recent Biochemistry Discoveries</div>
+            <div style="text-align:center; padding:40px; color:#64748b;" id="blog-loading">Loading Latest Research...</div>
             <div id="static-articles">
                 <div class="article-preview">
-                    <h2><a href="#" onclick="openArticle('diabetes')">Curing autoimmune diabetes in mice</a></h2>
+                    <h2><a href="#" onclick="openArticle('diabetes')">Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation</a></h2>
                     <div class="meta-line">November 26, 2025 &mdash; Stanford Medicine</div>
-                    <div class="summary-box">
-                        <span class="summary-label">Summary</span>
-                        Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant. The procedure creates a hybrid immune system that stops autoimmune attacks without chronic immunosuppression.
-                    </div>
-                    <a href="#" onclick="openArticle('diabetes')" style="font-weight:bold; font-size:0.9rem;">Read Full Story &rarr;</a>
+                    <div class="summary-box">Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant. The procedure creates a hybrid immune system that stops autoimmune attacks without chronic immunosuppression.</div>
+                    <a href="#" onclick="openArticle('diabetes')" class="read-more-link">Read Full Story &rarr;</a>
                 </div>
             </div>
         </div>
 
-        <!-- VIEW B: FULL ARTICLE DETAIL -->
         <div id="view-article-detail" class="full-article">
             <div onclick="closeArticle()" class="back-btn">&larr; Back to Latest News</div>
-            
             <div id="article-content-diabetes" style="display:none;">
                 <div class="meta-line">Date: November 26, 2025<br>Source: Stanford Medicine / JCI</div>
                 <h1>Curing autoimmune diabetes in mice with islet and hematopoietic cell transplantation</h1>
-                <div class="summary-box"><span class="summary-label">Summary</span>Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant.</div>
+                <div class="summary-box">Researchers at Stanford have found a way to cure or prevent Type 1 diabetes in mice using a combined blood stem cell and islet cell transplant.</div>
                 <div class="article-body">
                     <p><strong>FULL STORY</strong></p>
                     <p>Stanford Medicine scientists report that giving mice both blood-forming stem cells and pancreatic islet cells from an immunologically mismatched donor either completely prevented or fully reversed Type 1 diabetes.</p>
@@ -404,69 +240,55 @@
                     <p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><strong>Reference:</strong> <a href="https://www.jci.org/articles/view/190034" target="_blank" style="color:var(--primary); font-weight:bold;">View Original Source (JCI) &rarr;</a></p>
                 </div>
             </div>
-            
             <div id="dynamic-article-container"></div>
         </div>
 
-        <!-- VIEW C: QUIZ VIEW (LIST MODE) -->
         <div id="view-quiz" class="quiz-view">
-            <div class="quiz-header">
-                <span id="quiz-title">Topic Quiz</span>
-                <span id="score-display">Score: 0</span>
-            </div>
-            
+            <div class="quiz-header"><span id="quiz-title">Topic Quiz</span><span id="score-display">Score: 0</span></div>
             <div id="loading-spinner" style="text-align:center; padding:20px;">Connecting to Database...</div>
             <div id="error-container" style="display:none;"></div>
-
-            <!-- Questions injected here -->
             <div id="quiz-list-container"></div>
         </div>
         
-        <!-- VIEW: ABOUT US -->
         <div id="view-about" class="info-container" style="display:none;">
             <h1>About BioChemHub</h1>
-            <p>BioChemHub is a free, open-access educational platform dedicated to medical and science students worldwide. Our mission is to simplify complex biochemical concepts through interactive learning tools, up-to-date research summaries, and rigorous self-assessment quizzes.</p>
-            <p>Designed for students preparing for USMLE, MCAT, and university exams, we focus on high-yield topics ranging from molecular genetics to metabolic regulation.</p>
+            <p>BiochemHub is an educational platform created to support students preparing for competitive examinations in biochemistry, agricultural sciences, medical sciences, and life sciences—especially across India. Our mission is to make biochemistry learning clear, structured, and accessible to everyone.</p>
+            <h3>The website offers:</h3>
+            <ul>
+                <li><strong>Curated Multiple-Choice Questions (MCQs):</strong> Topic-wise and exam-oriented</li>
+                <li><strong>Concept Explanations:</strong> Simplified notes to strengthen fundamentals</li>
+                <li><strong>Recent Biochemistry Discoveries:</strong> Regular updates and summaries of the latest research advancements to keep learners informed and inspired</li>
+            </ul>
+            <p>We understand that biochemistry is vast and often challenging. That’s why our content is designed to mirror the style and difficulty of exams such as ICAR, CSIR-NET, GATE (Life Sciences), ICMR-JRF, DBT-JRF, NEET-related biochemistry sections, university entrance tests, and other national/state-level examinations.</p>
+            <h3>At BiochemHub, we strive to be:</h3>
+            <ul>
+                <li><strong>Student-Friendly:</strong> Clean navigation and organized topics for quick practice</li>
+                <li><strong>Up-to-Date:</strong> Latest questions and research highlights</li>
+                <li><strong>Open & Accessible:</strong> A free academic resource for learners across backgrounds</li>
+            </ul>
+            <p>This platform is created purely for educational purposes, aiming to empower future scientists, medical professionals, researchers, and biochemistry enthusiasts with reliable tools, high-quality questions, and current scientific insights.</p>
+            <p>We hope BiochemHub becomes a meaningful part of your preparation journey.</p>
+            <p>For suggestions or feedback, feel free to reach out.</p>
+            <p><strong>Happy learning and best wishes for your exams!</strong></p>
         </div>
 
-        <!-- VIEW: CONTACT -->
         <div id="view-contact" class="info-container" style="display:none;">
             <h1>Contact Us</h1>
             <p>Have a question about a quiz question? Spotted an error? Or just want to say hi?</p>
-            <p><strong>Email:</strong> support@biochemhub.example.com</p>
-            <p><strong>Location:</strong> Academic Science Center, Web</p>
+            <p><strong>Email:</strong> biochemhub2025@gmail.com</p>
         </div>
 
-        <!-- VIEW: FEEDBACK -->
         <div id="view-feedback" class="info-container" style="display:none;">
             <h1>Feedback</h1>
-            <p>Your feedback helps us improve. Since this is an open-source project hosted on GitHub, the best way to report bugs or suggest features is directly through our repository.</p>
-            
+            <p>Your feedback helps us improve.</p>
             <div class="feedback-form">
                 <label class="form-label">What's on your mind?</label>
                 <textarea id="feedback-text" placeholder="Type your suggestions or bug report here..."></textarea>
-                
-                <div class="feedback-actions">
-                    <button class="btn-github" onclick="submitToGithub()">Submit via GitHub Issues</button>
-                    <button class="btn-email" onclick="submitToEmail()">Send via Email</button>
-                </div>
-                <p style="font-size:0.8rem; color:#666; margin-top:10px;">* Submitting via GitHub requires a free account and is the fastest way to get technical issues resolved.</p>
+                <div class="feedback-actions"><button class="btn-email" onclick="submitToEmail()">Send via Email</button></div>
             </div>
         </div>
 
-        <!-- CALCULATORS (Sample: Michaelis Menten) -->
-        <div id="view-calc-mm" class="quiz-view">
-            <div class="quiz-header"><span>Michaelis-Menten Calculator</span></div>
-            <div style="padding:10px;">
-                <p>Formula: $v_0 = \frac{V_{max}[S]}{K_m + [S]}$</p>
-                <div class="form-group"><label class="form-label">Vmax</label><input type="number" id="mm-vmax" class="form-input" placeholder="e.g. 100"></div>
-                <div class="form-group"><label class="form-label">Km</label><input type="number" id="mm-km" class="form-input" placeholder="e.g. 50"></div>
-                <div class="form-group"><label class="form-label">[S]</label><input type="number" id="mm-s" class="form-input" placeholder="e.g. 10"></div>
-                <button onclick="calculateMM()" class="btn-action">Calculate</button>
-                <div id="calc-result-mm" class="feedback"><strong>Result:</strong> <span id="mm-result">0</span><div id="mm-steps" class="step-box"></div></div>
-            </div>
-        </div>
-        <!-- Other calculators hidden for brevity but present in logic -->
+        <div id="view-calc-mm" class="quiz-view"><div class="quiz-header"><span>Michaelis-Menten Calculator</span></div><div style="padding:10px;"><p>Formula: $v_0 = \frac{V_{max}[S]}{K_m + [S]}$</p><div class="form-group"><label class="form-label">Vmax</label><input type="number" id="mm-vmax" class="form-input"></div><div class="form-group"><label class="form-label">Km</label><input type="number" id="mm-km" class="form-input"></div><div class="form-group"><label class="form-label">[S]</label><input type="number" id="mm-s" class="form-input"></div><button onclick="calculateMM()" class="btn-action">Calculate</button><div id="calc-result-mm" class="feedback"><strong>Result:</strong> <span id="mm-result">0</span><div id="mm-steps" class="step-box"></div></div></div></div>
         <div id="view-calc-ph" class="quiz-view" style="display:none;"></div>
         <div id="view-calc-kw" class="quiz-view" style="display:none;"></div>
         <div id="view-calc-entropy" class="quiz-view" style="display:none;"></div>
@@ -477,20 +299,11 @@
     <aside class="right-sidebar">
         <div class="sidebar-header">Share This Page</div>
         <div class="share-container">
-            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-fb" title="Facebook">
-                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            </a>
-            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-x" title="X (Twitter)">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="#" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-wa" title="WhatsApp">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            </a>
-            <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-in" title="LinkedIn">
-                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
+            <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-fb" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-x" title="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-wa" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+            <a href="#" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href), '_blank')" class="share-btn bg-in" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
         </div>
-
         <div class="sidebar-header">Advertisements</div>
         <div class="ad-box">Google AdSense (300x250)</div>
         <div class="sidebar-header">Resources</div>
@@ -502,18 +315,29 @@
 
 </div>
 
-<div id="privacyModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6);">
-  <div style="background:#fff; margin:10% auto; padding:30px; width:80%; max-width:600px; border:1px solid #000;">
-    <span onclick="document.getElementById('privacyModal').style.display='none'" style="float:right; cursor:pointer;">&times;</span>
-    <h2>Privacy Policy</h2><p>AdSense Standard Policy.</p>
-  </div>
-</div>
+<div id="privacyModal" style="display:none;"></div>
 
 <script>
     // --- 1. MAP YOUR LINKS HERE ---
     const SHEET_MAP = {
         'daily': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfpljSRlQUhMAdo3E_eTBwyYXNlcvLPjwyrZaKN2LGr3JiojSVHRpvWgJEoAIg0NP49maM20ISMTwU/pub?output=csv',
-        // ... (Rest of your sheet map) ...
+        'mol_all': '', 'mol_dna': '', 'mol_pol': '', 'mol_telo': '', 'mol_repair': '', 'mol_transc': '', 
+        'mol_post_trans': '', 'mol_transl': '', 'mol_reg': '', 'mol_epi': '', 'mol_mut': '', 'mol_code': '',
+        'enz_all': '', 'enz_class': '', 'enz_kinetics': '', 'enz_inhib': '', 'enz_allo': '', 'enz_graphs': '',
+        'enz_iso': '', 'enz_co': '', 'enz_mm': '', 'enz_clin': '',
+        'carb_all': '', 'carb_glyc': '', 'carb_tca': '', 'carb_etc': '', 'carb_gluco': '', 'carb_glycogen': '', 
+        'carb_gsd': '', 'carb_hmp': '', 'carb_fruct': '', 'carb_lactic': '', 'carb_warburg': '',
+        'lip_all': '', 'lip_oxi': '', 'lip_syn': '', 'lip_keto': '', 'lip_chol': '', 'lip_lipo': '', 'lip_storage': '', 'lip_omega': '', 'lip_eico': '',
+        'prot_all': '', 'prot_aa': '', 'prot_trans': '', 'prot_urea': '', 'prot_phe': '', 'prot_bcaa': '', 'prot_oneC': '', 'prot_glut': '', 'prot_heme': '',
+        'vit_all': '', 'vit_water': '', 'vit_fat': '', 'vit_def': '', 'vit_iron': '', 'vit_calcium': '', 'vit_trace': '',
+        'horm_all': '', 'horm_sig': '', 'horm_thyroid': '', 'horm_steroid': '', 'horm_2nd': '', 'horm_growth': '', 'horm_recep': '',
+        'clin_all': '', 'clin_liver': '', 'clin_renal': '', 'clin_acid': '', 'clin_abg': '', 'clin_plasma': '', 'clin_hb': '', 'clin_dm': '', 'clin_tumor': '',
+        'tech_all': '', 'tech_chrom': '', 'tech_electro': '', 'tech_spec': '', 'tech_mass': '', 'tech_elisa': '', 'tech_pcr': '', 'tech_blot': '', 'tech_seq': '',
+        'met_all': '', 'met_fed': '', 'met_starve': '', 'met_randle': '', 'met_cori': '', 'met_organ': '',
+        'imm_all': '', 'imm_comp': '', 'imm_ab': '', 'imm_mhc': '', 'imm_cyto': '', 'imm_vac': '', 'imm_inf': '',
+        'neuro_all': '', 'neuro_trans': '', 'neuro_bbb': '', 'neuro_park': '', 'neuro_syn': '',
+        'omic_all': '', 'omic_meta': '', 'omic_prot': '', 'omic_gen': '', 'omic_bio': '', 'omic_crispr': '',
+        'spec_all': '', 'spec_free': '', 'spec_detox': '', 'spec_aging': '', 'spec_stress': '', 'spec_apop': '', 'spec_no': '', 'spec_bio': '', 'spec_ph': '', 'spec_memb': ''
     };
     
     const BLOG_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3ZlgFhkSowtqTzfCCZtar4xPNwHz_OoXW2no5Oi-ry-pp_9vE4D2DNZ6Tk7gTx3squbRmgjJrM-Qo/pub?output=csv"; 
@@ -539,177 +363,43 @@
         ids.forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; });
     }
 
-    // --- FEEDBACK HANDLERS ---
-    function submitToGithub() {
-        const text = document.getElementById('feedback-text').value;
-        const url = `https://github.com/YOUR_USERNAME/YOUR_REPO/issues/new?title=Website%20Feedback&body=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
-    }
     function submitToEmail() {
         const text = document.getElementById('feedback-text').value;
-        window.location.href = `mailto:support@biochemhub.example.com?subject=BioChemHub%20Feedback&body=${encodeURIComponent(text)}`;
+        window.location.href = `mailto:biochemhub2025@gmail.com?subject=BioChemHub%20Feedback&body=${encodeURIComponent(text)}`;
     }
 
-    // --- PAGE LOADING LOGIC ---
     document.addEventListener("DOMContentLoaded", () => {
         hideAllViews();
-        
         if (activePage) {
-            // Handle Info Pages
             if(activePage === 'about') document.getElementById('view-about').style.display = 'block';
             else if(activePage === 'contact') document.getElementById('view-contact').style.display = 'block';
             else if(activePage === 'feedback') document.getElementById('view-feedback').style.display = 'block';
-            else document.getElementById('view-feed').style.display = 'block'; // Default home
-            
+            else document.getElementById('view-feed').style.display = 'block'; 
         } else if (activeTopic) {
             document.getElementById('view-quiz').style.display = 'block';
             loadQuiz(activeTopic);
         } else if (activeTool) {
-            // Show calculators (simplified)
             if(activeTool === 'michaelis') { document.getElementById('view-calc-mm').style.display = 'block'; renderMathInElement(document.body); }
             else if(activeTool === 'ph') { document.getElementById('view-calc-ph').style.display = 'block'; renderMathInElement(document.body); }
-            // ... other tool logic ...
+            else if(activeTool === 'kw') { document.getElementById('view-calc-kw').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'entropy') { document.getElementById('view-calc-entropy').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'conversions') { document.getElementById('view-calc-conversions').style.display = 'block'; renderMathInElement(document.body); }
+            else if(activeTool === 'molarmass') { document.getElementById('view-calc-molarmass').style.display = 'block'; renderMathInElement(document.body); }
         } else {
             document.getElementById('view-feed').style.display = 'block';
             if(BLOG_SHEET_URL) loadBlog();
         }
     });
 
-    // --- (EXISTING QUIZ, CALC, & BLOG LOGIC REMAINS HERE) ---
-    // ... (loadQuiz, calculateMM, loadBlog, etc. are preserved from previous version) ...
-
-    // --- 3. QUIZ ENGINE (LIST VIEW) ---
-    let quizData=[], score=0;
-    const quizUI = {
-        title: document.getElementById('quiz-title'),
-        score: document.getElementById('score-display'),
-        container: document.getElementById('quiz-list-container'),
-        spinner: document.getElementById('loading-spinner'),
-        error: document.getElementById('error-container')
-    };
-
-    function loadQuiz(topic) {
-        const url = SHEET_MAP[topic];
-        
-        // DEBUG 1: Check if link exists
-        if(!url) { 
-            quizUI.spinner.style.display = 'none';
-            quizUI.error.style.display = 'block';
-            quizUI.error.className = 'error-box';
-            quizUI.error.innerHTML = `<strong>Setup Required:</strong><br>No Google Sheet link found for topic ID: '<code>${topic}</code>'.<br>Please edit the SHEET_MAP in the code.`;
-            return; 
-        }
-        
-        // DEBUG 2: Clear old data
-        quizUI.container.innerHTML = '';
-        quizUI.error.style.display = 'none';
-        quizUI.spinner.style.display = 'block';
-        score = 0;
-        quizUI.score.innerText = `Score: 0`;
-
-        Papa.parse(url, { 
-            download: true, 
-            header: true, 
-            complete: res => {
-                // DEBUG 3: Validating Headers
-                const headers = res.meta.fields;
-                if(!headers.includes("Question") || !headers.includes("Option1")) {
-                    quizUI.spinner.style.display = 'none';
-                    quizUI.error.style.display = 'block';
-                    quizUI.error.className = 'error-box';
-                    quizUI.error.innerHTML = `<strong>CSV Structure Error:</strong><br>Could not find column "Question" or "Option1".<br>Found: ${headers.join(", ")}<br>Please check your Google Sheet Row 1.`;
-                    return;
-                }
-
-                quizData = res.data.filter(d => d.Question).map(d => ({ 
-                    q: d.Question, 
-                    o: [d.Option1, d.Option2, d.Option3, d.Option4], 
-                    // Fallback: If parseInt returns NaN (because user typed "Option A"), default to 0
-                    c: (parseInt(d.CorrectAnswer) || 1) - 1, 
-                    e: d.Explanation 
-                }));
-                
-                quizUI.spinner.style.display = 'none';
-                if(quizData.length === 0) {
-                    quizUI.error.style.display = 'block';
-                    quizUI.error.className = 'error-box';
-                    quizUI.error.innerHTML = "Sheet loaded, but no questions found. Check if rows are empty.";
-                    return;
-                }
-                
-                quizUI.container.style.display = 'block';
-                renderQuizList();
-            },
-            error: err => {
-                quizUI.spinner.style.display = 'none';
-                quizUI.error.style.display = 'block';
-                quizUI.error.className = 'error-box';
-                quizUI.error.innerHTML = `<strong>Connection Error:</strong><br>${err.message}<br>Check if your Sheet is "Published to Web" as CSV.`;
-            }
-        });
-    }
-
-    function renderQuizList() {
-        quizData.forEach((d, qIndex) => {
-            const block = document.createElement('div');
-            block.className = 'question-wrapper';
-            block.id = `q-block-${qIndex}`;
-            
-            const qHeader = document.createElement('div');
-            qHeader.className = 'question-header';
-            qHeader.innerHTML = `${qIndex + 1}. ${d.q}`;
-            block.appendChild(qHeader);
-            
-            d.o.forEach((opt, oIndex) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerHTML = opt;
-                btn.onclick = () => checkAnswer(qIndex, oIndex, btn);
-                block.appendChild(btn);
-            });
-            
-            const feedDiv = document.createElement('div');
-            feedDiv.className = 'feedback';
-            feedDiv.id = `feedback-${qIndex}`;
-            block.appendChild(feedDiv);
-
-            quizUI.container.appendChild(block);
-        });
-        renderMathInElement(quizUI.container);
-    }
-
-    function checkAnswer(qIndex, oIndex, btn) {
-        const d = quizData[qIndex];
-        const block = document.getElementById(`q-block-${qIndex}`);
-        const feedback = document.getElementById(`feedback-${qIndex}`);
-        
-        const buttons = block.querySelectorAll('.option-btn');
-        buttons.forEach(b => { b.onclick = null; b.classList.add('disabled'); });
-
-        if(oIndex === d.c) {
-            btn.classList.add('correct');
-            score++;
-            feedback.innerHTML = "<b>Correct!</b> " + (d.e || "");
-        } else {
-            btn.classList.add('incorrect');
-            if(buttons[d.c]) buttons[d.c].classList.add('correct');
-            feedback.innerHTML = "<b>Incorrect.</b> " + (d.e || "");
-        }
-        
-        feedback.style.display = 'block';
-        quizUI.score.innerText = `Score: ${score} / ${quizData.length}`;
-        renderMathInElement(feedback);
-    }
-    // --- 5. CALCULATORS (Working) ---
+    // --- CALCULATORS ---
     function calculateMM() {
         const v = parseFloat(document.getElementById('mm-vmax').value), k = parseFloat(document.getElementById('mm-km').value), s = parseFloat(document.getElementById('mm-s').value);
         if(isNaN(v)||isNaN(k)||isNaN(s)) return alert("Invalid");
         document.getElementById('mm-result').innerText = ((v*s)/(k+s)).toFixed(4);
         document.getElementById('mm-steps').innerHTML = `$$ v_0 = \\frac{${v}\\cdot${s}}{${k}+${s}} $$`;
-        document.getElementById('calc-result-mm').style.display = 'block'; // FIXED: Show result
+        document.getElementById('calc-result-mm').style.display = 'block';
         renderMathInElement(document.getElementById('calc-result-mm'));
     }
-    
     function calculatePH() {
         const c = parseFloat(document.getElementById('ph-conc').value);
         if(isNaN(c)) return alert("Invalid");
@@ -718,8 +408,7 @@
         document.getElementById('calc-result-ph').style.display = 'block';
         renderMathInElement(document.getElementById('calc-result-ph'));
     }
-
-    // (Add other calculator functions like calculateKw here same as before)
+    // (Add calculateKw, calculateEntropy, calculateConversion, calculateMolarMass here from previous versions)
     function calculateKw() {
         const h = parseFloat(document.getElementById('kw-h-conc').value);
         if(isNaN(h)||h<=0) return alert("Invalid");
@@ -803,11 +492,59 @@
         document.getElementById('calc-result-mass').style.display = 'block';
     }
 
+
+    // --- QUIZ & BLOG ---
+    let quizData=[], score=0;
+    const quizUI = { title: document.getElementById('quiz-title'), score: document.getElementById('score-display'), container: document.getElementById('quiz-list-container'), spinner: document.getElementById('loading-spinner'), error: document.getElementById('error-container') };
+
+    function loadQuiz(topic) {
+        const url = SHEET_MAP[topic];
+        if(!url) { quizUI.spinner.style.display = 'none'; quizUI.error.style.display = 'block'; quizUI.error.innerHTML = `<strong>Setup Required:</strong><br>No link for '<code>${topic}</code>'.`; return; }
+        quizUI.container.innerHTML = ''; quizUI.error.style.display = 'none'; quizUI.spinner.style.display = 'block'; score = 0; quizUI.score.innerText = `Score: 0`;
+
+        Papa.parse(url, { download: true, header: true, complete: res => {
+            quizData = res.data.filter(d => d.Question).map(d => ({ q: d.Question, o: [d.Option1, d.Option2, d.Option3, d.Option4], c: (parseInt(d.CorrectAnswer) || 1) - 1, e: d.Explanation }));
+            quizUI.spinner.style.display = 'none';
+            if(quizData.length === 0) { quizUI.error.style.display = 'block'; quizUI.error.innerHTML = "No questions found."; return; }
+            quizUI.container.style.display = 'block';
+            renderQuizList();
+        }, error: err => { quizUI.spinner.style.display = 'none'; quizUI.error.style.display = 'block'; quizUI.error.innerHTML = "Connection Error"; } });
+    }
+
+    function renderQuizList() {
+        quizData.forEach((d, qIndex) => {
+            const block = document.createElement('div'); block.className = 'question-wrapper'; block.id = `q-block-${qIndex}`;
+            block.innerHTML = `<div class="question-header">${qIndex + 1}. ${d.q}</div>`;
+            d.o.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+                btn.onclick = () => checkAnswer(qIndex, oIndex, btn);
+                block.appendChild(btn);
+            });
+            const feedDiv = document.createElement('div'); feedDiv.className = 'feedback'; feedDiv.id = `feedback-${qIndex}`;
+            block.appendChild(feedDiv);
+            quizUI.container.appendChild(block);
+        });
+        renderMathInElement(quizUI.container);
+    }
+
+    function checkAnswer(qIndex, oIndex, btn) {
+        const d = quizData[qIndex];
+        const block = document.getElementById(`q-block-${qIndex}`);
+        const feedback = document.getElementById(`feedback-${qIndex}`);
+        block.querySelectorAll('.option-btn').forEach(b => { b.onclick = null; b.classList.add('disabled'); });
+
+        if(oIndex === d.c) { btn.classList.add('correct'); score++; feedback.innerHTML = "<b>Correct!</b> " + (d.e || ""); }
+        else { btn.classList.add('incorrect'); block.querySelectorAll('.option-btn')[d.c].classList.add('correct'); feedback.innerHTML = "<b>Incorrect.</b> " + (d.e || ""); }
+        
+        feedback.style.display = 'block';
+        quizUI.score.innerText = `Score: ${score} / ${quizData.length}`;
+        renderMathInElement(feedback);
+    }
+
     function openArticle(id) {
         hideAllViews();
         document.getElementById('view-article-detail').style.display = 'block';
         document.getElementById('article-content-diabetes').style.display = 'none';
-        
         if(id.startsWith('dynamic-')) {
             const content = document.getElementById(`article-content-${id}`);
             if(content) content.style.display = 'block';
@@ -828,36 +565,18 @@
                 const container = document.getElementById('view-feed');
                 const detailContainer = document.getElementById('dynamic-article-container');
                 document.getElementById('blog-loading').style.display = 'none';
-                
                 results.data.forEach((post, index) => {
                     if(!post.Title) return;
-                    
                     const div = document.createElement('div');
                     div.className = 'article-preview';
-                    div.innerHTML = `
-                        <h2><a href="#" onclick="openArticle('dynamic-${index}')">${post.Title}</a></h2>
-                        <div class="meta-line">${post.Date || 'Recent'} &mdash; ${post.Source || 'News'}</div>
-                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary || ''}</div>
-                        <a href="#" onclick="openArticle('dynamic-${index}')" style="font-weight:bold; font-family:var(--font-ui); font-size:0.9rem;">Read Full Story &rarr;</a>
-                    `;
+                    div.innerHTML = `<h2><a href="#" onclick="openArticle('dynamic-${index}')">${post.Title}</a></h2><div class="meta-line">${post.Date || 'Recent'} &mdash; ${post.Source || 'News'}</div><div class="summary-box">${post.Summary || ''}</div><a href="#" onclick="openArticle('dynamic-${index}')" class="read-more-link">Read Full Story &rarr;</a>`;
                     container.insertBefore(div, document.getElementById('static-articles'));
                     
                     const detailDiv = document.createElement('div');
                     detailDiv.id = `article-content-dynamic-${index}`;
                     detailDiv.style.display = 'none';
-                    
                     const referenceHtml = (post.Link || post.URL || post['Source Link']) ? `<p style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;"><strong>Reference:</strong> <a href="${post.Link || post.URL || post['Source Link']}" target="_blank" style="color:var(--primary); font-weight:bold;">View Original Source &rarr;</a></p>` : '';
-
-                    detailDiv.innerHTML = `
-                        <div class="meta-line">Date: ${post.Date}<br>Source: ${post.Source}</div>
-                        <h1>${post.Title}</h1>
-                        <div class="summary-box"><span class="summary-label">Summary</span>${post.Summary}</div>
-                        <div class="article-body">
-                            <p><strong>FULL STORY</strong></p>
-                            ${post.Content ? post.Content.replace(/\n/g, '<p>') : ''}
-                            ${referenceHtml}
-                        </div>
-                    `;
+                    detailDiv.innerHTML = `<div class="meta-line">Date: ${post.Date}<br>Source: ${post.Source}</div><h1>${post.Title}</h1><div class="summary-box">${post.Summary}</div><div class="article-body"><p><strong>FULL STORY</strong></p>${post.Content ? post.Content.replace(/\n/g, '<p>') : ''}${referenceHtml}</div>`;
                     detailContainer.appendChild(detailDiv);
                 });
             }
